@@ -1,3 +1,5 @@
+package ttb;
+
 public enum Tuile
 {
 	OUT_OF_BOUNDS(null),
