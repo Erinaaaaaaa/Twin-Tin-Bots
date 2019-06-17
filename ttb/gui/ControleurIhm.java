@@ -1,4 +1,4 @@
-package gui;
+package ttb.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
