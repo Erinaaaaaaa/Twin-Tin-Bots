@@ -147,7 +147,7 @@ public class Plateau
 
 		if(pos[0] < 0 || pos[0] >= plateau.length ||
 		   pos[1] < 0 || pos[1] >= plateau.length ||
-		   plateau[pos[0]][pos[1]] == null
+		   plateau[pos[0]][pos[1]] == Tuile.OUT_OF_BOUNDS
 		  )
 		  	return initPos;
 
@@ -186,14 +186,14 @@ public class Plateau
 		String retour = "";
 		for (int i=0; i<plateau.length; i++)
 		{
-			//if (i%2!=0)
-			//	System.out.print("  ");
+			if (i%2 == 0)
+				retour +="  ";
 			for (int j=0; j<plateau[i].length; j++)
 			{
 				if(r.getPos()[0] == i && r.getPos()[1] == j)
 					retour += "  R ";
 				else
-					retour += "  "+plateau[i][j] + " ";
+					retour +="  "+ plateau[i][j]+ " " ;
 			}
 			retour += "\n";
 		}

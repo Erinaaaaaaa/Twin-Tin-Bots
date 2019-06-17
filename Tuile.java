@@ -18,6 +18,6 @@ public enum Tuile
 		if (nom != null)
 			return nom;
 		else
-			return "";
+			return " ";
 	}
 }

@@ -23,5 +23,6 @@ public class Robot
 			dir = (dir - 1) % 6;
 		else
 			dir = (dir+1) % 6;
+			System.out.println(dir);
 	}
 }
