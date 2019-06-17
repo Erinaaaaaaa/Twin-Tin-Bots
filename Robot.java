@@ -12,5 +12,5 @@ public class Robot
 	public char getDir() {return dir;}
 	public int[] getPos() {return pos;}
 
-	public void chargeDir(int dir) {this.dir = (this.dir + dir) % Plateau.tabDir.length;}
+	public void chargeDir(int dir) {this.dir = (this.dir + dir) % 6;}
 }
