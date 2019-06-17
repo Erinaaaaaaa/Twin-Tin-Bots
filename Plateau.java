@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Plateau
 {
@@ -7,11 +8,14 @@ public class Plateau
 	private Tuile[][] plateau;
 	private Joueur[]  tabJoueurs;
 	private int joueurActuel;
+	private Robot r;
 
 	public Plateau(int nbJoueurs)
 	{
-		NB_LIGNES   = 9 + nbJoueurs > 4?2:0;
+		NB_LIGNES   = 9;
 		NB_COLONNES = NB_LIGNES;
+
+		plateau = new String[NB_LIGNES][NB_COLONNES];
 
 		int nbCasesVoulu = plateau.length/2;
 		int aRemplir;
@@ -29,29 +33,55 @@ public class Plateau
 				plateau[i][j] = Tuile.VIDE; // Tuile vide
 			}
 		}
+
+		r = new Robot(NB_LIGNES/2, NB_COLONNES/2, 6);
+		jouer();
 	}
 
-	private Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
+	private void jouer()
+	{
+		Scanner sc = new Scanner(System.in);
+		do
+		{
+			System.out.println("Entrez une lettre (A, D, G)");
+			String choix = sc.next();
+			switch(choix)
+			{
+				case "A" :
+					avancer(r, true);
+					break;
+				case "D" :
+					r.turnAround(true);
+					break;
+				case "G" :
+					r.turnAround(false);
+					break;
+			}
+			System.out.println(toString());
+		} while (true);
+	}
 
-	private void changerJoueur() {joueurActuel++ % tabJoueurs.length;}
+	//private Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
+
+	//private void changerJoueur() {joueurActuel = joueurActuel++ % tabJoueurs.length;}
 
 	public boolean isNextFree(Robot r, int dir)
 	{
-		int[] pos = joueur.getPos();
+		int[] pos = r.getPos();
 		pos = nextPos(pos, dir);
-		return isFree(pos);
+		return isFree(pos) == null;
 	}
 
 	public Robot isFree(int[] pos)
 	{
-		for(Joueur j : tabJoueurs)
+		/*for(Joueur j : tabJoueurs)
 		{
 			for(Robot r : j.getRobots())
 			{
 				if(r.getPos() == pos)
 					return r;
 			}
-		}
+		}*/
 
 		return null;
 	}
@@ -163,5 +193,9 @@ public class Plateau
 			retour += "\n";
 		}
 		return retour;
+	}
+
+	public static void main(String[] args) {
+		new Plateau(2);
 	}
 }
