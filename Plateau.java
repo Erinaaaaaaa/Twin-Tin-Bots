@@ -5,8 +5,8 @@ public class Plateau
 {
 	private final int NB_LIGNES;
 	private final int NB_COLONNES;
-	private String[][] plateau;
-	//private Joueur[] tabJoueurs;
+	private Tuile[][] plateau;
+	private Joueur[]  tabJoueurs;
 	private int joueurActuel;
 	private Robot r;
 
@@ -30,7 +30,7 @@ public class Plateau
 			}
 			for (int j=aRemplir/2; j<aRemplir/2+nbCasesVoulu; j++)
 			{
-				plateau[i][j] = "T"; // Tuile vide
+				plateau[i][j] = Tuile.VIDE; // Tuile vide
 			}
 		}
 
