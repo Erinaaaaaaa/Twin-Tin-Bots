@@ -1,9 +1,9 @@
 public class Joueur
 {
 	private int[] pos;
-	private char dir;
+	private int dir;
 
-	public Joueur(int ligne, int colonne, char dir)
+	public Joueur(int ligne, int colonne, int dir)
 	{
 		this.pos = {ligne, colonne};
 		this.dir = dir;
@@ -12,5 +12,5 @@ public class Joueur
 	public char getDir() {return dir;}
 	public int[] getPos() {return pos;}
 
-	public void chargeDir(char dir) {this.dir = dir;}
+	public void chargeDir(int dir) {this.dir = (this.dir + dir) % Plateau.tabDir.length;}
 }
