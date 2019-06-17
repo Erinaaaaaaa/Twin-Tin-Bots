@@ -1,22 +1,33 @@
 package ttb;
 
-import java.util.Arrays;
-import javafx.scene.paint.Color;
-
 public class Joueur
 {
-	private Color   couleur;
+	private static int nbJoueurs = 1;
+	private int id;
 	private Robot[] tabRobot;
 	private int[] posBase;
 
 	public Joueur(Color couleur, Robot[] tabRobot, int[] posBase)
 	{
-		this.couleur = couleur;
-		this.tabRobot = Arrays.copyOf(tabRobot, tabRobot.length);
+		id = nbJoueurs++;
+		this.tabRobot = new Robot[] {null, null};
 		this.posBase = posBase;
 	}
 
 	public Robot[] getRobots() {return this.tabRobot;}
+
+	public void ajouterRobot(Robot r)
+	{
+		if(tabRobot[0] == null)
+		{
+			this.tabRobot[0] = r;
+			return;
+		}
+		if(tabRobot[1] == null)
+		{
+			this.tabRobot[1] = r;
+		}
+	}
 
 	public int[] getBase() {return this.posBase;}
 }
