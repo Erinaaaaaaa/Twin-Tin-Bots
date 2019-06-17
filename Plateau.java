@@ -16,6 +16,8 @@ public class Plateau
 		NB_COLONNES = NB_LIGNES;
 
 		plateau = new Tuile[NB_LIGNES][NB_COLONNES];
+		for (Tuile[] ligne : plateau) // On remplit le plateau de tuiles inaccessibles
+			Arrays.fill(ligne, Tuile.OUT_OF_BOUNDS);
 
 		int nbCasesVoulu = plateau.length/2;
 		int aRemplir;
@@ -52,10 +54,10 @@ public class Plateau
 					avancer(r, true);
 					break;
 				case "D" :
-					r.turnAround(true);
+					r.turnAround(false);
 					break;
 				case "G" :
-					r.turnAround(false);
+					r.turnAround(true);
 					break;
 			}
 		} while (true);
