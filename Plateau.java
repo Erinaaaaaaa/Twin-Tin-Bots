@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Plateau
 {
 	private final int NB_LIGNES;
@@ -25,7 +27,7 @@ public class Plateau
 	private int[] nextPos(int[] initPos, char dir)
 	{
 		char[] tabDir = {'N', 'O', 'S', 'E'};
-		int[] pos = initPos;
+		int[] pos = Arrays.copyOf(initPos, initPos.length);
 		for(int i = 0; i < tabDir.length; i++)
 		{
 			if(dir == tabDir[i])
