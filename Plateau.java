@@ -9,8 +9,8 @@ public class Plateau
 
 	public Plateau(int nbJoueurs)
 	{
-		NB_LIGNES = 11 + (nbJoueurs > 4)?2:0;
-		NB_COLONNES = 9 + (nbJoueurs > 4)?3:0;
+		NB_LIGNES   = 11 + nbJoueurs > 4?2:0;
+		NB_COLONNES = 9  + nbJoueurs > 4?3:0;
 	}
 
 	public boolean isNextFree(Robot r, int dir)
