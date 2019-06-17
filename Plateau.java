@@ -9,6 +9,8 @@ public class Plateau
 	//private Joueur[]  tabJoueurs;
 	private int joueurActuel;
 	private Robot r;
+	private Robot autreR;
+	private Robot uit;
 
 	public Plateau(int nbJoueurs)
 	{
@@ -36,7 +38,9 @@ public class Plateau
 			}
 		}
 
-		r = new Robot(NB_LIGNES/2, NB_COLONNES/2, 5);
+		r = new Robot(NB_LIGNES/2, NB_COLONNES/2, 2);
+		autreR = new Robot(NB_LIGNES/2, NB_COLONNES/2+1, 5);
+		uit = new Robot(NB_LIGNES/2, NB_COLONNES/2+2, 5);
 		jouer();
 	}
 
@@ -76,14 +80,11 @@ public class Plateau
 
 	public Robot isFree(int[] pos)
 	{
-		/*for(Joueur j : tabJoueurs)
-		{
-			for(Robot r : j.getRobots())
-			{
-				if(r.getPos() == pos)
-					return r;
-			}
-		}*/
+		if(pos[0] == autreR.getPos()[0] && pos[1] == autreR.getPos()[1])
+			return autreR;
+
+		if(pos[0] == uit.getPos()[0] && pos[1] == uit.getPos()[1])
+			return uit;
 
 		return null;
 	}
@@ -94,7 +95,7 @@ public class Plateau
 		switch(dir)
 		{
 			case 0 :
-				if(pos[0] % 2 == 0)
+				if(pos[0] % 2 != 0)
 				{
 					pos[0]--;
 					pos[1]--;
@@ -105,7 +106,7 @@ public class Plateau
 				}
 				break;
 			case 1 :
-				if(pos[0] % 2 == 0)
+				if(pos[0] % 2 != 0)
 				{
 					pos[0]--;
 				}
@@ -119,7 +120,7 @@ public class Plateau
 				pos[1]++;
 				break;
 			case 3 :
-				if(pos[0] % 2 == 0)
+				if(pos[0] % 2 != 0)
 				{
 					pos[0]++;
 				}
@@ -130,7 +131,7 @@ public class Plateau
 				}
 				break;
 			case 4 :
-				if(pos[0] % 2 == 0)
+				if(pos[0] % 2 != 0)
 				{
 					pos[0]++;
 					pos[1]--;
@@ -190,7 +191,10 @@ public class Plateau
 				retour +="  ";
 			for (int j=0; j<plateau[i].length; j++)
 			{
-				if(r.getPos()[0] == i && r.getPos()[1] == j)
+				if((r.getPos()[0] == i && r.getPos()[1] == j) ||
+				   (autreR.getPos()[0] == i && autreR.getPos()[1] == j) ||
+				   (uit.getPos()[0] == i && uit.getPos()[1] == j)
+				  )
 					retour += "  R ";
 				else
 					retour +="  "+ plateau[i][j]+ " " ;
