@@ -1,3 +1,5 @@
+package ttb;
+
 public class Robot
 {
 	private int[] pos;
