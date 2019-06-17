@@ -43,7 +43,7 @@ public class Plateau
 		r = new Robot(NB_LIGNES/2, NB_COLONNES/2, 2);
 		autreR = new Robot(NB_LIGNES/2, NB_COLONNES/2+1, 5);
 		uit = new Robot(NB_LIGNES/2, NB_COLONNES/2+2, 5);
-		jouer();
+		// jouer();
 	}
 
 	private void jouer()
@@ -212,6 +212,6 @@ public class Plateau
 	}
 
 	public static void main(String[] args) {
-		new Plateau(2);
+		new Plateau(2).jouer();
 	}
 }

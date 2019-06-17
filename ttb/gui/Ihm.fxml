@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ttControleurIhm">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ttb.gui.ControleurIhm">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
          <items>
@@ -44,7 +44,7 @@
                               <Rectangle2D height="83.0" width="83.0" />
                            </viewport>
                            <image>
-                              <Image url="@../images/robot_tmp.png" />
+                              <Image url="@../../images/robot_tmp.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -55,7 +55,7 @@
                               <Rectangle2D height="83.0" width="83.0" />
                            </viewport>
                            <image>
-                              <Image url="@../images/avancer_1.png" />
+                              <Image url="@../../images/avancer_1.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -66,7 +66,7 @@
                               <Rectangle2D height="83.0" width="83.0" />
                            </viewport>
                            <image>
-                              <Image url="@../images/avancer_2.png" />
+                              <Image url="@../../images/avancer_2.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -77,7 +77,7 @@
                               <Rectangle2D height="83.0" width="83.0" />
                            </viewport>
                            <image>
-                              <Image url="@../images/charger.png" />
+                              <Image url="@../../images/charger.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -102,7 +102,7 @@
                               <Rectangle2D height="83.0" width="83.0" />
                            </viewport>
                            <image>
-                              <Image url="@../images/robot_tmp.png" />
+                              <Image url="@../../images/robot_tmp.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -113,7 +113,7 @@
                               <Rectangle2D height="83.0" width="83.0" />
                            </viewport>
                            <image>
-                              <Image url="@../images/avancer_1.png" />
+                              <Image url="@../../images/avancer_1.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -124,7 +124,7 @@
                               <Rectangle2D height="83.0" width="83.0" />
                            </viewport>
                            <image>
-                              <Image url="@../images/avancer_2.png" />
+                              <Image url="@../../images/avancer_2.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -135,7 +135,7 @@
                               <Rectangle2D height="83.0" width="83.0" />
                            </viewport>
                            <image>
-                              <Image url="@../images/charger.png" />
+                              <Image url="@../../images/charger.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
