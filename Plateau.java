@@ -4,14 +4,19 @@ public class Plateau
 {
 	private final int NB_LIGNES;
 	private final int NB_COLONNES;
-	private String[] plateau;
+	private String[][] plateau;
 	private Joueur[] tabJoueurs;
+	private int joueurActuel;
 
 	public Plateau(int nbJoueurs)
 	{
-		NB_LIGNES   = 11 + nbJoueurs > 4?2:0;
+		NB_LIGNES   = 9 + nbJoueurs > 4?2:0;
 		NB_COLONNES = 9  + nbJoueurs > 4?3:0;
 	}
+
+	private Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
+
+	private void changerJoueur() {joueurActuel++ % tabJoueurs.length;}
 
 	public boolean isNextFree(Robot r, int dir)
 	{
@@ -89,7 +94,6 @@ public class Plateau
 			case 6 :
 				pos[1]--;
 				break;
-
 		}
 
 		if(pos[0] < 0 || pos[0] >= plateau.length ||
@@ -104,16 +108,27 @@ public class Plateau
 	public boolean avancer(Robot r, boolean canPush)
 	{
 		int[] pos = nextPos(r.getPos(), r.getDir());
+		int initDirR = 0;
 		if(pos == r.getPos())
 			return false;
 
 		Robot nextHex = isFree(pos);
+		if(nextHex != null)
+		{
+			initDirR = nextHex.getDir();
+			nextHex.setDir(r.getDir());
+		}
+
 		if(isFree(pos) == null || (canPush && avancer(nextHex, false)))
 		{
 			r.setPos(pos);
+			if(nextHex != null)
+				nextHex.setDir(initDirR);
 			return true;
 		}
 
+		if(nextHex != null)
+			nextHex.setDir(initDirR);
 		return false;
 	}
 }

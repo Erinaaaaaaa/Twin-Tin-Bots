@@ -13,5 +13,13 @@ public class Robot
 	public int   getDir() {return dir;}
 	public int[] getPos() {return pos;}
 
-	public void chargeDir(int dir) {this.dir = (this.dir + dir) % 6;}
+	public void chargeDir(int dir) {this.dir = dir;}
+
+	public void turnAround(boolean right)
+	{
+		if(right)
+			dir = dir-- % 6;
+		else
+			dir = dir++ % 6;
+	}
 }
