@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 public class Joueur
 {
 	private Color   couleur;
-	private Robot[] tabRobot;
+	private Robot[] tabRobot;
 	private int[] posBase;
 
 	public Joueur(Color couleur, Robot[] tabRobot, int[] posBase)
