@@ -15,6 +15,9 @@ public enum Tuile
 
 	public String toString()
 	{
-		return nom;
+		if (nom != null)
+			return nom;
+		else
+			return "";
 	}
 }
