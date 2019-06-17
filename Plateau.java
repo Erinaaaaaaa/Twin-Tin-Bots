@@ -3,15 +3,16 @@ import java.util.Arrays;
 public class Plateau
 {
 	private static char[] tabDir = {'N', 'O', 'S', 'E'};
-	private final int NB_LIGNES;
-	private final int NB_COLONNES;
-	private char[] plateau;
+	private final  int    NB_LIGNES;
+	private final  int    NB_COLONNES;
+
+	private char[]   plateau;
 	private Joueur[] tabJoueurs;
 
 	public Plateau(int nbJoueurs)
 	{
-		NB_LIGNES = 11 + (nbJoueurs > 4)?2:0;
-		NB_COLONNES = 9 + (nbJoueurs > 4)?3:0;
+		NB_LIGNES   = 11 + nbJoueurs > 4?2:0;
+		NB_COLONNES = 9  + nbJoueurs > 4?3:0;
 	}
 
 	public boolean isNextFree(Joueur joueur, char dir)

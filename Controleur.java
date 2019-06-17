@@ -1,7 +1,7 @@
 public class Controleur
 {
 	private Plateau metier;
-	private IHM ihm;
+	private IHM     ihm;
 
 	public Controleur(int nbJoueurs)
 	{
