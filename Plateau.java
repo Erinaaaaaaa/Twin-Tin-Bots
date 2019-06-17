@@ -11,7 +11,24 @@ public class Plateau
 	public Plateau(int nbJoueurs)
 	{
 		NB_LIGNES   = 9 + nbJoueurs > 4?2:0;
-		NB_COLONNES = 9  + nbJoueurs > 4?3:0;
+		NB_COLONNES = NB_LIGNES;
+
+		int nbCasesVoulu = plateau.length/2;
+		int aRemplir;
+		for (int i=0; i<plateau.length; i++)
+		{
+			aRemplir = plateau.length-nbCasesVoulu;
+			if (i < plateau.length/2+1)
+				nbCasesVoulu++;
+			else {
+				aRemplir+=2;
+				nbCasesVoulu--;
+			}
+			for (int j=aRemplir/2; j<aRemplir/2+nbCasesVoulu; j++)
+			{
+				plateau[i][j] = "T"; // Tuile vide
+			}
+		}
 	}
 
 	private Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
@@ -130,5 +147,21 @@ public class Plateau
 		if(nextHex != null)
 			nextHex.setDir(initDirR);
 		return false;
+	}
+
+	public String toString()
+	{
+		String retour = "";
+		for (int i=0; i<plateau.length; i++)
+		{
+			//if (i%2!=0)
+			//	System.out.print("  ");
+			for (int j=0; j<plateau[i].length; j++)
+			{
+				retour += "  "+plateau[i][j] + " ";
+			}
+			retour += "\n";
+		}
+		return retour;
 	}
 }
