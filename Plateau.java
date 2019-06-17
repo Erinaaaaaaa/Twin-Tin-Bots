@@ -133,4 +133,20 @@ public class Plateau
 
 		return false;
 	}
+
+	public String toString()
+	{
+		String retour = "";
+		for (int i=0; i<plateau.length; i++)
+		{
+			//if (i%2!=0)
+			//	System.out.print("  ");
+			for (int j=0; j<plateau[i].length; j++)
+			{	
+				retour += "  "+plateau[i][j] + " ";
+			}
+			retour += "\n";
+		}
+		return retour;
+	}
 }
