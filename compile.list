@@ -1,5 +1,5 @@
-./Controleur.java
-./Joueur.java
-./Plateau.java
-./Robot.java
-./Tuile.java
+./ttb/Controleur.java
+./ttb/Joueur.java
+./ttb/Plateau.java
+./ttb/Robot.java
+./ttb/Tuile.java
