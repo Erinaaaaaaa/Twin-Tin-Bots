@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Controleur
 {
 	private Plateau metier;
@@ -6,11 +8,10 @@ public class Controleur
 	public Controleur(int nbJoueurs)
 	{
 		metier = new Plateau(nbJoueurs);
-		ihm = new IHM();
+		ihm    = new IHM();
 	}
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		System.out.println("Combien de joueurs ? ");
 		Scanner sc = new Scanner(System.in);
 		new Controleur(sc.nextInt());
