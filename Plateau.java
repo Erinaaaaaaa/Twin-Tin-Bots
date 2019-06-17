@@ -4,13 +4,30 @@ public class Plateau
 {
 	private final int NB_LIGNES;
 	private final int NB_COLONNES;
-	private String[] plateau;
-	private Joueur[] tabJoueurs;
+	private String[][] plateau;
+	private Joueur[]   tabJoueurs;
 
 	public Plateau(int nbJoueurs)
 	{
-		NB_LIGNES   = 11 + nbJoueurs > 4?2:0;
-		NB_COLONNES = 9  + nbJoueurs > 4?3:0;
+		NB_LIGNES   = 9 + nbJoueurs > 4?2:0;
+		NB_COLONNES = NB_LIGNES;
+
+		int nbCasesVoulu = plateau.length/2;
+		int aRemplir;
+		for (int i=0; i<plateau.length; i++)
+		{
+			aRemplir = plateau.length-nbCasesVoulu;
+			if (i < plateau.length/2+1)
+				nbCasesVoulu++;
+			else {
+				aRemplir+=2;
+				nbCasesVoulu--;
+			}
+			for (int j=aRemplir/2; j<aRemplir/2+nbCasesVoulu; j++)
+			{
+				plateau[i][j] = "T"; // Tuile vide
+			}
+		}
 	}
 
 	public boolean isNextFree(Robot r, int dir)
