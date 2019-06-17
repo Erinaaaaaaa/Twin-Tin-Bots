@@ -6,7 +6,7 @@ public class Plateau
 	private final int NB_LIGNES;
 	private final int NB_COLONNES;
 	private Tuile[][] plateau;
-	private Joueur[]  tabJoueurs;
+	//private Joueur[]  tabJoueurs;
 	private int joueurActuel;
 	private Robot r;
 
@@ -15,7 +15,7 @@ public class Plateau
 		NB_LIGNES   = 9;
 		NB_COLONNES = NB_LIGNES;
 
-		plateau = new String[NB_LIGNES][NB_COLONNES];
+		plateau = new Tuile[NB_LIGNES][NB_COLONNES];
 
 		int nbCasesVoulu = plateau.length/2;
 		int aRemplir;
@@ -188,7 +188,10 @@ public class Plateau
 			//	System.out.print("  ");
 			for (int j=0; j<plateau[i].length; j++)
 			{
-				retour += "  "+plateau[i][j] + " ";
+				if(r.getPos()[0] == i && r.getPos()[1] == j)
+					retour += "  R ";
+				else
+					retour += "  "+plateau[i][j] + " ";
 			}
 			retour += "\n";
 		}
