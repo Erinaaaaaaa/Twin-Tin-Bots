@@ -1,7 +1,7 @@
 public class Plateau
 {
-	private final int nbLignes;
-	private final int nbColonnes;
+	private final int NB_LIGNES;
+	private final int NB_COLONNES;
 	private Joueur[] tabJoueurs;
 
 	public Plateau(int nbJoueurs)
