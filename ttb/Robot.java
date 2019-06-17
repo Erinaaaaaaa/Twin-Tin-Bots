@@ -22,7 +22,7 @@ public class Robot
 	public void turnAround(boolean right)
 	{
 		if(right)
-			dir = (dir - 1) % 6;
+			dir = Math.floorMod((dir - 1), 6);
 		else
 			dir = (dir+1) % 6;
 			System.out.println(dir);
