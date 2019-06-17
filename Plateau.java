@@ -54,10 +54,10 @@ public class Plateau
 					avancer(r, true);
 					break;
 				case "D" :
-					r.turnAround(true);
+					r.turnAround(false);
 					break;
 				case "G" :
-					r.turnAround(false);
+					r.turnAround(true);
 					break;
 			}
 		} while (true);
