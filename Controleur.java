@@ -15,4 +15,6 @@ public class Controleur
 		Scanner sc = new Scanner(System.in);
 		new Controleur(sc.nextInt());
 	}
+
+	public char[] getPlateau() {return metier.getPlateau();}
 }

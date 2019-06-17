@@ -1,16 +1,11 @@
 public class Joueur
 {
-	private int[] pos;
-	private int dir;
+	private Color couleur;
+	private Robot[] tabRobot;
 
-	public Joueur(int ligne, int colonne, int dir)
+	public Joueur(Color couleur, Robot[] tabRobot)
 	{
-		this.pos = {ligne, colonne};
-		this.dir = dir;
+		this.couleur = couleur;
+		this.tabRobot = Arrays.cloneOf(tabRobot, tabRobot.length);
 	}
-
-	public char getDir() {return dir;}
-	public int[] getPos() {return pos;}
-
-	public void chargeDir(int dir) {this.dir = (this.dir + dir) % Plateau.tabDir.length;}
 }
