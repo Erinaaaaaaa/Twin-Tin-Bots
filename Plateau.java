@@ -43,6 +43,7 @@ public class Plateau
 		Scanner sc = new Scanner(System.in);
 		do
 		{
+			System.out.println(toString());
 			System.out.println("Entrez une lettre (A, D, G)");
 			String choix = sc.next();
 			switch(choix)
@@ -57,7 +58,6 @@ public class Plateau
 					r.turnAround(false);
 					break;
 			}
-			System.out.println(toString());
 		} while (true);
 	}
 
