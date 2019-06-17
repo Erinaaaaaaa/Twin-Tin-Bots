@@ -206,6 +206,11 @@ public class Plateau
 		return retour;
 	}
 
+	public Tuile[][] getTuiles()
+	{
+		return this.plateau;
+	}
+
 	public static void main(String[] args) {
 		new Plateau(2);
 	}
