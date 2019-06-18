@@ -226,4 +226,9 @@ public class Plateau
 	{
 		return this.plateau;
 	}
+
+	public int getNbJoueurs()
+	{
+		return 2;
+	}
 }
