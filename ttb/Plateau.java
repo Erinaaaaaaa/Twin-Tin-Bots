@@ -175,7 +175,7 @@ public class Plateau
 		Tuile cristal = r.deposerCrystal();
 		int[] next = nextPos(r.getPos(), r.getDir());
 		Tuile t = plateau[next[0]][next[1]];
-		if(t == Tuile.BASE || (t == Tuile.ROBOT && getRobotAPosition(next).chargerCrystal(cristal)) || (t == Tuile.VIDE)
+		if(t == Tuile.BASE || (t == Tuile.ROBOT && getRobotAPosition(next).chargerCrystal(cristal)) || (t == Tuile.VIDE))
 		{
 			if(t == Tuile.BASE)
 				getJoueurParBase(next).addPoint();

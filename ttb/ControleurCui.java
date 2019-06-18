@@ -9,7 +9,7 @@ public class ControleurCui
 
 	public ControleurCui(int nbJoueurs)
 	{
-		metier = new Plateau(nbJoueurs);
+		metier = SetGrille.initGrille(nbJoueurs);
 		// ihm    = new IHM();
 	}
 

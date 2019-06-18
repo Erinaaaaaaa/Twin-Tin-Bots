@@ -14,33 +14,33 @@ public abstract class SetGrille
 		String[]  temp;
 		String    nextLigne;
 		String    fileAttent;
-		
+
 		if(nbJoueur <= 4) grille = SetGrille.creePlateau(9);
 		else              grille = SetGrille.creePlateau(11);
 
-		
+
 		try
 		{
 			sc  = new Scanner(new FileReader("niveau.data"));
-			
+
 			for (int i = 0; i < nbJoueur; i++)
 				sc.nextLine();
-				
+
 			nextLigne = sc.nextLine();
 			temp      = nextLigne.split("\\|");
-			
+
 			int[] coor;
 			for (int i = 0; i < temp.length; i++)
 			{
 				switch ( temp[i].charAt(0))
 				{
 					case 'R' : 	coor = SetGrille.getCooordoner(temp[i]);
-								grille[coor[0]][coor[1]] = Tuille.ROBOT;
+								grille[coor[0]][coor[1]] = Tuile.ROBOT;
 								tabJoueur[new Integer(temp[i].charAt(1))].ajouterRobot(new Robot(coor[0],coor[1],new Integer(temp[i].charAt(2))));
 					break;
-					
+
 					case 'B' :	coor = SetGrille.getCooordoner(temp[i]);
-								grille[coor[0]][coor[1]] = Tuille.BASE;
+								grille[coor[0]][coor[1]] = Tuile.BASE;
 								tabJoueur[new Integer(temp[i].charAt(1))].setBase(new Robot(coor[0],coor[1]));
 					break;
 
@@ -56,7 +56,7 @@ public abstract class SetGrille
 			sc.close();
 		}
 		catch (Exception e){e.printStackTrace();}
-		
+
 		return new Plateau(grille,tabJoueur,fileAttent);
 	}
 
@@ -68,9 +68,9 @@ public abstract class SetGrille
 			Arrays.fill(ligne, Tuile.OUT_OF_BOUNDS);
 
 		int nbCasesVoulu = plateau.length/2;
-		
+
 		int aRemplir;
-		
+
 		for (int i=0; i<plateau.length; i++)
 		{
 			aRemplir = plateau.length-nbCasesVoulu;
@@ -92,8 +92,8 @@ public abstract class SetGrille
 	private static int[] getCooordoner(String info)
 	{
 		String   coorBrut;
-		if(info.charAt(0) == 'R') coorBrut = info.subString(4);
-		else                      coorBrut = info.subString(3);
+		if(info.charAt(0) == 'R') coorBrut = info.substring(4);
+		else                      coorBrut = info.substring(3);
 
 		String[] coorString = coorBrut.split(":");
 		int[] coor;
@@ -103,9 +103,9 @@ public abstract class SetGrille
 		return coor;
 	}
 
-	private static Tuille getTypeCristal(String info)
+	private static Tuile getTypeCristal(String info)
 	{
-		switch(info.charat(1))
+		switch(info.charAt(1))
 		{
 			case 'V' : return Tuile.CRISTAL_VERT;
 			case 'B' : return Tuile.CRISTAL_BLEU;
@@ -116,10 +116,10 @@ public abstract class SetGrille
 
 	private static String getFileAttente(String info)
 	{
-		String   infoBrut = info.subString(3);
+		String   infoBrut = info.substring(3);
 		String   fileAttente = "";
-		String[] tabInfo = coorBrut.split(":");
-		
+		String[] tabInfo = info.split(":");
+
 		for(String cristal : tabInfo)
 			fileAttente += cristal.charAt(1);
 

@@ -1,5 +1,7 @@
 package ttb;
 
+import java.awt.Color;
+
 public class Joueur
 {
 	public static Color[] tabCouleur = {Color.RED, Color.YELLOW, Color.GREEN};
@@ -40,5 +42,7 @@ public class Joueur
 		return null;
 	}
 
-	public int[] addPoint() {points++;}
+	public void addPoint() {points++;}
+
+	public int[] getBase() {return this.posBase;}
 }
