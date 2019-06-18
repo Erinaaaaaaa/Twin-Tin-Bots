@@ -4,6 +4,3 @@
 ./ttb/Robot.java
 ./ttb/Tuile.java
 ./ttb/SetGrille.java
-
-./ttb/gui/ControleurIhm.java
-./ttb/gui/IhmGui.java
