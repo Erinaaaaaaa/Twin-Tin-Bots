@@ -1,5 +1,10 @@
 package ttb;
 
+/**
+  * Classe Robot
+  * @version 2019-06-18
+  */
+
 public class Robot
 {
 	private int[] pos;
@@ -19,12 +24,11 @@ public class Robot
 
 	public void setDir(int dir) {this.dir = dir;}
 
-	public void turnAround(boolean right)
+	public void turnAround(boolean left)
 	{
-		if(right)
+		if(left)
 			dir = Math.floorMod((dir - 1), 6);
 		else
 			dir = (dir+1) % 6;
-			System.out.println(dir);
 	}
 }
