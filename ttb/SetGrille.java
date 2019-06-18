@@ -13,7 +13,10 @@ public abstract class SetGrille
 		Scanner   sc;
 		String[]  temp;
 		String    nextLigne;
-		String    fileAttent;
+		String    fileAttent = "";
+
+		tabJoueur = new Joueur[nbJoueur];
+		Arrays.fill(tabJoueur, new Joueur());
 
 		if(nbJoueur <= 4) grille = SetGrille.creePlateau(9);
 		else              grille = SetGrille.creePlateau(11);
@@ -41,7 +44,7 @@ public abstract class SetGrille
 
 					case 'B' :	coor = SetGrille.getCooordoner(temp[i]);
 								grille[coor[0]][coor[1]] = Tuile.BASE;
-								tabJoueur[new Integer(temp[i].charAt(1))].setBase(new Robot(coor[0],coor[1]));
+								tabJoueur[new Integer(temp[i].charAt(1))].setBase(coor);
 					break;
 
 					case 'C' :	coor = SetGrille.getCooordoner(temp[i]);
@@ -96,7 +99,7 @@ public abstract class SetGrille
 		else                      coorBrut = info.substring(3);
 
 		String[] coorString = coorBrut.split(":");
-		int[] coor;
+		int[] coor = new int[2];
 		coor[0] = new Integer(coorString[0]);
 		coor[1] = new Integer(coorString[1]);
 

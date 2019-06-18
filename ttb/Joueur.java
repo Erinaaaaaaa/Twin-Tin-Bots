@@ -45,4 +45,10 @@ public class Joueur
 	public void addPoint() {points++;}
 
 	public int[] getBase() {return this.posBase;}
+
+	public void setBase(int[] pos)
+	{
+		if(posBase == null)
+			this.posBase = pos;
+	}
 }
