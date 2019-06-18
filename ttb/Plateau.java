@@ -195,6 +195,17 @@ public class Plateau
 		return false;
 	}
 
+	public void chargerCristal(Robot r)
+	{
+		int[] next = nextPos(r.getPos(), r.getDir());
+		Tuile t = plateau[next[0]][next[1]];
+		if(!Tuile.isCristal(t))
+			return;
+
+		if(r.chargerCrystal(t))
+			plateau[next[0]][next[1]] = Tuile.VIDE;
+	}
+
 	public String toString()
 	{
 		String retour = "";
