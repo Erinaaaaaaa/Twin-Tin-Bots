@@ -11,6 +11,7 @@ public class Robot
 	/** Direction du robot, commence à 0 et va jusqu'à 5, sens horaire */
 	private int   dir;
 	private Joueur monJoueur;
+	private Tuile crystal;
 
 	public Robot(int ligne, int colonne, int dir)
 	{
@@ -20,6 +21,22 @@ public class Robot
 
 	public int   getDir() {return dir;}
 	public int[] getPos() {return pos;}
+
+	public boolean chargerCrystal(Tuile c)
+	{
+		if(crystal != null)
+			return false;
+
+		crystal = c;
+		return true;
+	}
+
+	public Tuile deposerCrystal()
+	{
+		Tuile c = crystal;
+		crystal = null;
+		return c;
+	}
 
 	public void setPos(int[] pos) {this.pos = pos;}
 

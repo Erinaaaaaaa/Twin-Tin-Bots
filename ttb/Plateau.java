@@ -156,15 +156,21 @@ public class Plateau
 		if(pos == r.getPos())
 			return retour;
 
-		Robot nextHex = getRobotAPosition(pos);
-		if(nextHex != null)
+		Tuile t = plateau[pos[0]][pos[1]];
+
+		if(t == Tuile.OUT_OF_BOUNDS)
+			return false;
+
+		Robot nextHex = null;
+		if(t == Tuile.ROBOT)
 		{
+			nextHex = getRobotAPosition(pos);
 			initDirR = nextHex.getDir();
 			while(nextHex.getDir() != r.getDir())
-				nextHex.turnAround(true);
+			nextHex.turnAround(true);
 		}
 
-		if(nextHex == null || (canPush && avancer(nextHex, false)))
+		if(t == Tuile.VIDE || (t == Tuile.ROBOT && canPush && avancer(nextHex, false)) || (Tuile.isCristal(t) && avancer(pos, r.getDir())))
 		{
 			plateau[r.getPos()[0]][r.getPos()[1]] = Tuile.VIDE;
 			r.setPos(pos);
@@ -176,6 +182,18 @@ public class Plateau
 			while(nextHex.getDir() != initDirR)
 				nextHex.turnAround(true);
 		return retour;
+	}
+
+	private boolean avancer(int[] pos, int dir)
+	{
+		int[] next = nextPos(pos, dir);
+		if(plateau[next[0]][next[1]] == Tuile.VIDE)
+		{
+			plateau[next[0]][next[1]] = plateau[pos[0]][pos[1]];
+			plateau[pos[0]][pos[1]] = Tuile.VIDE;
+			return true;
+		}
+		return false;
 	}
 
 	public String toString()
