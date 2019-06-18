@@ -2,15 +2,18 @@ package ttb;
 
 public class Joueur
 {
-	private static int nbJoueurs = 1;
+	public static Color[] tabCouleur = {Color.RED, Color.YELLOW, Color.GREEN};
+	private static int nbJoueurs = 0;
 	private int id;
 	private Robot[] tabRobot;
 	private int[] posBase;
+	private int points;
 
 	public Joueur()
 	{
 		id = Joueur.nbJoueurs++;
 		this.tabRobot = new Robot[] {null, null};
+		this.points = 0;
 	}
 
 	public Robot[] getRobots() {return this.tabRobot;}
@@ -28,5 +31,5 @@ public class Joueur
 			this.tabRobot[1] = r;
 	}
 
-	public int[] getBase() {return this.posBase;}
+	public int[] addPoint() {points++;}
 }

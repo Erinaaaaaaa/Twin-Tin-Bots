@@ -206,6 +206,29 @@ public class Plateau
 			plateau[next[0]][next[1]] = Tuile.VIDE;
 	}
 
+	public void deposerCristal(Robot r)
+	{
+		Tuile cristal = r.deposerCrystal();
+		int[] next = nextPos(r.getPos(), r.getDir());
+		Tuile t = plateau[next[0]][next[1]];
+		if(t == Tuile.BASE || (t == Tuile.ROBOT && getRobotAPosition(next).chargerCrystal(cristal)) || t == Tuile.VIDE)
+		{
+			if(t == Tuile.BASE)
+				getJoueurParCouleur(Tuile.getBaseCouleur(t)).addPoint();
+			if(t == Tuile.VIDE)
+				plateau[next[0]][next[1]] = cristal;
+			return;
+		}
+
+		r.chargerCrystal(cristal);
+	}
+
+	private Joueur getJoueurParCouleur(Tuile base)
+	{
+		Color couleur = Tuile.getBaseCouleur(base);
+		for(int i = 0; i < Joueur.tabCouleur; i++)
+	}
+
 	public String toString()
 	{
 		String retour = "";

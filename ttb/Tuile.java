@@ -7,7 +7,8 @@ public enum Tuile
 	CRISTAL_BLEU("CB"),
 	CRISTAL_VERT("CV"),
 	CRISTAL_VIOLET("CR"),
-	ROBOT("R");
+	ROBOT("R"),
+	BASE("B");
 
 	private String nom;
 
