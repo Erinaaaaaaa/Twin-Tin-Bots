@@ -45,4 +45,9 @@ public class Joueur
 	public void addPoint() {points++;}
 
 	public int[] getBase() {return this.posBase;}
+	public void  setBase(int ligne, int colonne)
+	{
+		posBase[0] = ligne;
+		posBase[1] = colonne;
+	}
 }
