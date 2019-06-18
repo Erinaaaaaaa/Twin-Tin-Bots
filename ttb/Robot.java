@@ -7,15 +7,18 @@ package ttb;
 
 public class Robot
 {
-	private int[] pos;
+	private static int nbRobots = 0;
+	private int[]  pos;
 	/** Direction du robot, commence à 0 et va jusqu'à 5, sens horaire */
-	private int   dir;
+	private int    dir;
+	private int    id;
 	private Joueur monJoueur;
 
 	public Robot(int ligne, int colonne, int dir)
 	{
 		this.pos = new int[] {ligne, colonne};
 		this.dir = dir;
+		this.id  = Robot.nbRobots++ % 2;
 	}
 
 	public int   getDir() {return dir;}
