@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class Joueur
 {
-	public static Color[] tabCouleur = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.PINK};
+	public  final static Color[] COULEURS = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.PINK};
 	private static int nbJoueurs = 0;
 	private int id;
 	private Robot[] tabRobot;
