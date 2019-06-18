@@ -32,14 +32,20 @@ public class ControleurCui
 					switch(choix)
 					{
 						case "A" :
-						metier.avancer(rActuel, true);
-						break;
+							metier.avancer(rActuel, true);
+							break;
 						case "D" :
-						rActuel.turnAround(false);
-						break;
+							rActuel.turnAround(false);
+							break;
 						case "G" :
-						rActuel.turnAround(true);
-						break;
+							rActuel.turnAround(true);
+							break;
+						case "C" :
+							metier.chargerCristal(rActuel);
+							break;
+						case "E" :
+							metier.deposerCristal(rActuel);
+							break;
 						default : bOk = false;
 					}
 				}while(bOk);

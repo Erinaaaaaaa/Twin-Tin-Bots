@@ -46,7 +46,7 @@ public abstract class SetGrille
 
 					case 'B' :	coor = SetGrille.getCooordoner(temp[i]);
 								grille[coor[0]][coor[1]] = Tuile.BASE;
-								tabJoueur[new Integer(temp[i].charAt(1))].setBase(coor);
+								tabJoueur[Integer.parseInt(temp[i].charAt(1) + "")].setBase(coor);
 								break;
 
 					case 'C' :	coor = SetGrille.getCooordoner(temp[i]);
