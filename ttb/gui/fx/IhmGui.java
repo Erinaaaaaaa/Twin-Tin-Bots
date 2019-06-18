@@ -1,4 +1,4 @@
-package ttb.gui;
+package ttb.gui.fx;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
