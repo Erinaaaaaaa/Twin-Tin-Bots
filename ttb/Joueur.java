@@ -27,11 +27,17 @@ public class Joueur
 		if(tabRobot[0] == null)
 		{
 			this.tabRobot[0] = r;
+			r.setJoueur(this);
 			return;
 		}
 		if(tabRobot[1] == null)
+		{
+			r.setJoueur(this);
 			this.tabRobot[1] = r;
+		}
 	}
+
+	public int getId() {return id;}
 
 	public Robot getRobotParPos(int[] pos)
 	{

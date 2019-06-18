@@ -41,6 +41,8 @@ public class Robot
 		return c;
 	}
 
+	public void setJoueur(Joueur j) {monJoueur = j;}
+
 	public void setPos(int[] pos) {this.pos = pos;}
 
 	public void turnAround(boolean left)

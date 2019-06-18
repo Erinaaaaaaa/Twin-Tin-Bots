@@ -16,7 +16,8 @@ public abstract class SetGrille
 		String    fileAttent = "";
 
 		tabJoueur = new Joueur[nbJoueur];
-		Arrays.fill(tabJoueur, new Joueur());
+		for(int i = 0; i < nbJoueur; i++)
+			tabJoueur[i] = new Joueur();
 
 		if(nbJoueur <= 4) grille = SetGrille.creePlateau(9);
 		else              grille = SetGrille.creePlateau(11);
@@ -26,7 +27,7 @@ public abstract class SetGrille
 		{
 			sc  = new Scanner(new FileReader("./ttb/niveau.data"));
 
-			for (int i = 0; i < nbJoueur; i++)
+			for (int i = 1; i < nbJoueur; i++)
 				sc.nextLine();
 
 			nextLigne = sc.nextLine();
@@ -35,11 +36,11 @@ public abstract class SetGrille
 			int[] coor;
 			for (int i = 0; i < temp.length; i++)
 			{
-				System.out.println(i);
 				switch ( temp[i].charAt(0))
 				{
 					case 'R' : 	coor = SetGrille.getCooordoner(temp[i]);
 								grille[coor[0]][coor[1]] = Tuile.ROBOT;
+								System.out.println(Integer.parseInt("" +temp[i].charAt(1)));
 								tabJoueur[Integer.parseInt("" +temp[i].charAt(1))].ajouterRobot(new Robot(coor[0],coor[1],Integer.parseInt(temp[i].charAt(2) + "")));
 					break;
 

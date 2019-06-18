@@ -24,7 +24,7 @@ public class Plateau
 
 	public Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
 
-	public void changerJoueur() {joueurActuel = joueurActuel++ % tabJoueurs.length;}
+	public void changerJoueur() {joueurActuel = (joueurActuel + 1) % tabJoueurs.length;}
 
 	public Robot getRobotAPosition(int[] pos)
 	{
