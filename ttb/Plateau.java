@@ -73,13 +73,6 @@ public class Plateau
 
 	//private void changerJoueur() {joueurActuel = joueurActuel++ % tabJoueurs.length;}
 
-	public boolean isNextFree(Robot r, int dir)
-	{
-		int[] pos = r.getPos();
-		pos = nextPos(pos, dir);
-		return isFree(pos) == null;
-	}
-
 	public Robot isFree(int[] pos)
 	{
 		if(pos[0] == autreR.getPos()[0] && pos[1] == autreR.getPos()[1])
