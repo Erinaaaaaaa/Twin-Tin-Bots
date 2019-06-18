@@ -40,7 +40,7 @@ public abstract class SetGrille
 				{
 					case 'R' : 	coor = SetGrille.getCooordoner(temp[i]);
 								grille[coor[0]][coor[1]] = Tuile.ROBOT;
-								tabJoueur[new Integer(temp[i].charAt(1))].ajouterRobot(new Robot(coor[0],coor[1],new Integer(temp[i].charAt(2))));
+								tabJoueur[Integer.parseInt("" +temp[i].charAt(1))].ajouterRobot(new Robot(coor[0],coor[1],Integer.parseInt(temp[i].charAt(2) + "")));
 					break;
 
 					case 'B' :	coor = SetGrille.getCooordoner(temp[i]);
