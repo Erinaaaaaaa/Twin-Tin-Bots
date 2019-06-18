@@ -7,7 +7,7 @@ public class Joueur
 	private Robot[] tabRobot;
 	private int[] posBase;
 
-	public Joueur(Color couleur, Robot[] tabRobot, int[] posBase)
+	public Joueur(Robot[] tabRobot, int[] posBase)
 	{
 		id = nbJoueurs++;
 		this.tabRobot = new Robot[] {null, null};

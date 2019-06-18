@@ -53,7 +53,7 @@ public class Plateau
 		{
 			System.out.println(toString());
 			System.out.println("Entrez une lettre (A, D, G)");
-			String choix = sc.next();
+			String choix = sc.next().toUpperCase();
 			switch(choix)
 			{
 				case "A" :

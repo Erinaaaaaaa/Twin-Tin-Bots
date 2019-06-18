@@ -1,16 +1,15 @@
-package ttb.gui;
+package ttb.gui.fx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import ttb.Plateau;
 import ttb.Tuile;
 
-public class ControleurIhm
+public class ControleurFx
 {
     private Plateau plateau;
 
