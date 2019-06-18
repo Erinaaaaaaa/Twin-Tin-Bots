@@ -169,7 +169,9 @@ public class Plateau
 			nextHex.turnAround(true);
 		}
 
-		if(t == Tuile.VIDE || (t == Tuile.ROBOT && canPush && avancer(nextHex, false)) || (Tuile.isCristal(t) && avancer(pos, r.getDir())))
+		if(t == Tuile.VIDE ||
+		  (t == Tuile.ROBOT && canPush && avancer(nextHex, false)) ||
+		  (Tuile.isCristal(t) && canPush && avancer(pos, r.getDir())))
 		{
 			plateau[r.getPos()[0]][r.getPos()[1]] = Tuile.VIDE;
 			r.setPos(pos);
@@ -211,7 +213,7 @@ public class Plateau
 		Tuile cristal = r.deposerCrystal();
 		int[] next = nextPos(r.getPos(), r.getDir());
 		Tuile t = plateau[next[0]][next[1]];
-		if(t == Tuile.BASE || (t == Tuile.ROBOT && getRobotAPosition(next).chargerCrystal(cristal)) || t == Tuile.VIDE)
+		if(t == Tuile.BASE || (t == Tuile.ROBOT && getRobotAPosition(next).chargerCrystal(cristal)) || (t == Tuile.VIDE)
 		{
 			if(t == Tuile.BASE)
 				getJoueurParBase(next).addPoint();
