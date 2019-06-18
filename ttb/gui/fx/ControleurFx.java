@@ -25,6 +25,7 @@ public class ControleurFx
     @FXML
     private Pane panePlateau;
 
+    @SuppressWarnings("Duplicates")
     @FXML
     void initPlateau(ActionEvent event)
     {
