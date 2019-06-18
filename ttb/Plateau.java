@@ -214,7 +214,7 @@ public class Plateau
 		if(t == Tuile.BASE || (t == Tuile.ROBOT && getRobotAPosition(next).chargerCrystal(cristal)) || t == Tuile.VIDE)
 		{
 			if(t == Tuile.BASE)
-				getJoueurParCouleur(Tuile.getBaseCouleur(t)).addPoint();
+				getJoueurParBase(next).addPoint();
 			if(t == Tuile.VIDE)
 				plateau[next[0]][next[1]] = cristal;
 			return;
@@ -223,10 +223,14 @@ public class Plateau
 		r.chargerCrystal(cristal);
 	}
 
-	private Joueur getJoueurParCouleur(Tuile base)
+	private Joueur getJoueurParBase(int[] pos)
 	{
-		Color couleur = Tuile.getBaseCouleur(base);
-		for(int i = 0; i < Joueur.tabCouleur; i++)
+		for(Joueur j : tabJoueurs)
+		{
+			if(j.getBase()[0] == pos[0] && j.getBase()[1] == pos[1])
+				return j;
+		}
+		return null;
 	}
 
 	public String toString()
