@@ -15,6 +15,15 @@ public enum Tuile
 		this.nom = nom;
 	}
 
+	public static boolean isCristal(Tuile tuile)
+	{
+		String nomTuile = tuile.name();
+		if (nomTuile.lastIndexOf("_") == -1)
+			return false;
+
+		return nomTuile.substring(0, nomTuile.lastIndexOf("_")).equals("CRISTAL");
+	}
+
 	public String toString()
 	{
 		if (nom != null)
