@@ -1,4 +1,4 @@
-package ttb;
+package ttb.metier;
 
 import java.awt.Color;
 
