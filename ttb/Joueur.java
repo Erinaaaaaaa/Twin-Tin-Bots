@@ -7,14 +7,15 @@ public class Joueur
 	private Robot[] tabRobot;
 	private int[] posBase;
 
-	public Joueur(Robot[] tabRobot, int[] posBase)
+	public Joueur()
 	{
 		id = Joueur.nbJoueurs++;
 		this.tabRobot = new Robot[] {null, null};
-		this.posBase = posBase;
 	}
 
 	public Robot[] getRobots() {return this.tabRobot;}
+
+	public Robot getRobot(int id) {return tabRobot[id];}
 
 	public void ajouterRobot(Robot r)
 	{

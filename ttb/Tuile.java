@@ -4,9 +4,10 @@ public enum Tuile
 {
 	OUT_OF_BOUNDS(null),
 	VIDE("T"),
-	CRISTAL_BLEU("B"),
-	CRISTAL_VERT("V"),
-	CRISTAL_VIOLET("R");
+	CRISTAL_BLEU("CB"),
+	CRISTAL_VERT("CV"),
+	CRISTAL_VIOLET("CR"),
+	ROBOT("R");
 
 	private String nom;
 

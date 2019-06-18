@@ -23,8 +23,6 @@ public class Robot
 
 	public void setPos(int[] pos) {this.pos = pos;}
 
-	public void setDir(int dir) {this.dir = dir;}
-
 	public void turnAround(boolean left)
 	{
 		if(left)

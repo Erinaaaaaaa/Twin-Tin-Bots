@@ -14,6 +14,7 @@ public class Plateau
 	private final int NB_COLONNES;
 	private Tuile[][] plateau;
 	private Joueur[]  tabJoueurs;
+	private Robot[] tabRobot;
 	private int joueurActuel;
 	private Robot r;
 	private Robot autreR;
@@ -30,6 +31,10 @@ public class Plateau
 
 		int nbCasesVoulu = plateau.length/2;
 		int aRemplir;
+		tabRobot = new Robot[3];
+		tabRobot[0] = new Robot(NB_LIGNES/2, NB_COLONNES/2, 2);
+		tabRobot[1] = new Robot(NB_LIGNES/2, NB_COLONNES/2+1, 5);
+		tabRobot[2] = new Robot(NB_LIGNES/2, NB_COLONNES/2+2, 5);
 		for (int i=0; i<plateau.length; i++)
 		{
 			aRemplir = plateau.length-nbCasesVoulu;
@@ -41,26 +46,38 @@ public class Plateau
 			}
 			for (int j=aRemplir/2; j<aRemplir/2+nbCasesVoulu; j++)
 			{
-				plateau[i][j] = Tuile.VIDE; // Tuile vide
+				boolean bOk = false;
+				for(Robot r : tabRobot)
+				{
+					if(i == r.getPos()[0] && j == r.getPos()[1])
+					{
+						plateau[i][j] = Tuile.ROBOT;
+						bOk = true;
+						break;
+					}
+				}
+				if(!bOk)
+					plateau[i][j] = Tuile.VIDE; // Tuile vide
 			}
 		}
 
-		r = new Robot(NB_LIGNES/2, NB_COLONNES/2, 2);
-		autreR = new Robot(NB_LIGNES/2, NB_COLONNES/2+1, 5);
-		uit = new Robot(NB_LIGNES/2, NB_COLONNES/2+2, 5);
+		tabJoueurs = new Joueur[]{new Joueur()};
+		tabJoueurs[0].ajouterRobot(tabRobot[0]);
+		tabJoueurs[0].ajouterRobot(tabRobot[1]);
 	}
 
-	private Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
+	public Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
 
-	private void changerJoueur() {joueurActuel = joueurActuel++ % tabJoueurs.length;}
+	public void changerJoueur() {joueurActuel = joueurActuel++ % tabJoueurs.length;}
 
-	public Robot isFree(int[] pos)
+	public Robot getRobotAPosition(int[] pos)
 	{
-		if(pos[0] == autreR.getPos()[0] && pos[1] == autreR.getPos()[1])
-			return autreR;
+		if(plateau[pos[0]][pos[1]] != Tuile.ROBOT)
+			return null;
 
-		if(pos[0] == uit.getPos()[0] && pos[1] == uit.getPos()[1])
-			return uit;
+		for(Robot r : tabRobot)
+			if(pos[0] == r.getPos()[0] && pos[1] == r.getPos()[1])
+				return r;
 
 		return null;
 	}
@@ -135,29 +152,30 @@ public class Plateau
 	{
 		int[] pos = nextPos(r.getPos(), r.getDir());
 		int initDirR = 0;
+		boolean retour = false;
 		if(pos == r.getPos())
-			return false;
+			return retour;
 
-		Robot nextHex = isFree(pos);
+		Robot nextHex = getRobotAPosition(pos);
 		if(nextHex != null)
 		{
 			initDirR = nextHex.getDir();
-			nextHex.setDir(r.getDir());
+			while(nextHex.getDir() != r.getDir())
+				nextHex.turnAround(true);
 		}
 
-		if(isFree(pos) == null || (canPush && avancer(nextHex, false)))
+		if(nextHex == null || (canPush && avancer(nextHex, false)))
 		{
-			plateau[r.getPos()[0][r.getPos()[1] = "T";
+			plateau[r.getPos()[0]][r.getPos()[1]] = Tuile.VIDE;
 			r.setPos(pos);
-			plateau[pos[0]][pos[1]] = "R";
-			if(nextHex != null)
-				nextHex.setDir(initDirR);
-			return true;
+			plateau[pos[0]][pos[1]] = Tuile.ROBOT;
+			retour = true;
 		}
 
 		if(nextHex != null)
-			nextHex.setDir(initDirR);
-		return false;
+			while(nextHex.getDir() != initDirR)
+				nextHex.turnAround(true);
+		return retour;
 	}
 
 	public String toString()
@@ -179,9 +197,5 @@ public class Plateau
 	public Tuile[][] getTuiles()
 	{
 		return this.plateau;
-	}
-
-	public static void main(String[] args) {
-		new Plateau(2).jouer();
 	}
 }
