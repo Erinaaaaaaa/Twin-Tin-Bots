@@ -26,7 +26,7 @@ public abstract class SetGrille
 
 		try
 		{
-			sc  = new Scanner(new FileReader("niveau.data"));
+			sc  = new Scanner(new FileReader("./ttb/niveau.data"));
 
 			for (int i = 0; i < nbJoueur; i++)
 				sc.nextLine();
@@ -37,24 +37,25 @@ public abstract class SetGrille
 			int[] coor;
 			for (int i = 0; i < temp.length; i++)
 			{
+				System.out.println(i);
 				switch ( temp[i].charAt(0))
 				{
 					case 'R' : 	coor = SetGrille.getCooordoner(temp[i]);
 								grille[coor[0]][coor[1]] = Tuile.ROBOT;
-								tabJoueur[new Integer(temp[i].charAt(1))].ajouterRobot(new Robot(coor[0],coor[1],new Integer(temp[i].charAt(2))));
+								tabJoueur[Integer.parseInt("" +temp[i].charAt(1))].ajouterRobot(new Robot(coor[0],coor[1],Integer.parseInt(temp[i].charAt(2) + "")));
 					break;
 
 					case 'B' :	coor = SetGrille.getCooordoner(temp[i]);
 								grille[coor[0]][coor[1]] = Tuile.BASE;
-								tabJoueur[new Integer(temp[i].charAt(1))].setBase(coor[0],coor[1]);
-					break;
+								tabJoueur[new Integer(temp[i].charAt(1))].setBase(coor);
+								break;
 
 					case 'C' :	coor = SetGrille.getCooordoner(temp[i]);
 								grille[coor[0]][coor[1]] = SetGrille.getTypeCristal(temp[i]);
-					break;
+								break;
 
 					case 'A' : fileAttent = SetGrille.getFileAttente(temp[i]);
-					break;
+							   break;
 				}
 			}
 
