@@ -3,12 +3,17 @@ package ttb;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Classe Plateau
+ * @version 2019-06-18
+ */
+
 public class Plateau
 {
 	private final int NB_LIGNES;
 	private final int NB_COLONNES;
 	private Tuile[][] plateau;
-	//private Joueur[]  tabJoueurs;
+	private Joueur[]  tabJoueurs;
 	private int joueurActuel;
 	private Robot r;
 	private Robot autreR;
@@ -43,35 +48,11 @@ public class Plateau
 		r = new Robot(NB_LIGNES/2, NB_COLONNES/2, 2);
 		autreR = new Robot(NB_LIGNES/2, NB_COLONNES/2+1, 5);
 		uit = new Robot(NB_LIGNES/2, NB_COLONNES/2+2, 5);
-		// jouer();
 	}
 
-	private void jouer()
-	{
-		Scanner sc = new Scanner(System.in);
-		do
-		{
-			System.out.println(toString());
-			System.out.println("Entrez une lettre (A, D, G)");
-			String choix = sc.next().toUpperCase();
-			switch(choix)
-			{
-				case "A" :
-					avancer(r, true);
-					break;
-				case "D" :
-					r.turnAround(false);
-					break;
-				case "G" :
-					r.turnAround(true);
-					break;
-			}
-		} while (true);
-	}
+	private Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
 
-	//private Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
-
-	//private void changerJoueur() {joueurActuel = joueurActuel++ % tabJoueurs.length;}
+	private void changerJoueur() {joueurActuel = joueurActuel++ % tabJoueurs.length;}
 
 	public Robot isFree(int[] pos)
 	{
@@ -166,7 +147,9 @@ public class Plateau
 
 		if(isFree(pos) == null || (canPush && avancer(nextHex, false)))
 		{
+			plateau[r.getPos()[0][r.getPos()[1] = "T";
 			r.setPos(pos);
+			plateau[pos[0]][pos[1]] = "R";
 			if(nextHex != null)
 				nextHex.setDir(initDirR);
 			return true;
@@ -186,13 +169,7 @@ public class Plateau
 				retour +="  ";
 			for (int j=0; j<plateau[i].length; j++)
 			{
-				if((r.getPos()[0] == i && r.getPos()[1] == j) ||
-				   (autreR.getPos()[0] == i && autreR.getPos()[1] == j) ||
-				   (uit.getPos()[0] == i && uit.getPos()[1] == j)
-				  )
-					retour += "  R ";
-				else
-					retour +="  "+ plateau[i][j]+ " " ;
+				retour +="  "+ plateau[i][j]+ " " ;
 			}
 			retour += "\n";
 		}

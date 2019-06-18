@@ -10,6 +10,7 @@ public class Robot
 	private int[] pos;
 	/** Direction du robot, commence à 0 et va jusqu'à 5, sens horaire */
 	private int   dir;
+	private Joueur monJoueur;
 
 	public Robot(int ligne, int colonne, int dir)
 	{

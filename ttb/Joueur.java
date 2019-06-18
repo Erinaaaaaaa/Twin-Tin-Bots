@@ -9,7 +9,7 @@ public class Joueur
 
 	public Joueur(Robot[] tabRobot, int[] posBase)
 	{
-		id = nbJoueurs++;
+		id = Joueur.nbJoueurs++;
 		this.tabRobot = new Robot[] {null, null};
 		this.posBase = posBase;
 	}
@@ -24,9 +24,7 @@ public class Joueur
 			return;
 		}
 		if(tabRobot[1] == null)
-		{
 			this.tabRobot[1] = r;
-		}
 	}
 
 	public int[] getBase() {return this.posBase;}
