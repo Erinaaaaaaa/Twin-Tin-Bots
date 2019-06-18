@@ -1,4 +1,4 @@
-./ttb/Controleur.java
+./ttb/ControleurCui.java
 ./ttb/Joueur.java
 ./ttb/Plateau.java
 ./ttb/Robot.java
