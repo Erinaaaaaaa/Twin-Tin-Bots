@@ -9,60 +9,17 @@ import java.util.Arrays;
 
 public class Plateau
 {
-	private final int NB_LIGNES;
-	private final int NB_COLONNES;
+
 	private Tuile[][] plateau;
 	private Joueur[]  tabJoueurs;
-	private Robot[] tabRobot;
-	private int joueurActuel;
-	private Robot r;
-	private Robot autreR;
-	private Robot uit;
+	private int       joueurActuel;
+	private String    fileAttent;
 
-	public Plateau(int nbJoueurs)
+	public Plateau(Tuile[][] grille, Joueur[] tabJoueur, String fileAttent)
 	{
-		NB_LIGNES   = 9;
-		NB_COLONNES = NB_LIGNES;
-
-		plateau = new Tuile[NB_LIGNES][NB_COLONNES];
-		for (Tuile[] ligne : plateau) // On remplit le plateau de tuiles inaccessibles
-			Arrays.fill(ligne, Tuile.OUT_OF_BOUNDS);
-
-		int nbCasesVoulu = plateau.length/2;
-		int aRemplir;
-		tabRobot = new Robot[3];
-		tabRobot[0] = new Robot(NB_LIGNES/2, NB_COLONNES/2, 2);
-		tabRobot[1] = new Robot(NB_LIGNES/2, NB_COLONNES/2+1, 5);
-		tabRobot[2] = new Robot(NB_LIGNES/2, NB_COLONNES/2+2, 5);
-		for (int i=0; i<plateau.length; i++)
-		{
-			aRemplir = plateau.length-nbCasesVoulu;
-			if (i < plateau.length/2+1)
-				nbCasesVoulu++;
-			else {
-				aRemplir+=2;
-				nbCasesVoulu--;
-			}
-			for (int j=aRemplir/2; j<aRemplir/2+nbCasesVoulu; j++)
-			{
-				boolean bOk = false;
-				for(Robot r : tabRobot)
-				{
-					if(i == r.getPos()[0] && j == r.getPos()[1])
-					{
-						plateau[i][j] = Tuile.ROBOT;
-						bOk = true;
-						break;
-					}
-				}
-				if(!bOk)
-					plateau[i][j] = Tuile.VIDE; // Tuile vide
-			}
-		}
-
-		tabJoueurs = new Joueur[]{new Joueur()};
-		tabJoueurs[0].ajouterRobot(tabRobot[0]);
-		tabJoueurs[0].ajouterRobot(tabRobot[1]);
+		this.plateau = grille;
+		this.tabJoueurs = tabJoueur;
+		this.fileAttent = fileAttent;
 	}
 
 	public Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}

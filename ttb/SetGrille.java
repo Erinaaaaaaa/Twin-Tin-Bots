@@ -6,20 +6,19 @@ import java.util.Arrays;
 
 public abstract class SetGrille
 {
-
-	public static Tuile[][] initGrille(int nbJoueur)
+	public static Plateau initGrille(int nbJoueur)
 	{
 		Tuile[][] grille;
 		Joueur[]  tabJoueur;
 		Scanner   sc;
 		String[]  temp;
 		String    nextLigne;
+		String    fileAttent;
 		
 		if(nbJoueur <= 4) grille = SetGrille.creePlateau(9);
 		else              grille = SetGrille.creePlateau(11);
 
 		
-
 		try
 		{
 			sc  = new Scanner(new FileReader("niveau.data"));
@@ -29,23 +28,28 @@ public abstract class SetGrille
 				
 			nextLigne = sc.nextLine();
 			temp      = nextLigne.split("\\|");
-
+			
+			int[] coor;
 			for (int i = 0; i < temp.length; i++)
 			{
-				switch ( temp[i].substring(0))
+				switch ( temp[i].charAt(0))
 				{
-					case "R" :
+					case 'R' : 	coor = SetGrille.getCooordoner(temp[i]);
+								grille[coor[0]][coor[1]] = Tuille.ROBOT;
+								tabJoueur[new Integer(temp[i].charAt(1))].ajouterRobot(new Robot(coor[0],coor[1],new Integer(temp[i].charAt(2))));
 					break;
 					
-					case "B" :
+					case 'B' :	coor = SetGrille.getCooordoner(temp[i]);
+								grille[coor[0]][coor[1]] = Tuille.BASE;
+								tabJoueur[new Integer(temp[i].charAt(1))].setBase(new Robot(coor[0],coor[1]));
 					break;
 
-					case "C" :
+					case 'C' :	coor = SetGrille.getCooordoner(temp[i]);
+								grille[coor[0]][coor[1]] = SetGrille.getTypeCristal(temp[i]);
 					break;
 
-					case "A" :
+					case 'A' : fileAttent = SetGrille.getFileAttente(temp[i]);
 					break;
-
 				}
 			}
 
@@ -53,7 +57,7 @@ public abstract class SetGrille
 		}
 		catch (Exception e){e.printStackTrace();}
 		
-		return grille;
+		return new Plateau(grille,tabJoueur,fileAttent);
 	}
 
 	private static Tuile[][] creePlateau(int nbCase)
@@ -83,5 +87,43 @@ public abstract class SetGrille
 			}
 		}
 		return plateau;
+	}
+
+	private static int[] getCooordoner(String info)
+	{
+		String   coorBrut;
+		if(info.charAt(0) == 'R') coorBrut = info.subString(4);
+		else                      coorBrut = info.subString(3);
+
+		String[] coorString = coorBrut.split(":");
+		int[] coor;
+		coor[0] = new Integer(coorString[0]);
+		coor[1] = new Integer(coorString[1]);
+
+		return coor;
+	}
+
+	private static Tuille getTypeCristal(String info)
+	{
+		switch(info.charat(1))
+		{
+			case 'V' : return Tuile.CRISTAL_VERT;
+			case 'B' : return Tuile.CRISTAL_BLEU;
+			case 'R' : return Tuile.CRISTAL_VIOLET;
+		}
+		return Tuile.VIDE;
+	}
+
+	private static String getFileAttente(String info)
+	{
+		String   infoBrut = info.subString(3);
+		String   fileAttente = "";
+		String[] tabInfo = coorBrut.split(":");
+		
+		for(String cristal : tabInfo)
+			fileAttente += cristal.charAt(1);
+
+		return fileAttente;
+
 	}
 }
