@@ -102,8 +102,8 @@ public abstract class SetGrille
 
 		String[] coorString = coorBrut.split(":");
 		int[] coor = new int[2];
-		coor[0] = new Integer(coorString[0]);
-		coor[1] = new Integer(coorString[1]);
+		coor[0] = Integer.parseInt(coorString[0]);
+		coor[1] = Integer.parseInt(coorString[1]);
 
 		return coor;
 	}
