@@ -23,32 +23,31 @@ public class ControleurCui
 			do
 			{
 				Robot rActuel = joueur.getRobot(i);
-				boolean bOk = true;
-				do
+				System.out.println(metier.toString());
+				System.out.println("Indiquez vos action");
+				String action = sc.next().toUpperCase();
+				for(int j = 0; j < action.length(); j++)
 				{
 					System.out.println(metier.toString());
-					System.out.println("Entrez une lettre (A, D, G)");
-					String choix = sc.next().toUpperCase();
-					switch(choix)
+					switch(action.charAt(j))
 					{
-						case "A" :
+						case 'A' :
 							metier.avancer(rActuel, true);
 							break;
-						case "D" :
+						case 'D' :
 							rActuel.turnAround(false);
 							break;
-						case "G" :
+						case 'G' :
 							rActuel.turnAround(true);
 							break;
-						case "C" :
+						case 'C' :
 							metier.chargerCristal(rActuel);
 							break;
-						case "E" :
+						case 'E' :
 							metier.deposerCristal(rActuel);
 							break;
-						default : bOk = false;
 					}
-				}while(bOk);
+				}
 				i++;
 			} while (i < 2);
 			metier.changerJoueur();
