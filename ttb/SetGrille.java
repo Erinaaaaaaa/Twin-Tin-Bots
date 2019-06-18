@@ -9,7 +9,7 @@ public abstract class SetGrille
 	public static Plateau initGrille(int nbJoueur)
 	{
 		Tuile[][] grille;
-		Joueur[]  tabJoueur;
+		Joueur[]  tabJoueur = new Joueur[nbJoueur];
 		Scanner   sc;
 		String[]  temp;
 		String    nextLigne;

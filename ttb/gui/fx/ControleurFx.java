@@ -3,11 +3,14 @@ package ttb.gui.fx;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import ttb.Plateau;
+import ttb.SetGrille;
 import ttb.Tuile;
+
+import java.io.File;
 
 public class ControleurFx
 {
@@ -17,65 +20,115 @@ public class ControleurFx
     private Button btnInit;
 
     @FXML
+    private ImageView imgPlateau;
+
+    @FXML
     private Pane panePlateau;
-
-
-    int x0 = 30;
-    int y0 = 30;
-
 
     @FXML
     void initPlateau(ActionEvent event)
     {
-        Tuile[][] tuilesPlateau = this.plateau.getTuiles();
+        double imgScale = 0.6;
 
-        for (int i = 0; i < tuilesPlateau.length; i++)
+        Tuile[][] tuiles = this.plateau.getTuiles();
+
+        if (this.plateau.getNbJoueurs() > 4) // Grand plateau
         {
-            for (int j = 0; j < tuilesPlateau[i].length; j++)
-            {
-                Polygon polygon = new Polygon(
-                        0,20,
-                        -17,10,
-                        -17,-10,
-                        0,-20,
-                        17,-10,
-                        17, 10
-                );
-
-                switch (tuilesPlateau[j][i].toString())
+            File file = new File("./ttb/gui/images/plateau5-6.png");
+            Image image = new Image(file.toURI().toString());
+            imgPlateau.setImage(image);
+            for (int i = 0; i < 11; i++)
+                for (int j = 0; j < 11; j++)
                 {
-                    case " ":
-                        polygon.setFill(Color.TRANSPARENT);break;
-                    case "T":
-                        polygon.setFill(Color.DARKBLUE);break;
-                    case "B":
-                        polygon.setFill(Color.LIGHTBLUE);break;
-                    case "V":
-                        polygon.setFill(Color.LIGHTGREEN);break;
-                    case "R":
-                        polygon.setFill(Color.MEDIUMPURPLE);break;
-                    default:
-                        polygon.setFill(Color.BLACK);break;
+                    String fic;
 
+                    switch(tuiles[i][j].toString())
+                    {
+                        case "T":
+                            fic = "robots/petit4";
+                            break;
+                        case "CB":
+                            fic = "robots/petit0";
+                            break;
+                        case "CV":
+                            fic = "robots/petit1";
+                            break;
+                        case "CR":
+                            fic = "robots/petit5";
+                            break;
+                        case "R":
+                            fic = "robots/gros0";
+                            break;
+                        case "B":
+                            fic = "bases/base0";
+                            break;
+                        default:
+                            continue;
+                    }
+
+                    Image robot = new Image(new File("./ttb/gui/images/"+fic+".png").toURI().toString());
+
+                    ImageView iv = new ImageView(robot);
+                    iv.setScaleY(imgScale);iv.setScaleX(imgScale);
+
+                    iv.setLayoutX(((i) % 2 == 0 ? -23 : 0) + (j) * 46 - 5);
+                    iv.setLayoutY((i) * 39 - 3);
+
+                    this.panePlateau.getChildren().add(iv);
                 }
-
-                polygon.setRotate(0);
-
-                polygon.setLayoutX(x0 + (40 * i) + (j%2 == 0 ? 20 : 0));
-                polygon.setLayoutY(y0 + (35 * j));
-
-                this.panePlateau.getChildren().add(polygon);
-            }
         }
+        else
+        {
+            File file = new File("./ttb/gui/images/plateau2-4.png");
+            Image image = new Image(file.toURI().toString());
+            imgPlateau.setImage(image);
+            for (int i = 0; i < 9; i++)
+                for (int j = 0; j < 9; j++)
+                {
+                    String fic;
+
+                    switch(tuiles[i][j].toString())
+                    {
+                        case "T":
+                            fic = "robots/petit4";
+                            break;
+                        case "CB":
+                            fic = "robots/petit0";
+                            break;
+                        case "CV":
+                            fic = "robots/petit1";
+                            break;
+                        case "CR":
+                            fic = "robots/petit5";
+                            break;
+                        case "R":
+                            fic = "robots/gros0";
+                            break;
+                        case "B":
+                            fic = "bases/base0";
+                            break;
+                        default:
+                            continue;
+                    }
+
+                    Image robot = new Image(new File("./ttb/gui/images/"+fic+".png").toURI().toString());
+
+                    ImageView iv = new ImageView(robot);
+                    iv.setScaleY(imgScale);iv.setScaleX(imgScale);
+
+                    iv.setLayoutX(((i+1) % 2 == 0 ? -23 : 0) + (j+1) * 46 - 5);
+                    iv.setLayoutY((i+1) * 39 - 3);
+
+                    this.panePlateau.getChildren().add(iv);
+                }
+        }
+
     }
 
     @FXML
     void initialize()
     {
-        assert btnInit != null : "fx:id=\"btnInit\" was not injected: check your FXML file 'Untitled'.";
-        assert panePlateau != null : "fx:id=\"panePlateau\" was not injected: check your FXML file 'Untitled'.";
-
-        this.plateau = new Plateau(5);
+        this.plateau = SetGrille.initGrille(2);
     }
 
 }
