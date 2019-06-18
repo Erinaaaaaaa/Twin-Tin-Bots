@@ -74,11 +74,16 @@ public class Plateau
 		if(plateau[pos[0]][pos[1]] != Tuile.ROBOT)
 			return null;
 
-		for(Robot r : tabRobot)
-			if(pos[0] == r.getPos()[0] && pos[1] == r.getPos()[1])
-				return r;
+		Robot r = null;
 
-		return null;
+		for(Joueur j : tabJoueurs)
+		{
+			r = j.getRobotParPos(pos);
+			if(r != null)
+				break;
+		}
+
+		return r;
 	}
 
 	private int[] nextPos(int[] initPos, int dir)

@@ -31,5 +31,14 @@ public class Joueur
 			this.tabRobot[1] = r;
 	}
 
+	public Robot getRobotParPos(int[] pos)
+	{
+		for(Robot r : tabRobot)
+			if(pos[0] == r.getPos()[0] && pos[1] == r.getPos()[1])
+				return r;
+
+		return null;
+	}
+
 	public int[] addPoint() {points++;}
 }
