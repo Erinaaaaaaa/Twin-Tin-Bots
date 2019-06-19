@@ -14,7 +14,6 @@ public class ControleurCui
 	{
 		metier = SetGrille.initGrille(nbJoueurs);
 		ihm    = new IhmCui(this);
-		jouer();
 	}
 
 	private void actionJoueur(Joueur j)
@@ -23,14 +22,14 @@ public class ControleurCui
 		switch(action.charAt(0))
 		{
 			case 'P' :
-				int[] ind = new int[] {ihm.getInd(j.getOrdres(), ihm.getInd(j.getOrdres()};
+				int[] ind = new int[] {ihm.getInd(j.getOrdres()), ihm.getInd(j.getOrdres())};
 				j.permuterOrdre(ind[0], ind[1]);
 				break;
 			case 'A' :
-				j.ajouterOrdre(ihm.getInd(j.getOrdres(), ihm.getAction().charAt(0));
+				j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getAction().charAt(0));
 				break;
 			case 'E' :
-				j.enleverOrdre(ihm.getInd(j.getOrdres());
+				j.enleverOrdre(ihm.getInd(j.getOrdres()));
 				break;
 			case 'R' :
 				j.resetOrdres();
@@ -122,7 +121,10 @@ public class ControleurCui
 	{
 		System.out.println("Combien de joueurs ? ");
 		Scanner sc = new Scanner(System.in);
-		new ControleurCui(sc.nextInt());
+		if(args.length > 0 && args[0].equals("SCENARIO"))
+			new ControleurCui(sc.nextInt()).scenario();
+		else
+			new ControleurCui(sc.nextInt()).jouer();
 		sc.close();
 	}
 
