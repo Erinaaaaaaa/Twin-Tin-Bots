@@ -3,8 +3,8 @@ package ttb;
 import ttb.metier.*;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class ControleurCui
 {
@@ -68,43 +68,69 @@ public class ControleurCui
 	}
 
 	/**
-	 * Methode pour utiliser le mode debug. La ligne a executer Les instructions à executer seront lues dans le fichier "scenario.data".
+	 * Methode pour utiliser le mode debug. Les instructions à executer seront lues dans le fichier "scenario.data". <br>
+	 * La premiere lettre doit etre soit J pour joueur ou R pour robot.<br>
+	 * <br>
+	 * <ul><b>Si c'est un robot:</b>
+	 * 	 <li>La suivante indique l'indice du joueur.</li>
+	 * 	 <li>La suivante celui du robot</li>
+	 * 	 <li>Ensuite, toutes les actions a effectuer.</li>
+	 * </ul><br>
+	 *
+	 * Si cest un joueur, la lettre suivante est son indice.<br>
+	 * Ensuite l'action a effectuer.<br>
+	 * <ul><b>En fontion de l'action.</b>
+	 *   <li>Si action A : on a une lettre et un indice.</li>
+	 *   <li>Si action E : 1 indice.</li>
+	 *   <li>Si action P : 2 indices suivent.</li>
+	 *   <li>Si action R : rien.</li>
+	 * </ul>
+	 * <br>
+	 * Si action robot, on execute que sur le robot.<br>
+	 * Si action joueur, on execute sur ses 2 robots.<br>
+	 *
 	 */
 	public void debug() {
-		Scanner sc    = null;
-		String[] line = null;
-		char[] ordres = null;
-		int robotID = 0;
-		int nbJoueurs = metier.getNbJoueurs();
+		Scanner sc = null;
+
 		try {
 			sc = new Scanner(new File("./ttb/scenario.data"), "utf8");
-			for(int i = 0; i < nbJoueurs; i++)
-				sc.nextLine();
-			line = sc.nextLine().split(";");
-		} catch (Exception e) { e.printStackTrace(); }
+			while (sc.hasNext()) {
+				char[] splittedLine = sc.nextLine().toCharArray();
+				if (splittedLine[0] == 'R') {
+					int playerID = Integer.parseInt(String.valueOf(splittedLine[1]));
+					int robotID  = Integer.parseInt(String.valueOf(splittedLine[2]));
 
-		int i = 0, j = 0;
-		ArrayList<Robot> aRobot = new ArrayList<Robot>();
-		do
-		{
-			Joueur joueur = metier.getJoueurCourant();
-			aRobot.add(joueur.getRobot(0));
-			aRobot.add(joueur.getRobot(1));
-			metier.changerJoueur();
-		}while(metier.getJoueurCourant().getId() != 0);
+					executerOrdres(Arrays.copyOfRange(splittedLine, 3, splittedLine.length-1), metier.getJoueur(playerID).getRobot(robotID));
+				}
+				else if (splittedLine[0] == 'J') {
+					Joueur j = metier.getJoueur( Integer.parseInt(String.valueOf(splittedLine[1])) );
+					switch (splittedLine[2]) {
+						case 'A':
+							char lettre = splittedLine[3];
+							int  index  = Integer.parseInt(String.valueOf(splittedLine[4]));
 
-		System.out.println(metier.toString());
+							break;
+						case 'E':
+							int indice = Integer.parseInt(String.valueOf(splittedLine[3]));
 
-		while(i < line.length)
-		{
-			executerOrdres(line[i].toCharArray(), aRobot.get(j));
-			i++;
-			j = (j+1) % aRobot.size();
-			System.out.println(metier.toString());
+							break;
+						case 'P':
+							int indice1 = Integer.parseInt(String.valueOf(splittedLine[3]));
+							int indice2 = Integer.parseInt(String.valueOf(splittedLine[4]));
+
+							break;
+						case 'R':
+							break;
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
-	public void executerOrdres(char[] ordres, Robot rActuel)
+	public void executerOrdres(char[] ordres, Robot r)
 	{
 		for(int i = 0; i < ordres.length; i++)
 		{

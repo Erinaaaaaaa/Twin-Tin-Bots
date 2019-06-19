@@ -26,6 +26,10 @@ public class Plateau
 
 	public void changerJoueur() {joueurActuel = (joueurActuel + 1) % tabJoueurs.length;}
 
+	public Joueur getJoueur(int indice) {
+		return tabJoueurs[indice];
+	}
+
 	public Robot getRobotAPosition(int[] pos)
 	{
 		if(plateau[pos[0]][pos[1]] != Tuile.ROBOT)
