@@ -20,8 +20,9 @@ public class Launcher {
             case 1:
 
                 String debug = new Scanner(System.in).nextLine();
-                if (debug.equals("yes")) new ControleurCui(choisir("Nombre de joueurs")).debug();
-                else new ControleurCui(choisir("Nombre de joueurs"));
+				int nbJoueurs = choisir("Nombre de joueurs");
+                if (debug.equals("yes")) new ControleurCui(nbJoueurs).debug(nbJoueurs);
+                else new ControleurCui(nbJoueurs);
                 break;
             case 2:
                 IhmGui.main(null);

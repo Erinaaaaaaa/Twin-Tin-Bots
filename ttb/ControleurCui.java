@@ -89,7 +89,7 @@ public class ControleurCui
 	 * Si action joueur, on execute sur ses 2 robots.<br>
 	 *
 	 */
-	public void debug() {
+	public void debug(int nbJoueurs) {
 		Scanner sc = null;
 
 		try {
@@ -98,14 +98,15 @@ public class ControleurCui
 				sc.nextLine();
 
 			Scanner line = new Scanner(sc.nextLine());
-			line.setDelimiter("|")
+			line.useDelimiter("|");
 			while (line.hasNext()) {
 				char[] splittedLine = line.next().toCharArray();
 				if (splittedLine[0] == 'R') {
 					int playerID = Integer.parseInt(String.valueOf(splittedLine[1]));
 					int robotID  = Integer.parseInt(String.valueOf(splittedLine[2]));
 
-					executerOrdres(Arrays.copyOfRange(splittedLine, 3, splittedLine.length-1), metier.getJoueur(playerID).getRobot(robotID));
+					executerOrdres(Arrays.copyOfRange(splittedLine, 3, splittedLine.length-1),
+					               metier.getJoueur(playerID).getRobot(robotID));
 				}
 				else if (splittedLine[0] == 'J') {
 					Joueur j = metier.getJoueur( Integer.parseInt(String.valueOf(splittedLine[1])) );
@@ -122,10 +123,23 @@ public class ControleurCui
 						case 'P':
 							int indice1 = Integer.parseInt(String.valueOf(splittedLine[3]));
 							int indice2 = Integer.parseInt(String.valueOf(splittedLine[4]));
-							j.permuterOrdre(indice1, indice2)
+							j.permuterOrdre(indice1, indice2);
 							break;
 						case 'R':
+							int ind = Integer.parseInt(String.valueOf(splittedLine[3]));
+							j.resetOrdres(ind);
 							break;
+						case 'F' :
+							char[] allOrdres = j.getOrdres();
+							for(int i = 0; i < j.getRobots().length; i++)
+							{
+								char[] ordres = new char[3];
+								for(int jui = 0; jui < allOrdres.length / 2; jui++)
+								{
+									ordres[jui] = allOrdres[jui + (3*i)];
+								}
+								executerOrdres(ordres, j.getRobot(i));
+							}
 					}
 				}
 			}
@@ -168,7 +182,7 @@ public class ControleurCui
 		System.out.println("Combien de joueurs ? ");
 		Scanner sc = new Scanner(System.in);
 		if(args.length > 0 && args[0].equals("SCENARIO"))
-			new ControleurCui(sc.nextInt()).debug();
+			new ControleurCui(sc.nextInt()).debug(sc.nextInt());
 		else
 			new ControleurCui(sc.nextInt()).jouer();
 		sc.close();

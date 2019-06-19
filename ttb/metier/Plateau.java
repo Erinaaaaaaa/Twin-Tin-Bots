@@ -233,4 +233,6 @@ public class Plateau
 		}
 		return "";
 	}
+
+	public Joueur getJoueur(int id) {return tabJoueurs[id];}
 }
