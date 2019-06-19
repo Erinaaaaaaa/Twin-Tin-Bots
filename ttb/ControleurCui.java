@@ -61,6 +61,7 @@ public class ControleurCui
 		System.out.println("Combien de joueurs ? ");
 		Scanner sc = new Scanner(System.in);
 		new ControleurCui(sc.nextInt());
+		sc.close();
 	}
 
 	public Tuile[][] getPlateau() { return metier.getTuiles(); }
