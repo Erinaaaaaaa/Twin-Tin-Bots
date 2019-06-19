@@ -17,7 +17,7 @@ public class Plateau
 
 	public Plateau(Tuile[][] grille, Joueur[] tabJoueur, String fileAttent)
 	{
-		this.plateau = grille;
+		this.plateau    = grille;
 		this.tabJoueurs = tabJoueur;
 		this.fileAttent = fileAttent;
 	}
@@ -49,41 +49,26 @@ public class Plateau
 		switch(dir)
 		{
 			case 0 :
-				if(pos[0] % 2 != 0)
-				{
-					pos[0]--;
+				if(pos[0] % 2 != 0)	
 					pos[1]--;
-				}
-				else
-				{
-					pos[0]--;
-				}
-				break;
+				
+				pos[0]--;
+			break;
 			case 1 :
-				if(pos[0] % 2 != 0)
-				{
-					pos[0]--;
-				}
-				else
-				{
-					pos[0]--;
+				if(pos[0] % 2 == 0)
 					pos[1]++;
-				}
-				break;
+
+				pos[0]--;
+			break;
 			case 2 :
 				pos[1]++;
-				break;
+			break;
 			case 3 :
-				if(pos[0] % 2 != 0)
-				{
-					pos[0]++;
-				}
-				else
-				{
-					pos[0]++;
+				if(pos[0] % 2 == 0)
 					pos[1]++;
-				}
-				break;
+
+				pos[0]++;
+			break;
 			case 4 :
 				if(pos[0] % 2 != 0)
 				{
@@ -94,10 +79,10 @@ public class Plateau
 				{
 					pos[0]--;
 				}
-				break;
+			break;
 			case 5 :
 				pos[1]--;
-				break;
+			break;
 		}
 
 		if(pos[0] < 0 || pos[0] >= plateau.length ||
@@ -111,8 +96,8 @@ public class Plateau
 
 	public boolean avancer(Robot r, boolean canPush)
 	{
-		int[] pos = nextPos(r.getPos(), r.getDir());
-		int initDirR = 0;
+		int[] pos      = nextPos(r.getPos(), r.getDir());
+		int initDirR   = 0;
 		boolean retour = false;
 		if(pos == r.getPos())
 			return retour;
@@ -125,7 +110,7 @@ public class Plateau
 		Robot nextHex = null;
 		if(t == Tuile.ROBOT)
 		{
-			nextHex = getRobotAPosition(pos);
+			nextHex  = getRobotAPosition(pos);
 			initDirR = nextHex.getDir();
 			while(nextHex.getDir() != r.getDir())
 			nextHex.turnAround(true);
