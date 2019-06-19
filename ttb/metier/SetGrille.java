@@ -17,6 +17,8 @@ public abstract class SetGrille
 	 */
 	public static Plateau initGrille(int nbJoueur)
 	{
+		Joueur.nbJoueurs = 0;
+
 		Tuile[][] grille;
 		Joueur[]  tabJoueur = new Joueur[nbJoueur];
 		Scanner   sc;

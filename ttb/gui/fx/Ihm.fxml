@@ -23,6 +23,8 @@
             <Button mnemonicParsing="false" onAction="#tournerDroite" text="Tourner droite" />
             <Button mnemonicParsing="false" onAction="#charger" text="Charger" />
             <Button mnemonicParsing="false" onAction="#deposer" text="Déposer" />
+            <Button mnemonicParsing="false" onAction="#changerJoueur" text="Changer de joueur" />
+            <Button mnemonicParsing="false" onAction="#changerRobot" text="Changer de robot" />
          </items>
       </ToolBar>
       <HBox VBox.vgrow="ALWAYS">

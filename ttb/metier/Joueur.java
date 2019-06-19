@@ -21,7 +21,8 @@ public class Joueur
 	 */
 	private final static char[] MAIN_BASE ={'A','A','S','G','G','G','D','D','D','C','C','E','E'};
 
-	private static int nbJoueurs = 0;
+	// Réinitialisé dans SetGrille, pour pouvoir recréer un plateau
+	static int nbJoueurs = 0;
 
 	private int     id;
 	private Robot[] tabRobot;

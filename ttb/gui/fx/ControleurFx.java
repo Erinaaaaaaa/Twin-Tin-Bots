@@ -9,12 +9,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import ttb.gui.fx.controls.EtatRobot;
+import ttb.gui.fx.controls.ImageRobot;
 import ttb.metier.*;
 
 import java.io.File;
 
 public class ControleurFx
 {
+    private final int nbJoueur = 6;
     private Plateau plateau;
 
     @FXML private Accordion accMains;
@@ -25,6 +27,7 @@ public class ControleurFx
     @FXML
     void initPlateau(ActionEvent event)
     {
+        this.plateau = SetGrille.initGrille(nbJoueur);
         afficherPlateau();
 
         for (TitledPane p : this.accMains.getPanes())
@@ -35,35 +38,51 @@ public class ControleurFx
     @FXML
     void avancer(ActionEvent event)
     {
-        this.plateau.avancer(plateau.getJoueur(0).getRobot(0), true);
+        this.plateau.avancer(plateau.getJoueurCourant().getRobot(robot), true);
         afficherPlateau();
     }
 
     @FXML
     void charger(ActionEvent event)
     {
-        plateau.chargerCristal(plateau.getJoueur(0).getRobot(0));
+        plateau.chargerCristal(plateau.getJoueurCourant().getRobot(robot));
         afficherPlateau();
     }
 
     @FXML
     void deposer(ActionEvent event)
     {
-        plateau.deposerCristal(plateau.getJoueur(0).getRobot(0));
+        plateau.deposerCristal(plateau.getJoueurCourant().getRobot(robot));
         afficherPlateau();
     }
 
     @FXML
     void tournerDroite(ActionEvent event)
     {
-        plateau.getJoueur(0).getRobot(0).turnAround(false);
+        plateau.getJoueurCourant().getRobot(robot).turnAround(false);
         afficherPlateau();
     }
 
     @FXML
     void tournerGauche(ActionEvent event)
     {
-        plateau.getJoueur(0).getRobot(0).turnAround(true);
+        plateau.getJoueurCourant().getRobot(robot).turnAround(true);
+        afficherPlateau();
+    }
+
+    @FXML
+    void changerJoueur(ActionEvent event)
+    {
+        plateau.changerJoueur();
+        afficherPlateau();
+    }
+
+    int robot = 0;
+
+    @FXML
+    void changerRobot(ActionEvent event)
+    {
+        robot = (robot + 1) % 2;
         afficherPlateau();
     }
 
@@ -126,8 +145,6 @@ public class ControleurFx
                 else
                     fic += "gros";
 
-
-
                 fic += r.getJoueur().getId();
             }
 
@@ -169,14 +186,30 @@ public class ControleurFx
                 for (int i = 0; i < 11; i++)
                     for (int j = 0; j < 11; j++)
                     {
-                        ImageView iv = chargerImage(tuiles[i][j], i, j);
-                        if (iv == null) continue;
+                        Robot r = this.plateau.getRobotAPosition(new int[]{i, j});
 
+                        int x = ((i) % 2 == 0 ? 23 : 0) + (j) * 46 - 5;
+                        if (r != null)
+                        {
+                            ImageRobot ir = new ImageRobot(r);
+                            ir.setLayoutX(x);
+                            ir.setLayoutY((i) * 39 - 3);
+                            ir.setScaleX(0.6);
+                            ir.setScaleY(0.6);
+                            ir.setRotate(-210 + r.getDir() * 60);
+                            this.panePlateau.getChildren().add(ir);
+                        }
+                        else
+                        {
+                            ImageView iv = chargerImage(tuiles[i][j], i, j);
 
-                        iv.setLayoutX((i % 2 == 0 ? 23 : 0) + (j) * 46 - 5);
-                        iv.setLayoutY((i) * 39 - 3);
+                            if (iv == null) continue;
 
-                        this.panePlateau.getChildren().add(iv);
+                            iv.setLayoutX(x);
+                            iv.setLayoutY((i) * 39 - 3);
+
+                            this.panePlateau.getChildren().add(iv);
+                        }
                     }
             } else
             {
@@ -187,14 +220,32 @@ public class ControleurFx
                 for (int i = 0; i < 9; i++)
                     for (int j = 0; j < 9; j++)
                     {
-                        ImageView iv = chargerImage(tuiles[i][j], i, j);
+                        Robot r = this.plateau.getRobotAPosition(new int[]{i, j});
 
-                        if (iv == null) continue;
+                        int x = ((i + 1) % 2 == 0 ? -23 : 0) + (j + 1) * 46 - 5;
+                        if (r != null)
+                        {
+                            ImageRobot ir = new ImageRobot(r);
+                            ir.setLayoutX(x);
+                            ir.setLayoutY((i + 1) * 39 - 3);
+                            ir.setScaleX(0.6);
+                            ir.setScaleY(0.6);
+                            ir.setRotate(-210 + r.getDir() * 60);
+                            this.panePlateau.getChildren().add(ir);
+                        }
+                        else
+                        {
+                            ImageView iv = chargerImage(tuiles[i][j], i, j);
 
-                        iv.setLayoutX(((i + 1) % 2 == 0 ? -23 : 0) + (j + 1) * 46 - 5);
-                        iv.setLayoutY((i + 1) * 39 - 3);
+                            if (iv == null) continue;
 
-                        this.panePlateau.getChildren().add(iv);
+                            iv.setLayoutX(x);
+                            iv.setLayoutY((i + 1) * 39 - 3);
+
+                            this.panePlateau.getChildren().add(iv);
+                        }
+
+
                     }
             }
         }
@@ -226,7 +277,7 @@ public class ControleurFx
     @FXML
     void initialize()
     {
-        this.plateau = SetGrille.initGrille(3);
+        this.plateau = SetGrille.initGrille(nbJoueur);
 
         for (int i = 0; i < this.plateau.getNbJoueurs(); i++)
         {
