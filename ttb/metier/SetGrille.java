@@ -107,10 +107,10 @@ public abstract class SetGrille
 		int[] coor = new int[2];
 		coor[0] = Integer.parseInt(coorString[0]);
 		coor[1] = Integer.parseInt(coorString[1]);
-		if(coor[0] % 2 != 0 && nbJoueur < 5)
+		if(coor[0] % 2 != 0 && SetGrille.nbJoueur < 5)
 			coor[1]++;
 
-		if(coor[0] % 2 == 0 && nbJoueur >= 5)
+		if(coor[0] % 2 == 0 && SetGrille.nbJoueur >= 5)
 			coor[1]++;
 
 		return coor;
