@@ -23,19 +23,21 @@ public class ControleurCui
 
 	private void actionJoueur(Joueur j, char c)
 	{
+		int idRobot = ihm.getRobot(j);
 		switch(c)
 		{
 			case 'P' :
-				int[] ind = new int[] {ihm.getInd(j.getOrdres()), ihm.getInd(j.getOrdres())};
+				int[] ind = new int[] {ihm.getInd(j.getOrdres(idRobot)), ihm.getInd(j.getOrdres(idRobot))};
+				j.permuterOrdre(idRobot, ind[0], ind[1]);
 				break;
 			case 'A' :
-				j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getCarte());
+				j.ajouterOrdre(idRobot, ihm.getInd(j.getOrdres(idRobot)), ihm.getCarte());
 				break;
 			case 'E' :
-				j.enleverOrdre(ihm.getInd(j.getOrdres()));
+				j.enleverOrdre(idRobot, ihm.getInd(j.getOrdres(idRobot)));
 				break;
 			case 'R' :
-				j.resetOrdres(ihm.getInd(j.getOrdres()));
+				j.resetOrdres(idRobot);
 				break;
 		}
 	}
@@ -51,14 +53,7 @@ public class ControleurCui
 			do
 			{
 				Robot r = joueur.getRobot(i);
-				char[] ordresTmp = joueur.getOrdres();
-				int ind = 0;
-				char[] ordres = new char[3];
-				for(int j = 3*i; j < 3*(i+1); j++)
-				{
-					ordres[ind] = ordresTmp[j];
-					ind++;
-				}
+				char[] ordres = joueur.getOrdres(i);
 				executerOrdres(ordres, r);
 				i++;
 			}while(i < 2);
@@ -112,34 +107,30 @@ public class ControleurCui
 					Joueur j = metier.getJoueur( Integer.parseInt(String.valueOf(splittedLine[1])) );
 					switch (splittedLine[2]) {
 						case 'A':
-							char lettre = splittedLine[3];
-							int  index  = Integer.parseInt(String.valueOf(splittedLine[4]));
-							j.ajouterOrdre(index, lettre);
+							int  idRobot  = Integer.parseInt(String.valueOf(splittedLine[3]));
+							char lettre = splittedLine[4];
+							int  index  = Integer.parseInt(String.valueOf(splittedLine[5]));
+							j.ajouterOrdre(idRobot, index, lettre);
 							break;
 						case 'E':
-							int indice = Integer.parseInt(String.valueOf(splittedLine[3]));
-							j.enleverOrdre(indice);
+							int idRobot = Integer.parseInt(String.valueOf(splittedLine[3]));
+							int indice = Integer.parseInt(String.valueOf(splittedLine[4]));
+							j.enleverOrdre(idRobot, indice);
 							break;
 						case 'P':
-							int indice1 = Integer.parseInt(String.valueOf(splittedLine[3]));
-							int indice2 = Integer.parseInt(String.valueOf(splittedLine[4]));
-							j.permuterOrdre(indice1, indice2);
+							int idRobot = Integer.parseInt(String.valueOf(splittedLine[4]));
+							int indice1 = Integer.parseInt(String.valueOf(splittedLine[4]));
+							int indice2 = Integer.parseInt(String.valueOf(splittedLine[5]));
+							j.permuterOrdre(idRobot, indice1, indice2);
 							break;
 						case 'R':
-							int ind = Integer.parseInt(String.valueOf(splittedLine[3]));
-							j.resetOrdres(ind);
+							int idRobot = Integer.parseInt(String.valueOf(splittedLine[3]));
+							int indice = Integer.parseInt(String.valueOf(splittedLine[4]));
+							j.resetOrdres(idRobot, indice);
 							break;
 						case 'F' :
-							char[] allOrdres = j.getOrdres();
 							for(int i = 0; i < j.getRobots().length; i++)
-							{
-								char[] ordres = new char[3];
-								for(int jui = 0; jui < allOrdres.length / 2; jui++)
-								{
-									ordres[jui] = allOrdres[jui + (3*i)];
-								}
-								executerOrdres(ordres, j.getRobot(i));
-							}
+								executerOrdres(j.getOrdres(i), j.getRobot(i));
 					}
 				}
 			}
@@ -213,8 +204,8 @@ public class ControleurCui
 			retour += "] ";
 		}
 
-		retour += "\n\tMain : ";
-		for(Character c : j.getMain())
+		retour += "\n\tReserve : ";
+		for(Character c : j.getReserve())
 			retour += c + ",";
 
 		return retour.substring(0, retour.length() - 1) + "\n";

@@ -12,18 +12,19 @@ public class Joueur
 	private Robot[] tabRobot;
 	private int[] posBase;
 	private int points;
-	private char[] ordres;
-	private ArrayList<Character> main;
+	private char[][] ordres;
+	private ArrayList<Character> reserve;
 
 	public Joueur()
 	{
 		id = Joueur.nbJoueurs++;
 		this.tabRobot = new Robot[] {null, null};
 		this.points = 0;
-		ordres = new char[6];
-		Arrays.fill(ordres, '\0');
-		main = new ArrayList<Character>();
-		initMain();
+		ordres = new char[2][3];
+		Arrays.fill(ordres[0], '\0');
+		Arrays.fill(ordres[1], '\0');
+		reserve = new ArrayList<Character>();
+		initReserve();
 	}
 
 	/**
@@ -35,64 +36,63 @@ public class Joueur
 	 * 2 Tuiles Charger un crystal 'C'
 	 * 2 Tuiles Déposer un crystal 'E'
 	 */
-	private void initMain()
+	private void initReserve()
 	{
-		main.add('A');
-		main.add('A');
-		main.add('S');
-		main.add('G');
-		main.add('G');
-		main.add('G');
-		main.add('D');
-		main.add('D');
-		main.add('D');
-		main.add('C');
-		main.add('C');
-		main.add('E');
-		main.add('E');
+		reserve.add('A');
+		reserve.add('A');
+		reserve.add('S');
+		reserve.add('G');
+		reserve.add('G');
+		reserve.add('G');
+		reserve.add('D');
+		reserve.add('D');
+		reserve.add('D');
+		reserve.add('C');
+		reserve.add('C');
+		reserve.add('E');
+		reserve.add('E');
 	}
 
-	public void ajouterOrdre(int ind, char c)
+	public void ajouterOrdre(int idRobot, int ind, char c)
 	{
 		int i = 0;
-		i = main.indexOf(c);
+		i = reserve.indexOf(c);
 		if( i != -1)
 		{
-			char ordre = ordres[ind];
-			ordres[ind] = main.remove(i);
+			char ordre = ordres[idRobot][ind];
+			ordres[idRobot][ind] = reserve.remove(i);
 			if(ordre != '\0')
-				main.add(c);
+				reserve.add(c);
 		}
 	}
 
-	public void enleverOrdre(int ind)
+	public void enleverOrdre(int idRobot, int ind)
 	{
-		if(ordres[ind] != '\0')
+		if(ordres[idRobot][ind] != '\0')
 		{
-			System.out.println("bite");
-			main.add(ordres[ind]);
-			ordres[ind] = '\0';
+			reserve.add(ordres[idRobot][ind]);
+			ordres[idRobot][ind] = '\0';
 		}
 	}
 
-	public void permuterOrdre(int ind1, int ind2)
+	public void permuterOrdre(int idRobot, int ind1, int ind2)
 	{
-		if(ordres[ind1] == '\0' || ordres[ind2] == '\0')
+		if(ordres[idRobot][ind1] == '\0' || ordres[idRobot][ind2] == '\0')
 			return;
 
 		char c;
-		c = ordres[ind1];
-		ordres[ind1] = ordres[ind2];
-		ordres[ind2] = c;
+		c = ordres[idRobot][ind1];
+		ordres[idRobot][ind1] = ordres[idRobot][ind2];
+		ordres[idRobot][ind2] = c;
 	}
 
 	public void resetOrdres(int id)
 	{
-		for(int i = 0; i < ordres.length / 2; i++)
+		for(int i = 0; i < ordres[id].length; i++)
 		{
-			if(ordres[i+(3*id)] != '\0')
+			if(ordres[id][i] != '\0')
 			{
-				main.add(ordres[i]);
+				reserve.add(ordres[i]);
 				ordres[i+(3*id)] = '\0';
 			}
 		}
@@ -119,6 +119,8 @@ public class Joueur
 
 	public int getId() {return id;}
 
+	public int getPoints() {return this.points;}
+
 	public Robot getRobotParPos(int[] pos)
 	{
 		for(Robot r : tabRobot)
@@ -138,8 +140,8 @@ public class Joueur
 			this.posBase = pos;
 	}
 
-	public char[] getOrdres() {return ordres;}
-	public ArrayList<Character> getMain() {return this.main;}
+	public char[] getOrdres(int id) {return Arrays.copyOf(order[id], order[id].length);}
+	public ArrayList<Character> getReserve() {return this.reserve;}
 	public String getCouleur(){return Joueur.COULEURS[this.id];}
 
 }
