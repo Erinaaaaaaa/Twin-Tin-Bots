@@ -5,10 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
 
-/**
- * Classe SetGrille.
- * Charge le plateau de jeu.
- */
 public abstract class SetGrille
 {
 	private static int nbJoueur;
