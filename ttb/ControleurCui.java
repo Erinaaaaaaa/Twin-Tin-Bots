@@ -30,7 +30,6 @@ public class ControleurCui
 				j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getCarte());
 				break;
 			case 'E' :
-				System.out.println("tuez moi");
 				j.enleverOrdre(ihm.getInd(j.getOrdres()));
 				break;
 			case 'R' :

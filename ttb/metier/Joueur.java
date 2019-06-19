@@ -59,15 +59,14 @@ public class Joueur
 		if( i != -1)
 		{
 			char ordre = ordres[ind];
-			ordres[i] = main.remove(i);
+			ordres[ind] = main.remove(i);
 			if(ordre != '\0')
-				ordres[i] = c;
+				main.add(c);
 		}
 	}
 
 	public void enleverOrdre(int ind)
 	{
-		System.out.println(ordres[ind]);
 		if(ordres[ind] != '\0')
 		{
 			System.out.println("bite");

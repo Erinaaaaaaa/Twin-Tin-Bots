@@ -1,8 +1,8 @@
 package ttb;
 
 import java.util.Scanner;
-import iut.algo.CouleurConsole; 
-import iut.algo.Console; 
+import iut.algo.CouleurConsole;
+import iut.algo.Console;
 
 
 public class IhmCui
@@ -48,7 +48,7 @@ public class IhmCui
 			for(int j = 0; j < ctrl.getNbColonne(); j++)
 			{
 				cara = ctrl.getSymbole(i,j);
-				
+
 				switch(cara)
 				{
 					case "R" : Console.couleurFont ( ctrl.getCouleur(i,j) );
@@ -64,7 +64,7 @@ public class IhmCui
 					case "T" : Console.couleurFont (CouleurConsole.BLANC );
 				}
 				System.out.print("  "+cara+" ");
-				Console.normal(); 
+				Console.normal();
 			}
 			System.out.print("\n");
 
@@ -88,6 +88,6 @@ public class IhmCui
 			ind = sc.next();
 		} while (!ind.matches("[1-6]"));
 
-		return Integer.parseInt(ind);
+		return Integer.parseInt(ind) - 1;
 	}
 }
