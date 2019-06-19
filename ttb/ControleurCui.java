@@ -72,7 +72,15 @@ public class ControleurCui
 			sc = new Scanner(new File("./ttb/niveau.data"), "utf8");
 			ordres = sc.nextLine().split(";");
 		} catch (Exception e) { e.printStackTrace(); }
-		executerOrdre(ordres);
+		int i = 0;
+		for(Joueur j : tabJoueur)
+		{
+			for(Robot r : j.getRobots())
+			{
+				executerOrdres(ordres[i], r)
+				i++;
+			}
+		}
 	}
 
 	public void executerOrdres(char[] ordres, Robot r)
