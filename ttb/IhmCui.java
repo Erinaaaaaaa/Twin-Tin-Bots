@@ -75,7 +75,7 @@ public class IhmCui
 	{
 		System.out.println("Choisissez une carte de la réserve : ");
 		Scanner sc = new Scanner(System.in);
-		return sc.next().charAt(0);
+		return sc.next().toUpperCase().charAt(0);
 	}
 
 	public int getInd(char[] ordres)

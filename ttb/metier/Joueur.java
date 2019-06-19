@@ -7,8 +7,11 @@ import java.util.ArrayList;
 public class Joueur
 {
 	public  final static String[] COULEURS = {"Rouge", "Jaune", "Vert", "Bleu", "Violet", "Rose"};
+	private final static char[]   MAIN_BASE ={'A','A','S','G','G','G','D','D','D','C','C','E','E'};
+
 	private static int nbJoueurs = 0;
-	private int id;
+
+	private int     id;
 	private Robot[] tabRobot;
 	private int[] posBase;
 	private int points;
@@ -92,8 +95,8 @@ public class Joueur
 		{
 			if(ordres[id][i] != '\0')
 			{
-				reserve.add(ordres[i]);
-				ordres[i+(3*id)] = '\0';
+				reserve.add(ordres[id][i]);
+				ordres[id][i] = '\0';
 			}
 		}
 	}
@@ -110,6 +113,7 @@ public class Joueur
 			r.setJoueur(this);
 			return;
 		}
+
 		if(tabRobot[1] == null)
 		{
 			r.setJoueur(this);
@@ -140,7 +144,7 @@ public class Joueur
 			this.posBase = pos;
 	}
 
-	public char[] getOrdres(int id) {return Arrays.copyOf(order[id], order[id].length);}
+	public char[] getOrdres(int id) {return Arrays.copyOf(ordres[id], ordres[id].length);}
 	public ArrayList<Character> getReserve() {return this.reserve;}
 	public String getCouleur(){return Joueur.COULEURS[this.id];}
 
