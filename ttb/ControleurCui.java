@@ -45,8 +45,12 @@ public class ControleurCui
 		do
 		{
 			Joueur joueur = metier.getJoueurCourant();
+			String action;
 			ihm.afficher();
-			actionJoueur(joueur, ihm.getAction().charAt(0));
+			do
+				action = ihm.getAction();
+			while (!action.matches("[APERN]")); // actions possibles
+			actionJoueur(joueur, action.charAt(0));
 			int i = 0;
 			do
 			{
