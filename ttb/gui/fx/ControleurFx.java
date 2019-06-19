@@ -6,10 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import ttb.metier.Plateau;
-import ttb.metier.Robot;
-import ttb.metier.SetGrille;
-import ttb.metier.Tuile;
+import ttb.metier.*;
 
 import java.io.File;
 
@@ -32,9 +29,9 @@ public class ControleurFx
         afficherPlateau();
     }
 
-    private String getFichier(String tuile)
+    private String getFichier(String nomTuile)
     {
-        switch(tuile)
+        switch(nomTuile)
         {
             case "2":
                 return "cristaux/gem2";
@@ -53,33 +50,49 @@ public class ControleurFx
 
     private ImageView chargerImage(Tuile tuile, int i, int j)
     {
-        Robot r = this.plateau.getRobotAPosition(new int[]{i, j});
+        Robot  r      = this.plateau.getRobotAPosition(new int[]{i, j});
+        Joueur joueur = this.plateau.getJoueurParBase (new int[]{i, j});
+        double angle = 0.0;
         String fic;
 
         if (r != null)
         {
-            System.out.println("ROBOT " + i + ";" + j + " ; dir:" + r.getDir() + "; id:" + r.getId() + "; j:" + r.getJoueur().getId());
+            fic = "robots/";
+
+            if (r.getId() == 0)
+                fic += "petit";
+            else
+                fic += "gros";
+
+            angle = (-210 + r.getDir() * 60);
+
+            fic += r.getJoueur().getId();
+
+        }
+        else if (joueur != null) // c'est une base
+        {
+            fic = "bases/base" + joueur.getId();
+        }
+        else
+        {
+            fic = getFichier(tuile.toString());
         }
 
-
-        fic = getFichier(tuile.toString());
         if (fic == null) return null;
-
-
-        // Robot r = this.plateau.getRobotAPosition(new int[]{i, j});
-
-        System.out.println("break");
 
         Image robot = new Image(new File("./ttb/gui/images/"+fic+".png").toURI().toString());
 
         ImageView iv = new ImageView(robot);
         iv.setScaleY(0.6);iv.setScaleX(0.6);
+        iv.setRotate(angle);
 
         return iv;
     }
 
     private void afficherPlateau()
     {
+        this.panePlateau.getChildren().clear();
+
         double imgScale = 0.6;
 
         Tuile[][] tuiles = this.plateau.getTuiles();
