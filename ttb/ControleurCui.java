@@ -19,25 +19,33 @@ public class ControleurCui
 
 	private void actionJoueur(Joueur j)
 	{
-		String action = ihm.getAction();
-		switch(action.charAt(0))
+		String action;
+		do
 		{
-			case 'P' :
-				//int[] ind = new int[] {ihm.getInd(j.getOrdres()), ihm.getInd(j.getOrdres())};
-				int ordre1 = ihm.getInd(j.getOrdres());
-				int ordre2 = ihm.getInd(j.getOrdres());
-				j.permuterOrdre(ordre1, ordre2);
-				break;
-			case 'A' :
-				j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getCarte());
-				break;
-			case 'E' :
-				j.enleverOrdre(ihm.getInd(j.getOrdres()));
-				break;
-			case 'R' :
-				j.resetOrdres();
-				break;
-		}
+			action = ihm.getAction();
+			switch(action.charAt(0))
+			{
+				case 'P' :
+					//int[] ind = new int[] {ihm.getInd(j.getOrdres()), ihm.getInd(j.getOrdres())};
+					int ordre1 = ihm.getInd(j.getOrdres());
+					int ordre2 = ihm.getInd(j.getOrdres());
+					j.permuterOrdre(ordre1, ordre2);
+					break;
+				case 'A' :
+					j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getCarte());
+					break;
+				case 'E' :
+					j.enleverOrdre(ihm.getInd(j.getOrdres()));
+					break;
+				case 'R' :
+					j.resetOrdres();
+					break;
+				case 'N' :
+					break;
+				default :
+					ihm.erreur();
+			}
+		} while (!action.matches("[PAERN]")); // Toutes les possibilités d'action
 	}
 
 	public void jouer()
