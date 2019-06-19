@@ -207,6 +207,11 @@ public class Plateau
 	{
 		return tabJoueurs.length;
 	}
+
+	public String getFileAttente()
+	{
+		return this.fileAttent;
+	}
 	public int getNbLigne(){return this.plateau.length;}
 	public int getNbColonne(){return this.plateau[0].length;}
 
