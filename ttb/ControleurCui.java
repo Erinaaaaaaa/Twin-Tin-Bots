@@ -14,7 +14,6 @@ public class ControleurCui
 	{
 		metier = SetGrille.initGrille(nbJoueurs);
 		ihm    = new IhmCui(this);
-		jouer();
 	}
 
 	private void actionJoueur(Joueur j)
@@ -116,7 +115,10 @@ public class ControleurCui
 	{
 		System.out.println("Combien de joueurs ? ");
 		Scanner sc = new Scanner(System.in);
-		new ControleurCui(sc.nextInt());
+		if(args.length > 0 && args[0].equals("SCENARIO"))
+			new ControleurCui(sc.nextInt()).scenario();
+		else
+			new ControleurCui(sc.nextInt()).jouer();
 		sc.close();
 	}
 
