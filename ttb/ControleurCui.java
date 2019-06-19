@@ -60,7 +60,7 @@ public class ControleurCui
 				executerOrdres(ordres, r);
 				i++;
 			}while(i < 2);
-			System.out.println(metier.toString());
+			ihm.afficherPlateau();
 			metier.changerJoueur();
 		}while(true);
 	}
@@ -91,7 +91,7 @@ public class ControleurCui
 			metier.changerJoueur();
 		}while(metier.getJoueurCourant().getId() != 0);
 
-		System.out.println(metier.toString());
+		ihm.afficherPlateau();
 
 		while(i < line.length)
 		{
