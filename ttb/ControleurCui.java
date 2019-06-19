@@ -23,6 +23,8 @@ public class ControleurCui
 
 	private void actionJoueur(Joueur j, char c)
 	{
+		if(c == 'N')
+			return;
 		int idRobot = ihm.getRobot(j);
 		switch(c)
 		{
