@@ -161,4 +161,9 @@ public class Joueur
 	public ArrayList<Character> getMain()   {return this.main;}
 	public String               getCouleur(){return Joueur.COULEURS[this.id];}
 
+	public int getPoints()
+	{
+		// TODO: calcul de points
+		return 0;
+	}
 }
