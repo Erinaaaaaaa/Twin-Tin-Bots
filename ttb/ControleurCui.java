@@ -27,11 +27,12 @@ public class ControleurCui
 				Robot rActuel = joueur.getRobot(i);
 				System.out.println(metier.toString());
 				System.out.println("Indiquez vos action");
-				String action = sc.next().toUpperCase();
-				for(int j = 0; j < action.length(); j++)
+				//for(int j = 0; j < action.length(); j++)
+				boolean bOk = true;
+				do
 				{
-					System.out.println(metier.toString());
-					switch(action.charAt(j))
+					String action = sc.next().toUpperCase();
+					switch(action.charAt(0))
 					{
 						case 'A' :
 							metier.avancer(rActuel, true);
@@ -48,8 +49,11 @@ public class ControleurCui
 						case 'E' :
 							metier.deposerCristal(rActuel);
 							break;
+						default :
+							bOk = false;
 					}
-				}
+					System.out.println(metier.toString());
+				}while(bOk);
 				i++;
 			} while (i < 2);
 			metier.changerJoueur();

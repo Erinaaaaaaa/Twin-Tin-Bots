@@ -28,9 +28,13 @@ public class Robot
 	public boolean chargerCrystal(Tuile c)
 	{
 		if(crystal != null)
+		{
+			System.out.println("Non");
 			return false;
+		}
 
 		crystal = c;
+		System.out.println("Oui");
 		return true;
 	}
 
@@ -52,4 +56,6 @@ public class Robot
 		else
 			dir = (dir+1) % 6;
 	}
+
+	public void setDir(int dir) {System.out.println("changedir");this.dir = dir;}
 }

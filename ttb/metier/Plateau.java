@@ -113,6 +113,7 @@ public class Plateau
 	{
 		int[] pos = nextPos(r.getPos(), r.getDir());
 		int initDirR = 0;
+		System.out.println(r.getDir());
 		boolean retour = false;
 		if(pos == r.getPos())
 			return retour;
@@ -127,8 +128,8 @@ public class Plateau
 		{
 			nextHex = getRobotAPosition(pos);
 			initDirR = nextHex.getDir();
-			while(nextHex.getDir() != r.getDir())
-			nextHex.turnAround(true);
+			System.out.println("help");
+			nextHex.setDir(r.getDir());
 		}
 
 		if(t == Tuile.VIDE ||
@@ -142,8 +143,11 @@ public class Plateau
 		}
 
 		if(nextHex != null)
-			while(nextHex.getDir() != initDirR)
-				nextHex.turnAround(true);
+		{
+			System.out.println("gneee");
+			nextHex.setDir(initDirR);
+		}
+
 		return retour;
 	}
 
@@ -177,7 +181,12 @@ public class Plateau
 			return;
 		int[] next = nextPos(r.getPos(), r.getDir());
 		Tuile t = plateau[next[0]][next[1]];
-		if(t == Tuile.BASE || (t == Tuile.ROBOT && getRobotAPosition(next).chargerCrystal(cristal)) || (t == Tuile.VIDE))
+		boolean bOk = false;
+		if(t == Tuile.ROBOT)
+			bOk = getRobotAPosition(next).chargerCrystal(cristal);
+
+		System.out.println(bOk);
+		if(t == Tuile.BASE || (t == Tuile.ROBOT && bOk) || (t == Tuile.VIDE))
 		{
 			if(t == Tuile.BASE)
 				getJoueurParBase(next).addPoint();

@@ -1,7 +1,7 @@
 package ttb;
 
 import ttb.gui.fx.*;
-import iut.algo.Clavier;
+import java.util.Scanner;
 
 /**
  * Classe launcher, permettant de lancer soit l'IHM CUI ou l'IHM GUI JavaFX
@@ -10,10 +10,11 @@ public class Launcher
 {
     public static void main(String[] args)
     {
+		Scanner sc = new Scanner(System.in)
         System.out.println("Choix de l'IHM: ");
         System.out.println(" 1 - IHM CUI");
         System.out.println(" 2 - IHM JavaFX");
-        int choix;
+        int choix = sc.nextInt();
 
         while( (choix = choisir("Mode")) < 1 || choix > 2);
 
