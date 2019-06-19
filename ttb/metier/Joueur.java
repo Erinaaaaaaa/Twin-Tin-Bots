@@ -1,6 +1,8 @@
 package ttb.metier;
 
 import java.awt.Color;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Joueur
 {
@@ -11,7 +13,7 @@ public class Joueur
 	private int[] posBase;
 	private int points;
 	private char[] ordres;
-	private ArrayList<char> main;
+	private ArrayList<Character> main;
 
 	public Joueur()
 	{
@@ -20,10 +22,19 @@ public class Joueur
 		this.points = 0;
 		ordres = new char[6];
 		Arrays.fill(ordres, '\0');
-		main = new ArrayList<char>();
+		main = new ArrayList<Character>();
 		initMain();
 	}
 
+	/**
+	 * La réserve contient :
+	 * 2 Tuiles Avancer 1x 'A'
+	 * 1 Tuile  Avancer 2x 'S'
+	 * 3 Tuiles Tourner à Gauche 'G'
+	 * 3 Tuiles Tourner à Droite 'D'
+	 * 2 Tuiles Charger un crystal 'C'
+	 * 2 Tuiles Déposer un crystal 'E'
+	 */
 	private void initMain()
 	{
 		main.add('A');
@@ -44,13 +55,13 @@ public class Joueur
 	public void ajouterOrdre(char c, int ind)
 	{
 		int i = 0;
-		i = main.getIndexOf(c);
+		i = main.indexOf(c);
 		if( i != -1)
 		{
 			char ordre = ordres[ind];
 			ordres[i] = main.remove(i);
 			if(ordre != '\0')
-				ordres.add(ordre);
+				ordres[i] = c;
 		}
 	}
 
@@ -80,7 +91,7 @@ public class Joueur
 		{
 			if(ordres[i] != '\0')
 			{
-				main.add(ordre[i]);
+				main.add(ordres[i]);
 				ordres[i] = '\0';
 			}
 		}
@@ -125,4 +136,6 @@ public class Joueur
 		if(posBase == null)
 			this.posBase = pos;
 	}
+
+	public char[] getOrdres() {return ordres;}
 }
