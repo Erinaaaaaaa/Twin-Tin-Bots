@@ -86,8 +86,6 @@ public class Plateau
 		  )
 		  	return initPos;
 
-		System.out.println("ok");
-
 		return pos;
 	}
 
@@ -95,7 +93,6 @@ public class Plateau
 	{
 		int[] pos = nextPos(r.getPos(), r.getDir());
 		int initDirR = 0;
-		System.out.println(r.getDir());
 		boolean retour = false;
 		if(pos == r.getPos())
 			return retour;
@@ -110,7 +107,6 @@ public class Plateau
 		{
 			nextHex  = getRobotAPosition(pos);
 			initDirR = nextHex.getDir();
-			System.out.println("help");
 			nextHex.setDir(r.getDir());
 		}
 
@@ -125,10 +121,7 @@ public class Plateau
 		}
 
 		if(nextHex != null)
-		{
-			System.out.println("gneee");
 			nextHex.setDir(initDirR);
-		}
 
 		return retour;
 	}
@@ -167,7 +160,6 @@ public class Plateau
 		if(t == Tuile.ROBOT)
 			bOk = getRobotAPosition(next).chargerCrystal(cristal);
 
-		System.out.println(bOk);
 		if(t == Tuile.BASE || (t == Tuile.ROBOT && bOk) || (t == Tuile.VIDE))
 		{
 			if(t == Tuile.BASE)

@@ -138,4 +138,5 @@ public class Joueur
 	}
 
 	public char[] getOrdres() {return ordres;}
+	public ArrayList<Character> getMain() {return this.main;}
 }
