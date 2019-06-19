@@ -110,9 +110,6 @@ public abstract class SetGrille
 		if(coor[0] % 2 != 0 && SetGrille.nbJoueur < 5)
 			coor[1]++;
 
-		if(coor[0] % 2 == 0 && SetGrille.nbJoueur >= 5)
-			coor[1]++;
-
 		return coor;
 	}
 
