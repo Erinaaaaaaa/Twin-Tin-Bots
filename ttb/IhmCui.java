@@ -60,6 +60,8 @@ public class IhmCui
 					case "4" : Console.couleurFont ( ctrl.getCouleur(i,j) ); cara = "C";
 					break;
 					case "B" : Console.couleurFont ( ctrl.getCouleur(i,j) );
+					break;
+					case "T" : Console.couleurFont (CouleurConsole.BLANC );
 				}
 				System.out.print("  "+cara+" ");
 				Console.normal(); 
