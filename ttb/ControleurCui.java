@@ -25,8 +25,15 @@ public class ControleurCui
 			do
 			{
 				Robot r = joueur.getRobot(i);
-
-			}
+				char[] ordresTmp = joueur.getOrdres();
+				int ind = 0;
+				for(int j = 3*i; j < 3*(i+1); j++)
+				{
+					ordres[ind] = ordresTmp[j];
+					ind++;
+				}
+				executerOrdres(ordres, r);
+			}while(i < 2);
 			metier.changerJoueur();
 		}while(metier.getJoueurCourant().getId() != 0);
 	}
@@ -51,6 +58,10 @@ public class ControleurCui
 					break;
 				case 'E' :
 					metier.deposerCristal(rActuel);
+					break;
+				case 'S' :
+					metier.avancer(rActuel, true);
+					metier.avancer(rActuel, true);
 					break;
 			}
 		}
