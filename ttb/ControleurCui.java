@@ -20,50 +20,48 @@ public class ControleurCui
 		do
 		{
 			Joueur joueur = metier.getJoueurCourant();
-			Scanner sc = new Scanner(System.in);
 			int i = 0;
 			do
 			{
-				Robot rActuel = joueur.getRobot(i);
-				System.out.println(metier.toString());
-				System.out.println("Indiquez vos action");
-				//for(int j = 0; j < action.length(); j++)
-				boolean bOk = true;
-				do
-				{
-					String action = sc.next().toUpperCase();
-					switch(action.charAt(0))
-					{
-						case 'A' :
-							metier.avancer(rActuel, true);
-							break;
-						case 'D' :
-							rActuel.turnAround(false);
-							break;
-						case 'G' :
-							rActuel.turnAround(true);
-							break;
-						case 'C' :
-							metier.chargerCristal(rActuel);
-							break;
-						case 'E' :
-							metier.deposerCristal(rActuel);
-							break;
-						default :
-							bOk = false;
-					}
-					System.out.println(metier.toString());
-				}while(bOk);
-				i++;
-			} while (i < 2);
+				Robot r = joueur.getRobot(i);
+				
+			}
 			metier.changerJoueur();
-		}while(true);
+		}while(metier.getJoueurCourant().getId() != 0);
+	}
+
+	public void executerOrdres(char[] ordres, Robot r)
+	{
+		for(int i = 0; i < ordres.length; i++)
+		{
+			switch(ordres[i])
+			{
+				case 'A' :
+					metier.avancer(rActuel, true);
+					break;
+				case 'D' :
+					rActuel.turnAround(false);
+					break;
+				case 'G' :
+					rActuel.turnAround(true);
+					break;
+				case 'C' :
+					metier.chargerCristal(rActuel);
+					break;
+				case 'E' :
+					metier.deposerCristal(rActuel);
+					break;
+			}
+		}
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Combien de joueurs ? ");
 		Scanner sc = new Scanner(System.in);
-		new ControleurCui(sc.nextInt()).jouer();
+		if(args.length > 0 && args[0].equals("DEBUG"))
+			new ControleurCui(sc.nextInt()).scenario();
+		else
+			new ControleurCui(sc.nextInt()).jouer();
 	}
 
 	public Tuile[][] getPlateau() { return metier.getTuiles(); }

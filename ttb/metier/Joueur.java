@@ -10,12 +10,80 @@ public class Joueur
 	private Robot[] tabRobot;
 	private int[] posBase;
 	private int points;
+	private char[] ordres;
+	private ArrayList<char> main;
 
 	public Joueur()
 	{
 		id = Joueur.nbJoueurs++;
 		this.tabRobot = new Robot[] {null, null};
 		this.points = 0;
+		ordres = new char[6];
+		Arrays.fill(ordres, '\0');
+		main = new ArrayList<char>();
+		initMain();
+	}
+
+	private void initMain()
+	{
+		main.add('A');
+		main.add('A');
+		main.add('S');
+		main.add('G');
+		main.add('G');
+		main.add('G');
+		main.add('D');
+		main.add('D');
+		main.add('D');
+		main.add('C');
+		main.add('C');
+		main.add('E');
+		main.add('E');
+	}
+
+	public void ajouterOrdre(char c, int ind)
+	{
+		int i = 0;
+		i = main.getIndexOf(c);
+		if( i != -1)
+		{
+			char ordre = ordres[ind];
+			ordres[i] = main.remove(i);
+			if(ordre != '\0')
+				ordres.add(ordre);
+		}
+	}
+
+	public void enleverOrdre(int ind)
+	{
+		if(ordres[ind] != '\0')
+		{
+			main.add(ordres[ind]);
+			ordres[ind] = '\0';
+		}
+	}
+
+	public void permuterOrdre(int ind1, int ind2)
+	{
+		if(ordres[ind1] == '\0' || ordres[ind2] == '\0')
+			return;
+
+		char c;
+		c = ordres[ind1];
+		ordres[ind1] = ordres[ind2];
+		ordres[ind2] = c;
+	}
+
+	public void resetOrdres()
+	{
+		for(int i = 0; i < ordres.length; i++)
+		{
+			if(ordres[i] != '\0')
+			{
+				main.add(ordre[i]);
+				ordres[i] = '\0';
+			}
+		}
 	}
 
 	public Robot[] getRobots() {return this.tabRobot;}
@@ -48,7 +116,7 @@ public class Joueur
 		return null;
 	}
 
-	public void addPoint() {points++;}
+	public void addPoint(Tuile t) {points += Integer.parseInt(t.toString());}
 
 	public int[] getBase() {return this.posBase;}
 
