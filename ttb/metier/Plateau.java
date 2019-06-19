@@ -213,6 +213,6 @@ public class Plateau
 
 	public int getNbJoueurs()
 	{
-		return 2;
+		return tabJoueurs.length;
 	}
 }
