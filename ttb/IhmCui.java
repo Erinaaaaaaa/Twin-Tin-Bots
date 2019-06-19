@@ -72,17 +72,14 @@ public class IhmCui
 
 	public int getInd(char[] ordres)
 	{
-		System.out.print("Choisir l'indice : ");
 		Scanner sc = new Scanner(System.in);
-		int ind;
+		String ind;
 		do
 		{
-			try
-			{
-				ind = sc.nextInt();
-			}
-			catch(Exception e) { ind = -1; }
-		} while (ind < 0);
-		return ind-1;
+			System.out.print("Choisir l'indice : ");
+			ind = sc.next();
+		} while (!ind.matches("[1-6]"));
+
+		return Integer.parseInt(ind);
 	}
 }
