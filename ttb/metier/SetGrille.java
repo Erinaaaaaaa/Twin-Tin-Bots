@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public abstract class SetGrille
 {
+	private static int nbJoueur;
 	public static Plateau initGrille(int nbJoueur)
 	{
 		Tuile[][] grille;
@@ -14,6 +15,8 @@ public abstract class SetGrille
 		String[]  temp;
 		String    nextLigne;
 		String    fileAttent = "";
+
+		SetGrille.nbJoueur = nbJoueur;
 
 		tabJoueur = new Joueur[nbJoueur];
 		for(int i = 0; i < nbJoueur; i++)
@@ -104,7 +107,10 @@ public abstract class SetGrille
 		int[] coor = new int[2];
 		coor[0] = Integer.parseInt(coorString[0]);
 		coor[1] = Integer.parseInt(coorString[1]);
-		if(coor[0] % 2 != 0)
+		if(coor[0] % 2 != 0 && nbJoueur < 5)
+			coor[1]++;
+
+		if(coor[0] % 2 == 0 && nbJoueur >= 5)
 			coor[1]++;
 
 		return coor;
