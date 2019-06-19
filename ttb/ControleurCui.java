@@ -26,7 +26,7 @@ public class ControleurCui
 				j.permuterOrdre(ind[0], ind[1]);
 				break;
 			case 'A' :
-				j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getAction().charAt(0));
+				j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getCarte());
 				break;
 			case 'E' :
 				j.enleverOrdre(ihm.getInd(j.getOrdres()));
@@ -42,6 +42,7 @@ public class ControleurCui
 		do
 		{
 			Joueur joueur = metier.getJoueurCourant();
+			ihm.afficher();
 			actionJoueur(joueur);
 			int i = 0;
 			do
@@ -56,7 +57,9 @@ public class ControleurCui
 					ind++;
 				}
 				executerOrdres(ordres, r);
+				i++;
 			}while(i < 2);
+			System.out.println(metier.toString());
 			metier.changerJoueur();
 		}while(metier.getJoueurCourant().getId() != 0);
 	}
@@ -71,7 +74,7 @@ public class ControleurCui
 		int robotID = 0;
 		int nbJoueurs = metier.getNbJoueurs();
 		try {
-			sc = new Scanner(new File("./ttb/niveau.data"), "utf8");
+			sc = new Scanner(new File("./ttb/scenario.data"), "utf8");
 			line = sc.nextLine().split(";");
 			ordres = new char[line.length];
 			for (int i = 0; i < line.length; i++) {
@@ -131,4 +134,29 @@ public class ControleurCui
 
 	public Tuile[][] getPlateau() { return metier.getTuiles(); }
 	public String getAffichagePlateau() { return metier.toString(); }
+	public String getInfosJoueur()
+	{
+		Joueur j = metier.getJoueurCourant();
+		String retour = "Joueur " + (j.getId() + 1) + " : \n";
+		retour += "\tOrdres : ";
+		char[] ordres = j.getOrdres();
+		for(int i = 0; i < ordres.length; i++)
+		{
+			if(i == 3)
+				retour += ": ";
+			retour += "[";
+			if(ordres[i] == '\0')
+				retour += " ";
+			else
+				retour += ordres[i];
+
+			retour += "] ";
+		}
+
+		retour += "\n\tMain : ";
+		for(Character c : j.getMain())
+			retour += c + ",";
+
+		return retour.substring(0, retour.length() - 1) + "\n";
+	}
 }
