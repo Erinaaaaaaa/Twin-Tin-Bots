@@ -230,5 +230,14 @@ public class Plateau
 		return retour;
 	}
 
+	public boolean estPartieFinie()
+	{
+		for(Joueur j : tabJoueurs)
+			if(j.getPoints() == pointVictoire)
+				return true;
+
+		return false;
+	}
+
 	public Joueur getJoueur(int id) {return tabJoueurs[id];}
 }
