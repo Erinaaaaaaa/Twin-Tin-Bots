@@ -1,4 +1,8 @@
+./ttb/Launcher.java
+
 ./ttb/ControleurCui.java
+./ttb/IhmCui.java
+
 ./ttb/metier/Joueur.java
 ./ttb/metier/Plateau.java
 ./ttb/metier/Robot.java
