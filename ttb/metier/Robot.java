@@ -7,11 +7,9 @@ package ttb.metier;
 
 public class Robot
 {
-	private static int nbRobots = 0;
 	private int[]  pos;
 	/** Direction du robot, commence à 0 et va jusqu'à 5, sens horaire */
 	private int    dir;
-	private int    id;
 	private Joueur monJoueur;
 	private Tuile crystal;
 
@@ -19,7 +17,6 @@ public class Robot
 	{
 		this.pos = new int[] {ligne, colonne};
 		this.dir = dir;
-		this.id  = Robot.nbRobots++ % 2;
 	}
 
 	public int      getDir()    { return dir; }
@@ -46,6 +43,8 @@ public class Robot
 		return c;
 	}
 
+	public Tuile getCristal() { return crystal; }
+
 	public void setJoueur(Joueur j) {monJoueur = j;}
 
 	public void setPos(int[] pos) {this.pos = pos;}
@@ -59,6 +58,7 @@ public class Robot
 	}
 
 	public void setDir(int dir) {this.dir = dir;}
+
 	public String getCouleur()
 	{
 		return this.monJoueur.getCouleur();
