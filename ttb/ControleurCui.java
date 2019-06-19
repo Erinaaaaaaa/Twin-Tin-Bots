@@ -65,14 +65,25 @@ public class ControleurCui
 	 * Methode pour utiliser le mode debug. La ligne a executer Les instructions à executer seront lues dans le fichier "scenario.data".
 	 */
 	public void debug() {
-		Scanner sc = null;
-		String[] ordres = null;
-
+		Scanner sc    = null;
+		String[] line = null;
+		char[] ordres = null;
+		int robotID = 0;
+		int nbJoueurs = metier.getNbJoueurs();
 		try {
 			sc = new Scanner(new File("./ttb/niveau.data"), "utf8");
-			ordres = sc.nextLine().split(";");
+			line = sc.nextLine().split(";");
+			ordres = new char[line.length];
+			for (int i = 0; i < line.length; i++) {
+				ordres[i] = line[i].charAt(0);
+			}
+			robotID = --nbJoueurs<0?(++robotID>1?0:1):0; //change l'indice du robot si un tour de tous les joueurs a deja ete effectue
+			executerOrdres(ordres, metier.getJoueurCourant().getRobot(robotID));
+
+			if(nbJoueurs < 0) nbJoueurs = metier.getNbJoueurs();//reinitialise le nombre de joueurs si un tour a deja ete effectue
+
 		} catch (Exception e) { e.printStackTrace(); }
-		executerOrdre(ordres);
+
 	}
 
 	public void executerOrdres(char[] ordres, Robot r)
