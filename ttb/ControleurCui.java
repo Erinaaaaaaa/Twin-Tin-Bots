@@ -4,6 +4,7 @@ import ttb.metier.*;
 
 import java.io.File;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class ControleurCui
 {
@@ -77,21 +78,30 @@ public class ControleurCui
 		int nbJoueurs = metier.getNbJoueurs();
 		try {
 			sc = new Scanner(new File("./ttb/scenario.data"), "utf8");
+			for(int i = 0; i < nbJoueurs; i++)
+				sc.nextLine();
 			line = sc.nextLine().split(";");
-			ordres = new char[line.length];
-			for (int i = 0; i < line.length; i++) {
-				ordres[i] = line[i].charAt(0);
-			}
-
-			executerOrdres(ordres, metier.getJoueurCourant().getRobot(robotID));
-			robotID++;
-			if(robotID > 1) {
-				robotID=0;
-				metier.changerJoueur();
-			}
-
-
 		} catch (Exception e) { e.printStackTrace(); }
+
+		int i = 0, j = 0;
+		ArrayList<Robot> aRobot = new ArrayList<Robot>();
+		do
+		{
+			Joueur joueur = metier.getJoueurCourant();
+			aRobot.add(joueur.getRobot(0));
+			aRobot.add(joueur.getRobot(1));
+			metier.changerJoueur();
+		}while(metier.getJoueurCourant().getId() != 0);
+
+		System.out.println(metier.toString());
+
+		while(i < line.length)
+		{
+			executerOrdres(line[i].toCharArray(), aRobot.get(j));
+			i++;
+			j = (j+1) % aRobot.size();
+			System.out.println(metier.toString());
+		}
 	}
 
 	public void executerOrdres(char[] ordres, Robot r)
