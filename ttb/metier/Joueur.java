@@ -73,7 +73,6 @@ public class Joueur
 	{
 		if(ordres[ind] != '\0')
 		{
-			System.out.println("bite");
 			main.add(ordres[ind]);
 			ordres[ind] = '\0';
 		}
