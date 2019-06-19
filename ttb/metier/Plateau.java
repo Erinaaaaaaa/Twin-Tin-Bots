@@ -14,12 +14,14 @@ public class Plateau
 	private Joueur[]  tabJoueurs;
 	private int       joueurActuel;
 	private String    fileAttent;
+	private int       pointVictoire;
 
 	public Plateau(Tuile[][] grille, Joueur[] tabJoueur, String fileAttent)
 	{
 		this.plateau    = grille;
 		this.tabJoueurs = tabJoueur;
 		this.fileAttent = fileAttent;
+		pointVictoire = 13 - tabJoueur.length;
 	}
 
 	public Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}

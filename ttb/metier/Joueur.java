@@ -85,14 +85,14 @@ public class Joueur
 		ordres[ind2] = c;
 	}
 
-	public void resetOrdres()
+	public void resetOrdres(int id)
 	{
-		for(int i = 0; i < ordres.length; i++)
+		for(int i = 0; i < ordres.length / 2; i++)
 		{
-			if(ordres[i] != '\0')
+			if(ordres[i+(3*id)] != '\0')
 			{
 				main.add(ordres[i]);
-				ordres[i] = '\0';
+				ordres[i+(3*id)] = '\0';
 			}
 		}
 	}

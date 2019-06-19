@@ -17,16 +17,12 @@ public class ControleurCui
 		ihm    = new IhmCui(this);
 	}
 
-	private void actionJoueur(Joueur j)
+	private void actionJoueur(Joueur j, char c)
 	{
-		String action = ihm.getAction();
-		switch(action.charAt(0))
+		switch(c)
 		{
 			case 'P' :
-				//int[] ind = new int[] {ihm.getInd(j.getOrdres()), ihm.getInd(j.getOrdres())};
-				int ordre1 = ihm.getInd(j.getOrdres());
-				int ordre2 = ihm.getInd(j.getOrdres());
-				j.permuterOrdre(ordre1, ordre2);
+				int[] ind = new int[] {ihm.getInd(j.getOrdres()), ihm.getInd(j.getOrdres())};
 				break;
 			case 'A' :
 				j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getCarte());
@@ -35,7 +31,7 @@ public class ControleurCui
 				j.enleverOrdre(ihm.getInd(j.getOrdres()));
 				break;
 			case 'R' :
-				j.resetOrdres();
+				j.resetOrdres(ihm.getInd(j.getOrdres()));
 				break;
 		}
 	}
@@ -46,7 +42,7 @@ public class ControleurCui
 		{
 			Joueur joueur = metier.getJoueurCourant();
 			ihm.afficher();
-			actionJoueur(joueur);
+			actionJoueur(joueur, ihm.getAction());
 			int i = 0;
 			do
 			{
@@ -144,9 +140,9 @@ public class ControleurCui
 		sc.close();
 	}
 
-	public Tuile[][] getPlateau() { return metier.getTuiles(); }
-	public String getAffichagePlateau() { return metier.toString(); }
-	public String getInfosJoueur()
+	public Tuile[][] getPlateau()          { return metier.getTuiles(); }
+	public String    getAffichagePlateau() { return metier.toString();  }
+	public String    getInfosJoueur()
 	{
 		Joueur j = metier.getJoueurCourant();
 		String retour = "Joueur " + (j.getId() + 1) + " : \n";
