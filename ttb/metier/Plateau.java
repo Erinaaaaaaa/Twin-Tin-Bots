@@ -171,7 +171,7 @@ public class Plateau
 		if(t == Tuile.BASE || (t == Tuile.ROBOT && bOk) || (t == Tuile.VIDE))
 		{
 			if(t == Tuile.BASE)
-				getJoueurParBase(next).addPoint();
+				getJoueurParBase(next).addPoint(t);
 			if(t == Tuile.VIDE)
 				plateau[next[0]][next[1]] = cristal;
 			return;

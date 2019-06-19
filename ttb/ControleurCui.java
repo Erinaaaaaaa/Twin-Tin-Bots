@@ -2,6 +2,7 @@ package ttb;
 
 import ttb.metier.*;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class ControleurCui
@@ -21,43 +22,64 @@ public class ControleurCui
 		do
 		{
 			Joueur joueur = metier.getJoueurCourant();
-			Scanner sc = new Scanner(System.in);
 			int i = 0;
 			do
 			{
-				Robot rActuel = joueur.getRobot(i);
-				ihm.afficherPlateau();
-				//for(int j = 0; j < action.length(); j++)
-				boolean bOk = true;
-				do
+				Robot r = joueur.getRobot(i);
+				char[] ordresTmp = joueur.getOrdres();
+				int ind = 0;
+				for(int j = 3*i; j < 3*(i+1); j++)
 				{
-					String action = ihm.getAction();
-					switch(action.charAt(0))
-					{
-						case 'A' :
-							metier.avancer(rActuel, true);
-							break;
-						case 'D' :
-							rActuel.turnAround(false);
-							break;
-						case 'G' :
-							rActuel.turnAround(true);
-							break;
-						case 'C' :
-							metier.chargerCristal(rActuel);
-							break;
-						case 'E' :
-							metier.deposerCristal(rActuel);
-							break;
-						default :
-							bOk = false;
-					}
-					ihm.afficherPlateau();
-				}while(bOk);
-				i++;
-			} while (i < 2);
+					ordres[ind] = ordresTmp[j];
+					ind++;
+				}
+				executerOrdres(ordres, r);
+			}while(i < 2);
 			metier.changerJoueur();
-		}while(true);
+		}while(metier.getJoueurCourant().getId() != 0);
+	}
+
+	/**
+	 * Methode pour utiliser le mode debug. La ligne a executer Les instructions à executer seront lues dans le fichier "scenario.data".
+	 */
+	public void debug() {
+		Scanner sc = null;
+		String[] ordres = null;
+
+		try {
+			sc = new Scanner(new File("./ttb/niveau.data"), "utf8");
+			ordres = sc.nextLine().split(";");
+		} catch (Exception e) { e.printStackTrace(); }
+		executerOrdre(ordres);
+	}
+
+	public void executerOrdres(char[] ordres, Robot r)
+	{
+		for(int i = 0; i < ordres.length; i++)
+		{
+			switch(ordres[i])
+			{
+				case 'A' :
+					metier.avancer(rActuel, true);
+					break;
+				case 'D' :
+					rActuel.turnAround(false);
+					break;
+				case 'G' :
+					rActuel.turnAround(true);
+					break;
+				case 'C' :
+					metier.chargerCristal(rActuel);
+					break;
+				case 'E' :
+					metier.deposerCristal(rActuel);
+					break;
+				case 'S' :
+					metier.avancer(rActuel, true);
+					metier.avancer(rActuel, true);
+					break;
+			}
+		}
 	}
 
 	public static void main(String[] args)
@@ -65,6 +87,7 @@ public class ControleurCui
 		System.out.println("Combien de joueurs ? ");
 		Scanner sc = new Scanner(System.in);
 		new ControleurCui(sc.nextInt());
+		sc.close();
 	}
 
 	public Tuile[][] getPlateau() { return metier.getTuiles(); }
