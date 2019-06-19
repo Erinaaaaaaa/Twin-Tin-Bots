@@ -106,31 +106,31 @@ public class ControleurCui
 			while (line.hasNext()) {
 				char[] splittedLine = line.next().toCharArray();
 				if (splittedLine[0] == 'R') {
-					int playerID = Integer.parseInt(String.valueOf(splittedLine[1]));
-					int robotID  = Integer.parseInt(String.valueOf(splittedLine[2]));
+					int playerID = Character.getNumericValue(splittedLine[1]);
+					int robotID  = Character.getNumericValue(splittedLine[2]);
 
 					executerOrdres(Arrays.copyOfRange(splittedLine, 3, splittedLine.length-1),
 					               metier.getJoueur(playerID).getRobot(robotID));
 				}
 				else if (splittedLine[0] == 'J') {
-					Joueur j = metier.getJoueur( Integer.parseInt(String.valueOf(splittedLine[1])) );
+					Joueur j = metier.getJoueur(Character.getNumericValue(splittedLine[1]));
 					switch (splittedLine[2]) {
 						case 'A':
 							char lettre = splittedLine[3];
-							int  index  = Integer.parseInt(String.valueOf(splittedLine[4]));
+							int  index  = Character.getNumericValue(splittedLine[4]);
 							j.ajouterOrdre(index, lettre);
 							break;
 						case 'E':
-							int indice = Integer.parseInt(String.valueOf(splittedLine[3]));
+							int indice = Character.getNumericValue(splittedLine[3]);
 							j.enleverOrdre(indice);
 							break;
 						case 'P':
-							int indice1 = Integer.parseInt(String.valueOf(splittedLine[3]));
-							int indice2 = Integer.parseInt(String.valueOf(splittedLine[4]));
+							int indice1 = Character.getNumericValue(splittedLine[3]);
+							int indice2 = Character.getNumericValue(splittedLine[4]);
 							j.permuterOrdre(indice1, indice2);
 							break;
 						case 'R':
-							int ind = Integer.parseInt(String.valueOf(splittedLine[3]));
+							int ind = Character.getNumericValue(splittedLine[3]);
 							j.resetOrdres(ind);
 							break;
 						case 'F' :
