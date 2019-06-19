@@ -180,7 +180,7 @@ public class Plateau
 		r.chargerCrystal(cristal);
 	}
 
-	private Joueur getJoueurParBase(int[] pos)
+	public Joueur getJoueurParBase(int[] pos)
 	{
 		for(Joueur j : tabJoueurs)
 		{

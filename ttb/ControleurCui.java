@@ -7,12 +7,13 @@ import java.util.Scanner;
 public class ControleurCui
 {
 	private Plateau metier;
-	// private IHM     ihm;
+	private IhmCui  ihm;
 
 	public ControleurCui(int nbJoueurs)
 	{
 		metier = SetGrille.initGrille(nbJoueurs);
-		// ihm    = new IHM();
+		ihm    = new IhmCui(this);
+		jouer();
 	}
 
 	public void jouer()
@@ -24,7 +25,7 @@ public class ControleurCui
 			do
 			{
 				Robot r = joueur.getRobot(i);
-				
+
 			}
 			metier.changerJoueur();
 		}while(metier.getJoueurCourant().getId() != 0);
@@ -55,14 +56,13 @@ public class ControleurCui
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		System.out.println("Combien de joueurs ? ");
 		Scanner sc = new Scanner(System.in);
-		if(args.length > 0 && args[0].equals("DEBUG"))
-			new ControleurCui(sc.nextInt()).scenario();
-		else
-			new ControleurCui(sc.nextInt()).jouer();
+		new ControleurCui(sc.nextInt());
 	}
 
 	public Tuile[][] getPlateau() { return metier.getTuiles(); }
+	public String getAffichagePlateau() { return metier.toString(); }
 }
