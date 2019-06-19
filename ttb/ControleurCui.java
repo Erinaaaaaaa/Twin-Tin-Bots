@@ -5,6 +5,9 @@ import ttb.metier.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.ArrayList;
+import iut.algo.CouleurConsole;
+import iut.algo.Console;
 
 public class ControleurCui
 {
@@ -17,16 +20,12 @@ public class ControleurCui
 		ihm    = new IhmCui(this);
 	}
 
-	private void actionJoueur(Joueur j)
+	private void actionJoueur(Joueur j, char c)
 	{
-		String action = ihm.getAction();
-		switch(action.charAt(0))
+		switch(c)
 		{
 			case 'P' :
-				//int[] ind = new int[] {ihm.getInd(j.getOrdres()), ihm.getInd(j.getOrdres())};
-				int ordre1 = ihm.getInd(j.getOrdres());
-				int ordre2 = ihm.getInd(j.getOrdres());
-				j.permuterOrdre(ordre1, ordre2);
+				int[] ind = new int[] {ihm.getInd(j.getOrdres()), ihm.getInd(j.getOrdres())};
 				break;
 			case 'A' :
 				j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getCarte());
@@ -35,7 +34,7 @@ public class ControleurCui
 				j.enleverOrdre(ihm.getInd(j.getOrdres()));
 				break;
 			case 'R' :
-				j.resetOrdres();
+				j.resetOrdres(ihm.getInd(j.getOrdres()));
 				break;
 		}
 	}
@@ -46,7 +45,7 @@ public class ControleurCui
 		{
 			Joueur joueur = metier.getJoueurCourant();
 			ihm.afficher();
-			actionJoueur(joueur);
+			actionJoueur(joueur, ihm.getAction().charAt(0));
 			int i = 0;
 			do
 			{
@@ -170,9 +169,9 @@ public class ControleurCui
 		sc.close();
 	}
 
-	public Tuile[][] getPlateau() { return metier.getTuiles(); }
-	public String getAffichagePlateau() { return metier.toString(); }
-	public String getInfosJoueur()
+	public Tuile[][] getPlateau()          { return metier.getTuiles(); }
+	public String    getAffichagePlateau() { return metier.toString();  }
+	public String    getInfosJoueur()
 	{
 		Joueur j = metier.getJoueurCourant();
 		String retour = "Joueur " + (j.getId() + 1) + " : \n";
@@ -196,5 +195,26 @@ public class ControleurCui
 			retour += c + ",";
 
 		return retour.substring(0, retour.length() - 1) + "\n";
+	}
+
+
+	public int getNbLigne(){return metier.getNbLigne();}
+	public int getNbColonne(){return metier.getNbColonne();}
+	public String getSymbole(int lig, int col){return metier.getSymbole(lig,col);}
+
+	public CouleurConsole getCouleur(int lig, int col)
+	{
+		String couleur = metier.getCouleur(lig,col);
+		switch(couleur)
+		{
+			case "Vert"  :return CouleurConsole.VERT;
+			case "Rouge" :return CouleurConsole.ROUGE;
+			case "Jaune" :return CouleurConsole.JAUNE;
+			case "Bleu"  :return CouleurConsole.BLEU;
+			case "Violet":return CouleurConsole.MAUVE;
+			case "Rose"  :return CouleurConsole.CYAN;
+			case "Cyan"  :return CouleurConsole.CYAN;
+		}
+		return CouleurConsole.NOIR;
 	}
 }

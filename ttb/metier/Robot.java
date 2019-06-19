@@ -59,4 +59,8 @@ public class Robot
 	}
 
 	public void setDir(int dir) {this.dir = dir;}
+	public String getCouleur()
+	{
+		return this.monJoueur.getCouleur();
+	}
 }

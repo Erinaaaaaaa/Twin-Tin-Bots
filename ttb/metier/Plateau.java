@@ -14,12 +14,14 @@ public class Plateau
 	private Joueur[]  tabJoueurs;
 	private int       joueurActuel;
 	private String    fileAttent;
+	private int       pointVictoire;
 
 	public Plateau(Tuile[][] grille, Joueur[] tabJoueur, String fileAttent)
 	{
 		this.plateau    = grille;
 		this.tabJoueurs = tabJoueur;
 		this.fileAttent = fileAttent;
+		pointVictoire = 13 - tabJoueur.length;
 	}
 
 	public Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
@@ -210,5 +212,29 @@ public class Plateau
 	public int getNbJoueurs()
 	{
 		return tabJoueurs.length;
+	}
+
+	public String getFileAttente()
+	{
+		return this.fileAttent;
+	}
+	public int getNbLigne(){return this.plateau.length;}
+	public int getNbColonne(){return this.plateau[0].length;}
+
+	public String getSymbole(int lig, int col)
+	{
+		return this.plateau[lig][col].toString();
+	}
+	public String getCouleur(int lig, int col)
+	{
+		switch(this.getSymbole(lig,col))
+		{
+			case "R" :return getRobotAPosition(new int[]{lig,col}).getCouleur();
+			case "B" :return getJoueurParBase(new int[]{lig,col}).getCouleur();
+			case "2" :return "Cyan";
+			case "3" :return "Vert";
+			case "4" :return "Violet";
+		}
+		return "";
 	}
 }
