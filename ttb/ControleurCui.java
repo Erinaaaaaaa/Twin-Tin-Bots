@@ -89,7 +89,7 @@ public class ControleurCui
 		} catch (Exception e) { e.printStackTrace(); }
 	}
 
-	public void executerOrdres(char[] ordres, Robot rActuel)
+	public void executerOrdres(char[] ordres, Robot r)
 	{
 		for(int i = 0; i < ordres.length; i++)
 		{
