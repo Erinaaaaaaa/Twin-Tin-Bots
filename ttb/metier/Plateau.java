@@ -21,7 +21,7 @@ public class Plateau
 		this.plateau    = grille;
 		this.tabJoueurs = tabJoueur;
 		this.fileAttent = fileAttent;
-		pointVictoire = 13 - tabJoueur.length;
+		pointVictoire   = 13 - tabJoueur.length;
 	}
 
 	public Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
@@ -82,8 +82,8 @@ public class Plateau
 			break;
 		}
 
-		if(pos[0] < 0 || pos[0] >= plateau.length ||
-		   pos[1] < 0 || pos[1] >= plateau.length ||
+		if(pos[0] < 0 || pos[0]    >= plateau.length ||
+		   pos[1] < 0 || pos[1]    >= plateau.length ||
 		   plateau[pos[0]][pos[1]] == Tuile.OUT_OF_BOUNDS
 		  )
 		  	return initPos;
@@ -93,9 +93,10 @@ public class Plateau
 
 	public boolean avancer(Robot r, boolean canPush)
 	{
-		int[] pos = nextPos(r.getPos(), r.getDir());
-		int initDirR = 0;
+		int[] pos      = nextPos(r.getPos(), r.getDir());
+		int initDirR   = 0;
 		boolean retour = false;
+
 		if(pos == r.getPos())
 			return retour;
 
@@ -105,6 +106,7 @@ public class Plateau
 			return false;
 
 		Robot nextHex = null;
+
 		if(t == Tuile.ROBOT)
 		{
 			nextHex  = getRobotAPosition(pos);
@@ -134,7 +136,7 @@ public class Plateau
 		if(plateau[next[0]][next[1]] == Tuile.VIDE)
 		{
 			plateau[next[0]][next[1]] = plateau[pos[0]][pos[1]];
-			plateau[pos[0]][pos[1]] = Tuile.VIDE;
+			plateau[pos[0]][pos[1]]   = Tuile.VIDE;
 			return true;
 		}
 		return false;
@@ -143,7 +145,8 @@ public class Plateau
 	public void chargerCristal(Robot r)
 	{
 		int[] next = nextPos(r.getPos(), r.getDir());
-		Tuile t = plateau[next[0]][next[1]];
+		Tuile t    = plateau[next[0]][next[1]];
+
 		if(!Tuile.isCristal(t))
 			return;
 
@@ -156,9 +159,11 @@ public class Plateau
 		Tuile cristal = r.deposerCrystal();
 		if(cristal == null)
 			return;
-		int[] next = nextPos(r.getPos(), r.getDir());
-		Tuile t = plateau[next[0]][next[1]];
+
+		int[] next  = nextPos(r.getPos(), r.getDir());
+		Tuile t     = plateau[next[0]][next[1]];
 		boolean bOk = false;
+
 		if(t == Tuile.ROBOT)
 			bOk = getRobotAPosition(next).chargerCrystal(cristal);
 
@@ -166,8 +171,10 @@ public class Plateau
 		{
 			if(t == Tuile.BASE)
 				getJoueurParBase(next).addPoint(t);
+
 			if(t == Tuile.VIDE)
 				plateau[next[0]][next[1]] = cristal;
+
 			return;
 		}
 
@@ -184,43 +191,14 @@ public class Plateau
 		return null;
 	}
 
-	public String toString()
-	{
-		String retour = "";
-		for (int i=0; i<plateau.length; i++)
-		{
-			if (i%2 == 0)
-				retour +="  ";
-			for (int j=0; j<plateau[i].length; j++)
-			{
-				retour +="  "+ plateau[i][j]+ " " ;
-			}
-			retour += "\n";
-		}
-		return retour;
-	}
+	public Tuile[][] getTuiles(){     return this.plateau;}
+	public int       getNbJoueurs(){  return tabJoueurs.length;}
+	public String    getFileAttente(){return this.fileAttent;}
+	public int       getNbLigne(){    return this.plateau.length;}
+	public int       getNbColonne(){  return this.plateau[0].length;}
 
-	public Tuile[][] getTuiles()
-	{
-		return this.plateau;
-	}
+	public String getSymbole(int lig, int col){return this.plateau[lig][col].toString();}
 
-	public int getNbJoueurs()
-	{
-		return tabJoueurs.length;
-	}
-
-	public String getFileAttente()
-	{
-		return this.fileAttent;
-	}
-	public int getNbLigne(){return this.plateau.length;}
-	public int getNbColonne(){return this.plateau[0].length;}
-
-	public String getSymbole(int lig, int col)
-	{
-		return this.plateau[lig][col].toString();
-	}
 	public String getCouleur(int lig, int col)
 	{
 		switch(this.getSymbole(lig,col))
@@ -232,6 +210,24 @@ public class Plateau
 			case "4" :return "Violet";
 		}
 		return "";
+	}
+
+	public String toString()
+	{
+		String retour = "";
+		for (int i=0; i < plateau.length; i++)
+		{
+			if (i%2 == 0)
+				retour += "  ";
+
+			for (int j=0; j<plateau[i].length; j++)
+			{
+				retour +="  "+ plateau[i][j]+ " " ;
+			}
+
+			retour += "\n";
+		}
+		return retour;
 	}
 
 	public Joueur getJoueur(int id) {return tabJoueurs[id];}

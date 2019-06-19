@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import iut.algo.CouleurConsole;
 import iut.algo.Console;
 
@@ -67,17 +68,17 @@ public class ControleurCui
 	}
 
 	/**
-	 * Methode pour utiliser le mode debug. Les instructions à executer seront lues dans le fichier "scenario.data". <br>
-	 * La premiere lettre doit etre soit J pour joueur ou R pour robot.<br>
-	 * <br>
+	 * Méthode pour utiliser le mode debug. Les instructions à exécuter seront lues dans le fichier "scenario.data". <br />
+	 * La premiere lettre doit être soit J pour joueur ou R pour robot.<br />
+	 * <br />
 	 * <ul><b>Si c'est un robot:</b>
 	 * 	 <li>La suivante indique l'indice du joueur.</li>
 	 * 	 <li>La suivante celui du robot</li>
-	 * 	 <li>Ensuite, toutes les actions a effectuer.</li>
+	 * 	 <li>Ensuite, toutes les actions à effectuer.</li>
 	 * </ul><br>
 	 *
-	 * Si cest un joueur, la lettre suivante est son indice.<br>
-	 * Ensuite l'action a effectuer.<br>
+	 * Si c'est un joueur, la lettre suivante est son indice.<br>
+	 * Ensuite l'action à effectuer.<br>
 	 * <ul><b>En fontion de l'action.</b>
 	 *   <li>Si action A : on a une lettre et un indice.</li>
 	 *   <li>Si action E : 1 indice.</li>
@@ -85,9 +86,8 @@ public class ControleurCui
 	 *   <li>Si action R : rien.</li>
 	 * </ul>
 	 * <br>
-	 * Si action robot, on execute que sur le robot.<br>
-	 * Si action joueur, on execute sur ses 2 robots.<br>
-	 *
+	 * Si action robot, on exécute que sur le robot.<br>
+	 * Si action joueur, on exécute sur ses 2 robots.<br>
 	 */
 	public void debug(int nbJoueurs) {
 		Scanner sc = null;
@@ -179,12 +179,16 @@ public class ControleurCui
 
 	public static void main(String[] args)
 	{
-		System.out.println("Combien de joueurs ? ");
+		System.out.println("Combien de joueurs ? [2-6]");
 		Scanner sc = new Scanner(System.in);
+		String nbJoueurs;
+		do
+			nbJoueurs = sc.next();
+		while (!nbJoueurs.matches("[2-6]"));
 		if(args.length > 0 && args[0].equals("SCENARIO"))
 			new ControleurCui(sc.nextInt()).debug(sc.nextInt());
 		else
-			new ControleurCui(sc.nextInt()).jouer();
+			new ControleurCui(Integer.parseInt(nbJoueurs)).jouer();
 		sc.close();
 	}
 
