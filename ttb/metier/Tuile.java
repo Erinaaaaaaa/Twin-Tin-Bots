@@ -19,11 +19,7 @@ public enum Tuile
 
 	public static boolean isCristal(Tuile tuile)
 	{
-		String nomTuile = tuile.name();
-		if (nomTuile.lastIndexOf("_") == -1)
-			return false;
-
-		return nomTuile.substring(0, nomTuile.lastIndexOf("_")).equals("CRISTAL");
+		return tuile.name().contains("CRISTAL");
 	}
 
 	public String toString()
