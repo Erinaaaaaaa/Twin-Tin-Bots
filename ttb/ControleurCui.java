@@ -49,6 +49,7 @@ public class ControleurCui
 				Robot r = joueur.getRobot(i);
 				char[] ordresTmp = joueur.getOrdres();
 				int ind = 0;
+				char[] ordres = new char[3];
 				for(int j = 3*i; j < 3*(i+1); j++)
 				{
 					ordres[ind] = ordresTmp[j];
@@ -95,23 +96,23 @@ public class ControleurCui
 			switch(ordres[i])
 			{
 				case 'A' :
-					metier.avancer(rActuel, true);
+					metier.avancer(r, true);
 					break;
 				case 'D' :
-					rActuel.turnAround(false);
+					r.turnAround(false);
 					break;
 				case 'G' :
-					rActuel.turnAround(true);
+					r.turnAround(true);
 					break;
 				case 'C' :
-					metier.chargerCristal(rActuel);
+					metier.chargerCristal(r);
 					break;
 				case 'E' :
-					metier.deposerCristal(rActuel);
+					metier.deposerCristal(r);
 					break;
 				case 'S' :
-					metier.avancer(rActuel, true);
-					metier.avancer(rActuel, true);
+					metier.avancer(r, true);
+					metier.avancer(r, true);
 					break;
 			}
 		}
@@ -122,7 +123,7 @@ public class ControleurCui
 		System.out.println("Combien de joueurs ? ");
 		Scanner sc = new Scanner(System.in);
 		if(args.length > 0 && args[0].equals("SCENARIO"))
-			new ControleurCui(sc.nextInt()).scenario();
+			new ControleurCui(sc.nextInt()).debug();
 		else
 			new ControleurCui(sc.nextInt()).jouer();
 		sc.close();

@@ -52,7 +52,7 @@ public class Joueur
 		main.add('E');
 	}
 
-	public void ajouterOrdre(char c, int ind)
+	public void ajouterOrdre(int ind, char c)
 	{
 		int i = 0;
 		i = main.indexOf(c);
