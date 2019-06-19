@@ -227,7 +227,7 @@ public class Plateau
 		{
 			case "R" :return getRobotAPosition(new int[]{lig,col}).getCouleur();
 			case "B" :return getJoueurParBase(new int[]{lig,col}).getCouleur();
-			case "2" :return "Bleu";
+			case "2" :return "Cyan";
 			case "3" :return "Vert";
 			case "4" :return "Violet";
 		}
