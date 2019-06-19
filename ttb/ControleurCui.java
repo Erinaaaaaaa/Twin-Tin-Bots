@@ -83,7 +83,15 @@ public class ControleurCui
 			if(nbJoueurs < 0) nbJoueurs = metier.getNbJoueurs();//reinitialise le nombre de joueurs si un tour a deja ete effectue
 
 		} catch (Exception e) { e.printStackTrace(); }
-
+		int i = 0;
+		for(Joueur j : tabJoueur)
+		{
+			for(Robot r : j.getRobots())
+			{
+				executerOrdres(ordres[i], r)
+				i++;
+			}
+		}
 	}
 
 	public void executerOrdres(char[] ordres, Robot r)
