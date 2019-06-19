@@ -109,6 +109,7 @@ public abstract class SetGrille
 				aRemplir+=2;
 				nbCasesVoulu--;
 			}
+			if(nbCase ==11) aRemplir--;
 			for (int j=aRemplir/2; j<aRemplir/2+nbCasesVoulu; j++)
 			{
 				plateau[i][j] = Tuile.VIDE;
