@@ -113,16 +113,16 @@ public class ControleurCui
 						case 'A':
 							char lettre = splittedLine[3];
 							int  index  = Integer.parseInt(String.valueOf(splittedLine[4]));
-
+							j.ajouterOrdre(index, lettre);
 							break;
 						case 'E':
 							int indice = Integer.parseInt(String.valueOf(splittedLine[3]));
-
+							j.enleverOrdre(indice);
 							break;
 						case 'P':
 							int indice1 = Integer.parseInt(String.valueOf(splittedLine[3]));
 							int indice2 = Integer.parseInt(String.valueOf(splittedLine[4]));
-
+							j.permuterOrdre(indice1, indice2)
 							break;
 						case 'R':
 							break;
