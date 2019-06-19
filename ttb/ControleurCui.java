@@ -22,8 +22,10 @@ public class ControleurCui
 		switch(action.charAt(0))
 		{
 			case 'P' :
-				int[] ind = new int[] {ihm.getInd(j.getOrdres()), ihm.getInd(j.getOrdres())};
-				j.permuterOrdre(ind[0], ind[1]);
+				//int[] ind = new int[] {ihm.getInd(j.getOrdres()), ihm.getInd(j.getOrdres())};
+				int ordre1 = ihm.getInd(j.getOrdres());
+				int ordre2 = ihm.getInd(j.getOrdres());
+				j.permuterOrdre(ordre1, ordre2);
 				break;
 			case 'A' :
 				j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getCarte());
