@@ -1,6 +1,9 @@
 package ttb;
 
 import java.util.Scanner;
+import iut.algo.CouleurConsole; 
+import iut.algo.Console; 
+
 
 public class IhmCui
 {
@@ -14,8 +17,8 @@ public class IhmCui
 	public void afficher()
 	{
 		System.out.println(ctrl.getInfosJoueur());
-		System.out.println(ctrl.getAffichagePlateau());
-		System.out.println("\n Quelle action effectuer ?");
+		this.afficherPlateau();
+		System.out.println("\n Quel action effectuer ?");
 		System.out.println("\t[A]jouter/Remplacer une carte");
 		System.out.println("\t[P]ermuter une carte");
 		System.out.println("\t[E]nlever une carte");
@@ -33,6 +36,37 @@ public class IhmCui
 		System.out.print("Action : ");
 		Scanner sc = new Scanner(System.in);
 		return sc.next().toUpperCase();
+	}
+
+	public void afficherPlateau()
+	{
+		String cara;
+		for(int i = 0; i < ctrl.getNbLigne(); i++)
+		{
+			if (i%2 == 0)
+				System.out.print("  ");
+			for(int j = 0; j < ctrl.getNbColonne(); j++)
+			{
+				cara = ctrl.getSymbole(i,j);
+				
+				switch(cara)
+				{
+					case "R" : Console.couleurFont ( ctrl.getCouleur(i,j) );
+					break;
+					case "2" : Console.couleurFont ( ctrl.getCouleur(i,j) ); cara = "C";
+					break;
+					case "3" : Console.couleurFont ( ctrl.getCouleur(i,j) ); cara = "C";
+					break;
+					case "4" : Console.couleurFont ( ctrl.getCouleur(i,j) ); cara = "C";
+					break;
+					case "B" : Console.couleurFont ( ctrl.getCouleur(i,j) );
+				}
+				System.out.print("  "+cara+" ");
+				Console.normal(); 
+			}
+			System.out.print("\n");
+
+		}
 	}
 
 	public char getCarte()

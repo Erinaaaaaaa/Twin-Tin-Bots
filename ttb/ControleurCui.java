@@ -5,6 +5,8 @@ import ttb.metier.*;
 import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
+import iut.algo.CouleurConsole; 
+import iut.algo.Console; 
 
 public class ControleurCui
 {
@@ -178,5 +180,25 @@ public class ControleurCui
 			retour += c + ",";
 
 		return retour.substring(0, retour.length() - 1) + "\n";
+	}
+	
+
+	public int getNbLigne(){return metier.getNbLigne();}
+	public int getNbColonne(){return metier.getNbColonne();}
+	public String getSymbole(int lig, int col){return metier.getSymbole(lig,col);}
+
+	public CouleurConsole getCouleur(int lig, int col)
+	{
+		String couleur = metier.getCouleur(lig,col);
+		switch(couleur)
+		{
+			case "Vert"  :return CouleurConsole.VERT;
+			case "Rouge" :return CouleurConsole.ROUGE;
+			case "Jaune" :return CouleurConsole.JAUNE;
+			case "Bleu"  :return CouleurConsole.BLEU;
+			case "Violet":return CouleurConsole.MAUVE;
+			case "Rose"  :return CouleurConsole.CYAN;
+		}
+		return CouleurConsole.NOIR;
 	}
 }
