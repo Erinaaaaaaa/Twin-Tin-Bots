@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import iut.algo.CouleurConsole;
 import iut.algo.Console;
 

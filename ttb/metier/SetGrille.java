@@ -53,7 +53,6 @@ public abstract class SetGrille
 					case 'R' : 
 						coor = SetGrille.getCooordonees(temp[i]);
 						grille[coor[0]][coor[1]] = Tuile.ROBOT;
-						//System.out.println(Integer.parseInt("" +temp[i].charAt(1)));
 						tabJoueur[Integer.parseInt("" +temp[i].charAt(1))].
 						ajouterRobot(new Robot(coor[0],coor[1],
 						                       Integer.parseInt(temp[i].charAt(2) + "")));
@@ -102,11 +101,11 @@ public abstract class SetGrille
 		for (int i=0; i<plateau.length; i++)
 		{
 			aRemplir = plateau.length-nbCasesVoulu;
-			if (i < plateau.length/2+1)
+			if (i < plateau.length/2 + 1)
 				nbCasesVoulu++;
 			else
 			{
-				aRemplir+=2;
+				aRemplir += 2;
 				nbCasesVoulu--;
 			}
 			if(nbCase ==11) aRemplir--;
@@ -133,6 +132,7 @@ public abstract class SetGrille
 		int[] coor = new int[2];
 		coor[0] = Integer.parseInt(coorString[0]);
 		coor[1] = Integer.parseInt(coorString[1]);
+
 		if(coor[0] % 2 != 0 && SetGrille.nbJoueur < 5)
 			coor[1]++;
 
@@ -163,9 +163,10 @@ public abstract class SetGrille
 	 */
 	private static String getFileAttente(String info)
 	{
-		String   infoBrut = info.substring(3);
+		String   infoBrut    = info.substring(3);
 		String   fileAttente = "";
-		String[] tabInfo = infoBrut.split(":");
+
+		String[] tabInfo     = infoBrut.split(":");
 
 		for(String cristal : tabInfo)
 			fileAttente += cristal.charAt(1);
