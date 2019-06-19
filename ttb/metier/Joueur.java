@@ -1,13 +1,25 @@
 package ttb.metier;
 
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Joueur
 {
+	/** Tableau contenant les différentes couleurs pour chaque joueur. */
 	public  final static String[] COULEURS = {"Rouge", "Jaune", "Vert", "Bleu", "Violet", "Rose"};
-	private final static char[]   MAIN_BASE ={'A','A','S','G','G','G','D','D','D','C','C','E','E'};
+
+	/**
+	 * La réserve contient :
+	 * <ul>
+	 * <li>2 Tuiles Avancer 1x 'A'</li>
+	 * <li>1 Tuile  Avancer 2x 'S'</li>
+	 * <li>3 Tuiles Tourner à Gauche 'G'</li>
+	 * <li>3 Tuiles Tourner à Droite 'D'</li>
+	 * <li>2 Tuiles Charger un cristal 'C'</li>
+	 * <li>2 Tuiles Déposer un cristal 'E'</li>
+	 * </ul>
+	 */
+	private final static char[] MAIN_BASE ={'A','A','S','G','G','G','D','D','D','C','C','E','E'};
 
 	private static int nbJoueurs = 0;
 
@@ -19,6 +31,10 @@ public class Joueur
 
 	private ArrayList<Character> main;
 
+	/**
+	 * Constructeur par défaut.
+	 * Initialise le numéro du joueur, sa main et les ordres de ses robots.
+	 */
 	public Joueur()
 	{
 		id = Joueur.nbJoueurs++;
@@ -32,15 +48,10 @@ public class Joueur
 	}
 
 	/**
-	 * La réserve contient :
-	 * 2 Tuiles Avancer 1x 'A'
-	 * 1 Tuile  Avancer 2x 'S'
-	 * 3 Tuiles Tourner à Gauche 'G'
-	 * 3 Tuiles Tourner à Droite 'D'
-	 * 2 Tuiles Charger un crystal 'C'
-	 * 2 Tuiles Déposer un crystal 'E'
+	 * Ajoute un ordre à un robot.
+	 * @param ind l'indice de l'ordre à changer.
+	 * @param c l'ordre à ajouter.
 	 */
-
 	public void ajouterOrdre(int ind, char c)
 	{
 		int i = 0;
@@ -54,6 +65,10 @@ public class Joueur
 		}
 	}
 
+	/**
+	 * Enlève l'ordre d'un robot.
+	 * @param ind l'indice de l'ordre à enlever.
+	 */
 	public void enleverOrdre(int ind)
 	{
 		if(ordres[ind] != '\0')
@@ -64,6 +79,11 @@ public class Joueur
 		}
 	}
 
+	/**
+	 * Permute deux ordres pour le programme d'un même robot.
+	 * @param ind1 l'indice du premier ordre à permuter.
+	 * @param ind2 l'indice du deuxième ordre à permuter.
+	 */
 	public void permuterOrdre(int ind1, int ind2)
 	{
 		if(ordres[ind1] == '\0' || ordres[ind2] == '\0')
@@ -75,6 +95,10 @@ public class Joueur
 		ordres[ind2] = c;
 	}
 
+	/**
+	 * Supprime tous les ordres d'un robot.
+	 * @param id l'id du robot pour lequel supprimer les ordres.
+	 */
 	public void resetOrdres(int id)
 	{
 		for(int i = 0; i < ordres.length / 2; i++)
@@ -91,6 +115,12 @@ public class Joueur
 
 	public Robot getRobot(int id) {return tabRobot[id];}
 
+	/**
+	 * Ajoute un robot à ce joueur.
+	 * Un joueur peut posséder deux robots ;
+	 * s'il en possède déjà un, il est ajouté après.
+	 * @param r le Robot à ajouter.
+	 */
 	public void ajouterRobot(Robot r)
 	{
 		if(tabRobot[0] == null)
