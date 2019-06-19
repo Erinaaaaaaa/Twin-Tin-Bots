@@ -142,6 +142,7 @@ public class Plateau
 		return false;
 	}
 
+	// TODO: prendre le cristal du robot en face
 	public void chargerCristal(Robot r)
 	{
 		int[] next = nextPos(r.getPos(), r.getDir());

@@ -24,6 +24,10 @@ public class Robot
 	public int      getId()     { return id ; }
 	public Joueur   getJoueur() { return this.monJoueur; }
 
+	public boolean hasCristal()
+	{
+		return crystal != null;
+	}
 
 	public boolean chargerCrystal(Tuile c)
 	{
