@@ -1,5 +1,7 @@
 package ttb;
 
+import ttb.metier.*;
+
 import java.util.Scanner;
 
 public class ControleurCui

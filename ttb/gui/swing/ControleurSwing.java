@@ -1,6 +1,6 @@
 package ttb.gui.swing;
 
-import ttb.Plateau;
+import ttb.metier.Plateau;
 
 public class ControleurSwing
 {

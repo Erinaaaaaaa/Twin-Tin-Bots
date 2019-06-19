@@ -6,9 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import ttb.Plateau;
-import ttb.SetGrille;
-import ttb.Tuile;
+import ttb.metier.Plateau;
+import ttb.metier.SetGrille;
+import ttb.metier.Tuile;
 
 import java.io.File;
 
@@ -25,6 +25,7 @@ public class ControleurFx
     @FXML
     private Pane panePlateau;
 
+    @SuppressWarnings("Duplicates")
     @FXML
     void initPlateau(ActionEvent event)
     {
