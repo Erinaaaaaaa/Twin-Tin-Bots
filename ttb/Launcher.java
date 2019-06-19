@@ -10,11 +10,10 @@ public class Launcher
 {
     public static void main(String[] args)
     {
-		Scanner sc = new Scanner(System.in)
         System.out.println("Choix de l'IHM: ");
         System.out.println(" 1 - IHM CUI");
         System.out.println(" 2 - IHM JavaFX");
-        int choix = sc.nextInt();
+        int choix;
 
         while( (choix = choisir("Mode")) < 1 || choix > 2);
 
@@ -34,6 +33,7 @@ public class Launcher
     private static int choisir(String text)
     {
         System.out.print(text + ": ");
-        return Clavier.lire_int();
+		Scanner sc = new Scanner(System.in);
+        return sc.nextInt();
     }
 }

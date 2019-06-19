@@ -71,14 +71,9 @@ public class Plateau
 			break;
 			case 4 :
 				if(pos[0] % 2 != 0)
-				{
-					pos[0]++;
 					pos[1]--;
-				}
-				else
-				{
-					pos[0]--;
-				}
+
+				pos[0]++;
 			break;
 			case 5 :
 				pos[1]--;
@@ -90,6 +85,8 @@ public class Plateau
 		   plateau[pos[0]][pos[1]] == Tuile.OUT_OF_BOUNDS
 		  )
 		  	return initPos;
+
+		System.out.println("ok");
 
 		return pos;
 	}
