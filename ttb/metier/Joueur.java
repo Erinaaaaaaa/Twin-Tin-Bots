@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Joueur
 {
-	public  final static Color[] COULEURS = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.PINK};
+	public  final static String[] COULEURS = {"Rouge", "Jaune", "Vert", "Bleu", "Violet", "Rose"};
 	private static int nbJoueurs = 0;
 	private int id;
 	private Robot[] tabRobot;
@@ -139,4 +139,6 @@ public class Joueur
 
 	public char[] getOrdres() {return ordres;}
 	public ArrayList<Character> getMain() {return this.main;}
+	public String getCouleur(){return Joueur.COULEURS[this.id];}
+
 }
