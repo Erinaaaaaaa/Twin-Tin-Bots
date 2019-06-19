@@ -134,12 +134,17 @@ public class ControleurCui
 
 	public static void main(String[] args)
 	{
-		System.out.println("Combien de joueurs ? ");
+		System.out.println("Combien de joueurs ? [2-6]");
 		Scanner sc = new Scanner(System.in);
+		String nbJoueurs;
+		do
+			nbJoueurs = sc.next();
+		while (!nbJoueurs.matches("[2-6]"));
+
 		if(args.length > 0 && args[0].equals("SCENARIO"))
-			new ControleurCui(sc.nextInt()).debug();
+			new ControleurCui(Integer.parseInt(nbJoueurs)).debug();
 		else
-			new ControleurCui(sc.nextInt()).jouer();
+			new ControleurCui(Integer.parseInt(nbJoueurs)).jouer();
 		sc.close();
 	}
 
