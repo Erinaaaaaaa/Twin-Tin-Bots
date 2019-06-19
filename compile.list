@@ -4,3 +4,6 @@
 ./ttb/metier/Robot.java
 ./ttb/metier/Tuile.java
 ./ttb/metier/SetGrille.java
+
+./ttb/gui/fx/IhmGui.java
+./ttb/gui/fx/ControleurFx.java
