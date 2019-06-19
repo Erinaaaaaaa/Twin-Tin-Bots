@@ -123,7 +123,7 @@ public abstract class SetGrille
 	{
 		String   infoBrut = info.substring(3);
 		String   fileAttente = "";
-		String[] tabInfo = info.split(":");
+		String[] tabInfo = infoBrut.split(":");
 
 		for(String cristal : tabInfo)
 			fileAttente += cristal.charAt(1);
