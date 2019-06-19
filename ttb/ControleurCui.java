@@ -30,6 +30,7 @@ public class ControleurCui
 				j.ajouterOrdre(ihm.getInd(j.getOrdres()), ihm.getCarte());
 				break;
 			case 'E' :
+				System.out.println("tuez moi");
 				j.enleverOrdre(ihm.getInd(j.getOrdres()));
 				break;
 			case 'R' :
@@ -62,7 +63,7 @@ public class ControleurCui
 			}while(i < 2);
 			System.out.println(metier.toString());
 			metier.changerJoueur();
-		}while(metier.getJoueurCourant().getId() != 0);
+		}while(true);
 	}
 
 	/**
