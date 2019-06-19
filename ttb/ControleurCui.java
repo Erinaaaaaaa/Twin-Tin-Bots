@@ -198,6 +198,7 @@ public class ControleurCui
 			case "Bleu"  :return CouleurConsole.BLEU;
 			case "Violet":return CouleurConsole.MAUVE;
 			case "Rose"  :return CouleurConsole.CYAN;
+			case "Cyan"  :return CouleurConsole.CYAN;
 		}
 		return CouleurConsole.NOIR;
 	}
