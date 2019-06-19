@@ -77,21 +77,16 @@ public class ControleurCui
 			for (int i = 0; i < line.length; i++) {
 				ordres[i] = line[i].charAt(0);
 			}
-			robotID = --nbJoueurs<0?(++robotID>1?0:1):0; //change l'indice du robot si un tour de tous les joueurs a deja ete effectue
-			executerOrdres(ordres, metier.getJoueurCourant().getRobot(robotID));
 
-			if(nbJoueurs < 0) nbJoueurs = metier.getNbJoueurs();//reinitialise le nombre de joueurs si un tour a deja ete effectue
+			executerOrdres(ordres, metier.getJoueurCourant().getRobot(robotID));
+			robotID++;
+			if(robotID > 1) {
+				robotID=0;
+				metier.changerJoueur();
+			}
+
 
 		} catch (Exception e) { e.printStackTrace(); }
-		int i = 0;
-		for(Joueur j : tabJoueur)
-		{
-			for(Robot r : j.getRobots())
-			{
-				executerOrdres(ordres[i], r)
-				i++;
-			}
-		}
 	}
 
 	public void executerOrdres(char[] ordres, Robot r)
