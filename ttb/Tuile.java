@@ -4,9 +4,9 @@ public enum Tuile
 {
 	OUT_OF_BOUNDS(null),
 	VIDE("T"),
-	CRISTAL_BLEU("CB"),
-	CRISTAL_VERT("CV"),
-	CRISTAL_VIOLET("CR"),
+	CRISTAL_BLEU("2"),
+	CRISTAL_VERT("3"),
+	CRISTAL_VIOLET("4"),
 	ROBOT("R"),
 	BASE("B");
 
