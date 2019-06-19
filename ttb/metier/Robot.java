@@ -22,8 +22,11 @@ public class Robot
 		this.id  = Robot.nbRobots++ % 2;
 	}
 
-	public int   getDir() {return dir;}
-	public int[] getPos() {return pos;}
+	public int      getDir()    { return dir; }
+	public int[]    getPos()    { return pos; }
+	public int      getId()     { return id ; }
+	public Joueur   getJoueur() { return this.monJoueur; }
+
 
 	public boolean chargerCrystal(Tuile c)
 	{
