@@ -2,6 +2,7 @@ package ttb;
 
 import ttb.metier.*;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class ControleurCui
@@ -58,6 +59,20 @@ public class ControleurCui
 			}while(i < 2);
 			metier.changerJoueur();
 		}while(metier.getJoueurCourant().getId() != 0);
+	}
+
+	/**
+	 * Methode pour utiliser le mode debug. La ligne a executer Les instructions à executer seront lues dans le fichier "scenario.data".
+	 */
+	public void debug() {
+		Scanner sc = null;
+		String[] ordres = null;
+
+		try {
+			sc = new Scanner(new File("./ttb/niveau.data"), "utf8");
+			ordres = sc.nextLine().split(";");
+		} catch (Exception e) { e.printStackTrace(); }
+		executerOrdre(ordres);
 	}
 
 	public void executerOrdres(char[] ordres, Robot r)
