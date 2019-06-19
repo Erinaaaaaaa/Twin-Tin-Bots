@@ -3,6 +3,7 @@ package ttb;
 import java.util.Scanner;
 import iut.algo.CouleurConsole;
 import iut.algo.Console;
+import ttb.metier.*;
 
 
 public class IhmCui
@@ -87,6 +88,37 @@ public class IhmCui
 			System.out.print("Choisir l'indice : ");
 			ind = sc.next();
 		} while (!ind.matches("[1-6]"));
+
+		return Integer.parseInt(ind) - 1;
+	}
+
+	public int getRobot(Joueur j)
+	{
+		String s = "";
+		for(int i = 0; i < j.getRobots().length; i++)
+		{
+			s += "\nRobot " + (i+1) + " :\n\t";
+			for(char c : j.getOrdres(i))
+			{
+				s += ("[");
+				if(c == '\0')
+					s += (" ");
+				else
+					s += (c);
+
+				s += ("] ");
+			}
+		}
+
+		System.out.println(s);
+
+		Scanner sc = new Scanner(System.in);
+		String ind;
+		do
+		{
+			System.out.print("Choisissez quel robot modifier : ");
+			ind = sc.next();
+		} while (!ind.matches("[1-2]"));
 
 		return Integer.parseInt(ind) - 1;
 	}
