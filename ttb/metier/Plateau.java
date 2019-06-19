@@ -204,8 +204,8 @@ public class Plateau
 		String retour = "";
 		for (int i=0; i<plateau.length; i++)
 		{
-			if (i%2 == 0)
-				retour +="  ";
+			/*if (i%2 == 0)
+				retour +="  ";*/
 			for (int j=0; j<plateau[i].length; j++)
 			{
 				retour +="  "+ plateau[i][j]+ " " ;
