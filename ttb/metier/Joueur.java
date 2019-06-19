@@ -7,12 +7,16 @@ import java.util.ArrayList;
 public class Joueur
 {
 	public  final static String[] COULEURS = {"Rouge", "Jaune", "Vert", "Bleu", "Violet", "Rose"};
+	private final static char[]   MAIN_BASE ={'A','A','S','G','G','G','D','D','D','C','C','E','E'};
+
 	private static int nbJoueurs = 0;
-	private int id;
+
+	private int     id;
 	private Robot[] tabRobot;
-	private int[] posBase;
-	private int points;
-	private char[] ordres;
+	private int[]   posBase;
+	private int     points;
+	private char[]  ordres;
+
 	private ArrayList<Character> main;
 
 	public Joueur()
@@ -23,7 +27,8 @@ public class Joueur
 		ordres = new char[6];
 		Arrays.fill(ordres, '\0');
 		main = new ArrayList<Character>();
-		initMain();
+		for(char c : MAIN_BASE)
+			main.add(c);
 	}
 
 	/**
@@ -35,22 +40,6 @@ public class Joueur
 	 * 2 Tuiles Charger un crystal 'C'
 	 * 2 Tuiles Déposer un crystal 'E'
 	 */
-	private void initMain()
-	{
-		main.add('A');
-		main.add('A');
-		main.add('S');
-		main.add('G');
-		main.add('G');
-		main.add('G');
-		main.add('D');
-		main.add('D');
-		main.add('D');
-		main.add('C');
-		main.add('C');
-		main.add('E');
-		main.add('E');
-	}
 
 	public void ajouterOrdre(int ind, char c)
 	{
@@ -110,6 +99,7 @@ public class Joueur
 			r.setJoueur(this);
 			return;
 		}
+
 		if(tabRobot[1] == null)
 		{
 			r.setJoueur(this);
@@ -138,8 +128,8 @@ public class Joueur
 			this.posBase = pos;
 	}
 
-	public char[] getOrdres() {return ordres;}
-	public ArrayList<Character> getMain() {return this.main;}
-	public String getCouleur(){return Joueur.COULEURS[this.id];}
+	public char[]               getOrdres() {return ordres;}
+	public ArrayList<Character> getMain()   {return this.main;}
+	public String               getCouleur(){return Joueur.COULEURS[this.id];}
 
 }
