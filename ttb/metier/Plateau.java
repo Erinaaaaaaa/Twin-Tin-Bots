@@ -1,6 +1,8 @@
 package ttb.metier;
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe Plateau
@@ -288,14 +290,14 @@ public class Plateau
 		return (fini || pionDecompte == 0);
 	}
 
-	public Joueur getGagnant()
+	public List<Joueur> getGagnant()
 	{
-		Joueur gagnant = null;
+		List<Joueur> gagnants = new ArrayList<Joueur>();
 		if (pionDecompte != 0)
 		{
 			for (Joueur j : tabJoueurs)
 				if (j.getPoints() >= pointVictoire)
-					gagnant = j;
+					gagnants.add(j);
 		}
 		else
 		{
@@ -315,12 +317,12 @@ public class Plateau
 				if (ptsMax < totalPoints[i])
 					indGagne = i;
 
-			gagnant = tabJoueurs[indGagne];
+			gagnants.add(tabJoueurs[indGagne]);
 			// TODO: gestion de victoire quand ptsMax égal pour 2 joueurs ou plus
 			// plus gérer en fonction du nb de cristaux d'une certaine couleur.
 		}
 
-		return gagnant;
+		return gagnants;
 	}
 
 	public void enleverPionDecompte() { pionDecompte--; }

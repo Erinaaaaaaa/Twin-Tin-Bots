@@ -1,10 +1,11 @@
 package ttb;
 
+import java.util.List;
 import java.util.Scanner;
+
 import iut.algo.CouleurConsole;
 import iut.algo.Console;
 import ttb.metier.*;
-
 
 public class IhmCui
 {
@@ -109,10 +110,13 @@ public class IhmCui
 		System.out.println();
 	}
 
-	public void finPartie(Joueur j)
+	public void finPartie(List<Joueur> gagnants)
 	{
 		System.out.println("\n-------------- Fin de la partie --------------");
-		System.out.println("Le joueur " + j.getCouleur() + " a gagné avec " + j.getPoints());
+		if (gagnants != null)
+			for (Joueur j : gagnants)
+				System.out.println("Le joueur " + j.getCouleur() +
+				                   " a gagné avec " + j.getPoints() + " points.");
 	}
 
 	public char getCarte()
