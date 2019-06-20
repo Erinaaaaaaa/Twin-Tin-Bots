@@ -105,6 +105,7 @@ public class ControleurCui
 				cpt++;
 			}
 			while (sc.hasNext() && !choix.equals("p")) {
+				ihm.afficherPlateau();
 				char[] splittedLine = sc.nextLine().toCharArray();
 				if (splittedLine[0] == 'R') {
 					int playerID = Character.getNumericValue(splittedLine[1]);
@@ -145,12 +146,12 @@ public class ControleurCui
 								executerOrdres(j.getOrdres(i), j.getRobot(i));
 					}
 					ihm.afficher(j);
-					cpt++;
-					do
-					{
-						choix = rep.next();
-					}while(!choix.matches("[ps]"));
 				}
+				cpt++;
+				do
+				{
+					choix = rep.next();
+				}while(!choix.matches("[ps]"));
 			}
 
 			if(choix.equals("p"))

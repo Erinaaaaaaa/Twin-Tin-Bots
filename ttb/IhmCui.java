@@ -21,12 +21,6 @@ public class IhmCui
 	{
 		System.out.println((getInfosJoueur(j)));
 		this.afficherPlateau();
-		System.out.println("\n Quel action effectuer ?");
-		System.out.println("\t[A]jouter/Remplacer une carte");
-		System.out.println("\t[P]ermuter une carte");
-		System.out.println("\t[E]nlever une carte");
-		System.out.println("\t[R]einitialiser les ordres");
-		System.out.println("\t[N]e rien faire");
 	}
 
 	public String    getInfosJoueur(Joueur j)
@@ -61,7 +55,13 @@ public class IhmCui
 
 	public String getAction()
 	{
-		System.out.print("Action : ");
+		System.out.println("\nQuel action effectuer ?");
+		System.out.println("\t[A]jouter/Remplacer une carte");
+		System.out.println("\t[P]ermuter une carte");
+		System.out.println("\t[E]nlever une carte");
+		System.out.println("\t[R]einitialiser les ordres");
+		System.out.println("\t[N]e rien faire");
+		System.out.print("\tAction : ");
 		return sc.next().toUpperCase();
 	}
 
