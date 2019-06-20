@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import iut.algo.CouleurConsole;
+import sun.net.www.content.text.plain;
 import iut.algo.Console;
 import ttb.metier.*;
 
@@ -151,14 +152,25 @@ public class IhmCui
 	 */
 	public int getInd(char[] ordres)
 	{
-		String ind;
+		String s = "";
+		for(int i = 0; i < ordres.length; i++)
+		{
+			s += "[";
+			if(ordres[i] != '\0')
+				s += ordres[i];
+			else
+				s += " ";
+
+			s += "] ";
+		}
+		System.out.println(s);
 		do
 		{
 			System.out.print("Choisir l'indice : ");
-			ind = sc.next();
-		} while (!ind.matches("[1-6]"));
+			s = sc.next();
+		} while (!s.matches("[1-3]"));
 
-		return Integer.parseInt(ind) - 1;
+		return Integer.parseInt(s) - 1;
 	}
 
 	/**
