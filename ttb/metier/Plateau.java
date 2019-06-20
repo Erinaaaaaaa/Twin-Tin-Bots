@@ -184,7 +184,7 @@ public class Plateau
 		if(t == Tuile.BASE || (t == Tuile.ROBOT && bOk) || (t == Tuile.VIDE))
 		{
 			if(t == Tuile.BASE)
-				getJoueurParBase(next).addPoint(t);
+				getJoueurParBase(next).addCristal(t);
 
 			if(t == Tuile.VIDE)
 				plateau[next[0]][next[1]] = cristal;
@@ -193,6 +193,32 @@ public class Plateau
 		}
 
 		r.chargerCrystal(cristal);
+	}
+
+	public boolean aPlusDeCristaux()
+	{
+		for(int i = 0; i < plateau.length; i++)
+			for(int j = 0; j < plateau[i].length; j++)
+				if(Tuile.isCristal(plateau[i][j]))
+					return false;
+
+		return true;
+	}
+
+	public void listeAttente()
+	{
+		if(fileAttent.equals(""))
+			return;
+
+		Tuile cristal = Tuile.getCristal(fileAttent.charAt(0));
+
+		if(fileAttent.length > 1)
+			fileAttent = fileAttent.substring(1);
+		else
+			fileAttent = "";
+
+		if(plateau[plateau.length / 2][plateau[0].length / 2] == Tuile.VIDE)
+			plateau[plateau.length / 2][plateau[0].length / 2] = cristal;
 	}
 
 	public Joueur getJoueurParBase(int[] pos)
