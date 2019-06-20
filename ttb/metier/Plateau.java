@@ -205,7 +205,7 @@ public class Plateau
 		return true;
 	}
 
-	public void listeAttente()
+	/* public void listeAttente()
 	{
 		if(fileAttent.equals(""))
 			return;
@@ -219,7 +219,7 @@ public class Plateau
 
 		if(plateau[plateau.length / 2][plateau[0].length / 2] == Tuile.VIDE)
 			plateau[plateau.length / 2][plateau[0].length / 2] = cristal;
-	}
+	} */
 
 	public Joueur getJoueurParBase(int[] pos)
 	{

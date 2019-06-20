@@ -21,7 +21,7 @@ public class Launcher {
 
                 String debug = new Scanner(System.in).nextLine();
 				int nbJoueurs = choisir("Nombre de joueurs");
-                if (debug.equals("yes")) new ControleurCui(nbJoueurs).debug(nbJoueurs);
+                if (debug.equals("yes")) new ControleurCui(nbJoueurs).debug(nbJoueurs,0);
                 else new ControleurCui(nbJoueurs);
                 break;
             case 2:
