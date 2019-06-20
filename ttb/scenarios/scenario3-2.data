@@ -1,0 +1,20 @@
+	Tests pour décharger un cristal alors qu'un robot en a déjà un.
+	Mise en place de la situation
+	Le robot rouge prend le cristal bleu
+R00SGC
+	Le robot vert prend un autre cristal
+R21SAG
+R21CDD
+	On replace le cristal du robot rouge
+R00E
+	On le reprend
+R00C
+	On dépose le cristal du robot vert sur le robot rouge
+R21E
+	On dépose le cristal du robot rouge
+R00E
+	On le reprend et on dépose le cristal du robot vert au-dessus
+R00C
+R21GE
+	Enfin, on replace le cristal du robot rouge
+R00E
