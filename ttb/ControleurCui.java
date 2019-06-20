@@ -93,13 +93,14 @@ public class ControleurCui
 	public void debug(int nbJoueurs, int ligne) {
 		Scanner sc = null;
 		Scanner rep = null;
-		String choix = "";
+		String choix = "s";
 		int cpt = 0;
 
 		try {
 			sc = new Scanner(new File("./ttb/scenarios/scenario" + nbJoueurs +".data"), "utf8");
 			rep = new Scanner(System.in);
-			while (sc.hasNext() && !choix.equals("p") && !choix.equals("q")) {
+			while (sc.hasNext() && choix.equals("s")) {
+				choix = "";
 				if(cpt >= ligne)
 					ihm.afficherPlateau();
 				char[] splittedLine = sc.nextLine().toCharArray();
@@ -144,11 +145,13 @@ public class ControleurCui
 					if(cpt >= ligne)
 						ihm.afficher(j);
 				}
-				cpt++;
-				while(!choix.matches("[psq]" && cpt >= ligne)
+				while(!choix.matches("[psq]") && cpt >= ligne)
 				{
 					choix = rep.next();
 				}
+				if(cpt < ligne)
+					choix = "s";
+				cpt++;
 			}
 
 			if(choix.equals("p"))
