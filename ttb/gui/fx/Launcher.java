@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class IhmGui extends Application
+public class Launcher extends Application
 {
 
     public static void main(String[] args)
@@ -19,6 +19,9 @@ public class IhmGui extends Application
     {
         try
         {
+            primaryStage.setMinHeight(690);
+            primaryStage.setMinWidth(900);
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Ihm.fxml"));
             VBox root = loader.load();
             Scene scene = new Scene(root);

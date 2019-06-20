@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root fx:id="titledRoot" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Joueur #" type="TitledPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<fx:root fx:id="titledRoot" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Joueur #" type="TitledPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="170.0" prefWidth="100.0">
          <children>
-            <Label text="Robot 1" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="25.0" text="Robot 1" AnchorPane.leftAnchor="0.0" />
+                  <Button mnemonicParsing="false" onAction="#robot1Reset" prefHeight="25.0" text="RESET" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <HBox alignment="TOP_RIGHT" />
             <GridPane>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,12 +34,17 @@
               </rowConstraints>
                <children>
                   <ImageView fx:id="imgR1" fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imgR1A1" fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                  <ImageView fx:id="imgR1A2" fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-                  <ImageView fx:id="imgR1A3" fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                  <ImageView fx:id="imgR1A1" fitHeight="60.0" fitWidth="57.0" onMouseClicked="#imgClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                  <ImageView fx:id="imgR1A2" fitHeight="60.0" fitWidth="57.0" onMouseClicked="#imgClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                  <ImageView fx:id="imgR1A3" fitHeight="60.0" fitWidth="57.0" onMouseClicked="#imgClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
                </children>
             </GridPane>
-            <Label text="Robot 2" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="25.0" text="Robot 2" AnchorPane.leftAnchor="0.0" />
+                  <Button mnemonicParsing="false" onAction="#robot2Reset" prefHeight="25.0" text="RESET" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
             <GridPane>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -43,9 +57,9 @@
                </rowConstraints>
                <children>
                   <ImageView fx:id="imgR2" fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imgR2A1" fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                  <ImageView fx:id="imgR2A2" fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-                  <ImageView fx:id="imgR2A3" fitHeight="60.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                  <ImageView fx:id="imgR2A1" fitHeight="60.0" fitWidth="57.0" onMouseClicked="#imgClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                  <ImageView fx:id="imgR2A2" fitHeight="60.0" fitWidth="57.0" onMouseClicked="#imgClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                  <ImageView fx:id="imgR2A3" fitHeight="60.0" fitWidth="57.0" onMouseClicked="#imgClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
                </children>
             </GridPane>
          </children>

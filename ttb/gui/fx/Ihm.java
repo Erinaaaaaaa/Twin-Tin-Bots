@@ -8,76 +8,80 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import ttb.gui.fx.controls.EtatRobot;
 import ttb.gui.fx.controls.ImageRobot;
+import ttb.gui.fx.controls.MainJoueur;
 import ttb.metier.*;
 
 import java.io.File;
 
-public class ControleurFx
+import static ttb.gui.fx.util.Dialog.lireNbJoueur;
+
+// TODO: Implémenter un panneau de commande en bas de la frame pour les ordres
+public class Ihm
 {
-    private final int nbJoueur = 3;
-    private Plateau plateau;
+    private int robot = 0;
+    private ControleurIhm ctrl;
 
     @FXML private Accordion accMains;
     @FXML private Button btnInit;
     @FXML private ImageView imgPlateau;
     @FXML private Pane panePlateau;
+    @FXML private VBox vboxDroite;
+
+    private MainJoueur mainJoueur;
 
     @FXML
     void initPlateau(ActionEvent event)
     {
-        this.plateau = SetGrille.initGrille(nbJoueur);
+        creerPartie();
         afficherPlateau();
-
-        for (TitledPane p : this.accMains.getPanes())
-            if (p instanceof EtatRobot)
-                ((EtatRobot) p).updateStatus();
     }
 
     @FXML
     void avancer(ActionEvent event)
     {
-        this.plateau.avancer(plateau.getJoueurCourant().getRobot(robot), true);
+        this.ctrl.avancer(ctrl.getJoueurCourant().getRobot(robot), true);
         afficherPlateau();
     }
 
     @FXML
     void charger(ActionEvent event)
     {
-        plateau.chargerCristal(plateau.getJoueurCourant().getRobot(robot));
+        ctrl.chargerCristal(ctrl.getJoueurCourant().getRobot(robot));
         afficherPlateau();
     }
 
     @FXML
     void deposer(ActionEvent event)
     {
-        plateau.deposerCristal(plateau.getJoueurCourant().getRobot(robot));
+        ctrl.deposerCristal(ctrl.getJoueurCourant().getRobot(robot));
         afficherPlateau();
     }
 
     @FXML
     void tournerDroite(ActionEvent event)
     {
-        plateau.getJoueurCourant().getRobot(robot).turnAround(false);
+        ctrl.getJoueurCourant().getRobot(robot).turnAround(false);
         afficherPlateau();
     }
 
     @FXML
     void tournerGauche(ActionEvent event)
     {
-        plateau.getJoueurCourant().getRobot(robot).turnAround(true);
+        ctrl.getJoueurCourant().getRobot(robot).turnAround(true);
         afficherPlateau();
     }
 
     @FXML
     void changerJoueur(ActionEvent event)
     {
-        plateau.changerJoueur();
+        ctrl.changerJoueur();
         afficherPlateau();
     }
 
-    int robot = 0;
+
 
     @FXML
     void changerRobot(ActionEvent event)
@@ -125,8 +129,8 @@ public class ControleurFx
 
     private ImageView chargerImage(Tuile tuile, int i, int j)
     {
-        Robot  r      = this.plateau.getRobotAPosition(new int[]{i, j});
-        Joueur joueur = this.plateau.getJoueurParBase (new int[]{i, j});
+        Robot  r      = this.ctrl.getRobotAPosition(new int[]{i, j});
+        Joueur joueur = this.ctrl.getJoueurParBase (new int[]{i, j});
         double angle = 0.0;
         String fic;
 
@@ -169,15 +173,15 @@ public class ControleurFx
         return iv;
     }
 
-    private void afficherPlateau()
+    void afficherPlateau()
     {
         this.panePlateau.getChildren().clear();
 
         // CONTENU PLATEAU
         {
-            Tuile[][] tuiles = this.plateau.getTuiles();
+            Tuile[][] tuiles = this.ctrl.getTuiles();
 
-            if (this.plateau.getNbJoueurs() > 4) // Grand plateau
+            if (this.ctrl.getNbJoueurs() > 4) // Grand ctrl
             {
                 File file = new File("./ttb/gui/images/plateau5-6.png");
                 Image image = new Image(file.toURI().toString());
@@ -186,7 +190,7 @@ public class ControleurFx
                 for (int i = 0; i < 11; i++)
                     for (int j = 0; j < 11; j++)
                     {
-                        Robot r = this.plateau.getRobotAPosition(new int[]{i, j});
+                        Robot r = this.ctrl.getRobotAPosition(new int[]{i, j});
 
                         int x = ((i) % 2 == 0 ? 23 : 0) + (j) * 46 - 5;
                         if (r != null)
@@ -220,7 +224,7 @@ public class ControleurFx
                 for (int i = 0; i < 9; i++)
                     for (int j = 0; j < 9; j++)
                     {
-                        Robot r = this.plateau.getRobotAPosition(new int[]{i, j});
+                        Robot r = this.ctrl.getRobotAPosition(new int[]{i, j});
 
                         int x = ((i + 1) % 2 == 0 ? -23 : 0) + (j + 1) * 46 - 5;
                         if (r != null)
@@ -252,14 +256,11 @@ public class ControleurFx
 
         // FILE ATTENTE (X0 = 64, Y0 = 450)
         {
-            String file = this.plateau.getFileAttente();
-            System.out.println(file);
+            String file = this.ctrl.getFileAttente();
 
             for (int i = 0; i < file.length(); i++)
             {
                 String fic = getFichierFileAttente(file.charAt(i));
-
-                System.out.println(fic);
 
                 ImageView iv = new ImageView(new Image(new File("./ttb/gui/images/" + fic + ".png").toURI().toString()));
 
@@ -271,19 +272,40 @@ public class ControleurFx
             }
         }
 
-        System.out.println(plateau);
+        for (TitledPane p : this.accMains.getPanes())
+            if (p instanceof EtatRobot)
+                ((EtatRobot) p).updateStatus();
+
+        this.vboxDroite.getChildren().remove(this.mainJoueur);
+        this.vboxDroite.getChildren().add(this.mainJoueur = new MainJoueur(this.ctrl.getJoueurCourant(), this.ctrl));
+    }
+
+    @FXML
+    void annulerSelection(ActionEvent event)
+    {
+        this.ctrl.setSource(null);
     }
 
     @FXML
     void initialize()
     {
-        this.plateau = SetGrille.initGrille(nbJoueur);
+        creerPartie();
 
-        for (int i = 0; i < this.plateau.getNbJoueurs(); i++)
+        this.afficherPlateau();
+    }
+
+    private void creerPartie()
+    {
+        this.ctrl = new ControleurIhm(lireNbJoueur(), this);
+
+        this.accMains.getPanes().clear();
+
+        for (int i = 0; i < this.ctrl.getNbJoueurs(); i++)
         {
             this.accMains.getPanes().add(
                     new EtatRobot(
-                            this.plateau.getJoueur(i)
+                            this.ctrl.getJoueur(i),
+                            this.ctrl
                     )
             );
         }
@@ -291,8 +313,6 @@ public class ControleurFx
         for (TitledPane p : this.accMains.getPanes())
             if (p instanceof EtatRobot)
                 ((EtatRobot) p).updateStatus();
-
-        this.afficherPlateau();
     }
 
 }
