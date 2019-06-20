@@ -20,6 +20,12 @@ public class Robot
 	private Joueur monJoueur;
 	private Tuile cristal;
 
+	/**
+	 * Construit un nouveau robot et initialise sa position et sa direction.
+	 * @param ligne la ligne où le robot est positionné;
+	 * @param colonne la colonne où le robot est positionné.
+	 * @param dir la direction du robot.
+	 */
 	public Robot(int ligne, int colonne, int dir)
 	{
 		this.pos = new int[] {ligne, colonne};
@@ -32,11 +38,20 @@ public class Robot
 	public int      getId()     { return id ; }
 	public Joueur   getJoueur() { return this.monJoueur; }
 
+	/**
+	 * Retourne vrai si le robot possède un cristal sur lui.
+	 * @return true si le robot possède un cristal sur lui, false sinon.
+	 */
 	public boolean hasCristal()
 	{
 		return cristal != null;
 	}
 
+	/**
+	 * Ajoute un cristal sur le robot.
+	 * @param t le cristal à ajouter.
+	 * @return true si il a pu être ajouté, false sinon.
+	 */
 	public boolean chargerCristal(Tuile t)
 	{
 		if(cristal != null)
@@ -48,6 +63,10 @@ public class Robot
 		return true;
 	}
 
+	/**
+	 * Dépose le cristal chargé.
+	 * @return le cristal déposé.
+	 */
 	public Tuile deposerCristal()
 	{
 		Tuile c = cristal;
@@ -55,12 +74,19 @@ public class Robot
 		return c;
 	}
 
+	/** Retourne le cristal dans l'inventaire du robot. */
 	public Tuile getCristal() { return cristal; }
 
+	/** Fait appartenir ce robot à un joueur. */
 	public void setJoueur(Joueur j) {monJoueur = j;}
 
+	/** Met à jour la position du robot sur le plateau. */
 	public void setPos(int[] pos) {this.pos = pos;}
 
+	/**
+	 * Fait tourner le robot de 60°.
+	 * @param left si true, tourne à gauche, sinon à droite.
+	 */
 	public void turnAround(boolean left)
 	{
 		if(left)
@@ -69,10 +95,9 @@ public class Robot
 			dir = (dir+1) % 6;
 	}
 
+	/** Met directement à jour la position du robot. */
 	public void setDir(int dir) {this.dir = dir;}
 
-	public String getCouleur()
-	{
-		return this.monJoueur.getCouleur();
-	}
+	/** Retourne la couleur du robot. */
+	public String getCouleur() { return this.monJoueur.getCouleur(); }
 }

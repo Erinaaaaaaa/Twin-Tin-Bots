@@ -123,8 +123,10 @@ public class Joueur
 		}
 	}
 
+	/** Retourne tous les robots du joueur. */
 	public Robot[] getRobots() {return this.tabRobot;}
 
+	/** Retourne le robot du joueur ayant l'id spécifié. */
 	public Robot getRobot(int id) {return tabRobot[id];}
 
 	/**
@@ -149,8 +151,14 @@ public class Joueur
 		}
 	}
 
+	/** Retourne l'id de ce joueur. */
 	public int getId() {return id;}
 
+	/**
+	 * Calcule le nombre de points de ce joueur, en fonction des cristaux
+	 * qu'il possède dans sa base.
+	 * @return le nombre de points du joueur.
+	 */
 	public int getPoints()
 	{
 		int points = 0;
@@ -160,6 +168,11 @@ public class Joueur
 		return points;
 	}
 
+	/**
+	 * Permet d'obtenir un robot en fonction d'une position donnée.
+	 * @param pos la position du robot
+	 * @return le Robot avec la position recherchée s'il existe ou null.
+	 */
 	public Robot getRobotParPos(int[] pos)
 	{
 		for(Robot r : tabRobot)
@@ -169,20 +182,32 @@ public class Joueur
 		return null;
 	}
 
+	/** Ajoute un cristal à la base du joueur. */
 	public void addCristal(Tuile t) {cristaux.add(t);}
 
+	/** Retourne les cristaux possédés par le joueur. */
 	public ArrayList<Tuile> getCristaux() { return this.cristaux; }
 
+	/** Retourne la position de la base du joueur. */
 	public int[] getBase() {return this.posBase;}
 
+	/**
+	 * Positionne la base du joueur.
+	 * @param pos la position de la base.
+	 */
 	public void setBase(int[] pos)
 	{
 		if(posBase == null)
 			this.posBase = pos;
 	}
 
+	/** Retourne les ordres du robot ayant l'id spécifié. */
 	public char[] getOrdres(int id) {return Arrays.copyOf(ordres[id], ordres[id].length);}
+
+	/** Retourne la réserve du joueur. */
 	public ArrayList<Character> getReserve() {return this.reserve;}
+
+	/** Retourne la couleur du joueur. */
 	public String getCouleur(){return Joueur.COULEURS[this.id];}
 
 	public String toString()
