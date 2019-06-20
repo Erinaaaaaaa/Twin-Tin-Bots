@@ -16,7 +16,7 @@ import java.io.File;
 
 public class ControleurFx
 {
-    private final int nbJoueur = 6;
+    private final int nbJoueur = 3;
     private Plateau plateau;
 
     @FXML private Accordion accMains;

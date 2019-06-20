@@ -71,7 +71,7 @@ public class ControleurCui
 	}
 
 	/**
-	 * Méthode pour utiliser le mode debug. Les instructions à exécuter seront lues dans le fichier "scenario.data". <br />
+	 * Méthode pour utiliser le mode debug. Les instructions à exécuter seront lues dans le fichier "scenario2.data". <br />
 	 * La premiere lettre doit être soit J pour joueur ou R pour robot.<br />
 	 * <br />
 	 * <ul><b>Si c'est un robot:</b>
