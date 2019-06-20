@@ -4,11 +4,14 @@ Faits :
 - avancer sur une base
 - charger un cristal
 - decharger un cristal sur une base
--
+- decharger un cristal sur out of bounds
+- decharger cristal sur robot et essayer de le reprendre
+- decharger un robot vide precedemment charge
+- decharger cristal sur cristal
+- pousser un robot contre un mur
+- pousser robot contre base
 
 A faire :
-- decharger robot sur OUT_OF_BOUNDS
-- deplacer cristal contre robot/cristal
 - pousser un robot jusqu'a un objet
 - pousser robot/cristal contre base/mur
 - decharger cristal sur robot qui en a deja un

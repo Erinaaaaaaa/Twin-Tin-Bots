@@ -90,7 +90,7 @@ public class ControleurCui
 	 * <br />
 	 * <ul><b>Si c'est un robot:</b>
 	 * 	 <li>La suivante indique l'indice du joueur.</li>
-	 * 	 <li>La suivante celui du robot</li>
+	 * 	 <li>La suivante celui du robot.</li>
 	 * 	 <li>Ensuite, toutes les actions à effectuer.</li>
 	 * </ul><br>
 	 *
@@ -266,13 +266,13 @@ public class ControleurCui
 	{
 		switch(couleur)
 		{
-			case "Vert"  :return CouleurConsole.VERT;
-			case "Rouge" :return CouleurConsole.ROUGE;
-			case "Jaune" :return CouleurConsole.JAUNE;
-			case "Bleu"  :return CouleurConsole.BLEU;
-			case "Violet":return CouleurConsole.MAUVE;
-			case "Rose"  :return CouleurConsole.CYAN;
-			case "Cyan"  :return CouleurConsole.CYAN;
+			case "Vert"  : return CouleurConsole.VERT;
+			case "Rouge" : return CouleurConsole.ROUGE;
+			case "Jaune" : return CouleurConsole.JAUNE;
+			case "Bleu"  : return CouleurConsole.BLEU;
+			case "Violet": return CouleurConsole.MAUVE;
+			case "Rose"  : return CouleurConsole.CYAN;
+			case "Cyan"  : return CouleurConsole.CYAN;
 		}
 		return CouleurConsole.NOIR;
 
