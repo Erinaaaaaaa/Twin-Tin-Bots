@@ -155,24 +155,24 @@ public class Plateau
 
 		if(Tuile.isCristal(t))
 		{
-			if(r.chargerCrystal(t))
+			if(r.chargerCristal(t))
 				plateau[next[0]][next[1]] = Tuile.VIDE;
 		}
 		else
 		{
 			Robot tmp = getRobotAPosition(next);
-			Tuile cristal = tmp.deposerCrystal();
+			Tuile cristal = tmp.deposerCristal();
 			if(cristal == null)
 				return;
 
-			if(!r.chargerCrystal(cristal))
-				tmp.chargerCrystal(cristal);
+			if(!r.chargerCristal(cristal))
+				tmp.chargerCristal(cristal);
 		}
 	}
 
 	public void deposerCristal(Robot r)
 	{
-		Tuile cristal = r.deposerCrystal();
+		Tuile cristal = r.deposerCristal();
 		if(cristal == null)
 			return;
 
@@ -181,7 +181,7 @@ public class Plateau
 		boolean bOk = false;
 
 		if(t == Tuile.ROBOT)
-			bOk = getRobotAPosition(next).chargerCrystal(cristal);
+			bOk = getRobotAPosition(next).chargerCristal(cristal);
 
 		if(t == Tuile.BASE || (t == Tuile.ROBOT && bOk) || (t == Tuile.VIDE))
 		{
@@ -197,7 +197,7 @@ public class Plateau
 			return;
 		}
 
-		r.chargerCrystal(cristal);
+		r.chargerCristal(cristal);
 	}
 
 	public void listeAttente()
