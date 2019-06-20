@@ -1,0 +1,14 @@
+Faits :
+- ajouter, enlever, permuter carte;
+- avancer, tourner
+- avancer sur une base
+- charger un cristal
+- decharger un cristal sur une base
+-
+
+A faire :
+- decharger robot sur OUT_OF_BOUNDS
+- deplacer cristal contre robot/cristal
+- pousser un robot jusqu'a un objet
+- pousser robot/cristal contre base/mur
+- decharger cristal sur robot qui en a deja un

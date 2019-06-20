@@ -1,24 +1,14 @@
-J0A0A0
-J0A0G1
-J0A0A2
-J0F
-J0A1S0
-J0A1A1
-J0P101
-J0F
-J1A0A0
-J1A0D1
-J1A0A2
-J1F
-J0A1D0
-J0F
-R01C
-J0A1G0
-J0F
-R01E
-J1A1A0
-J1A1G1
-J1A1S1
-J1A1S1
-J1A1S1
-J1F
+/*--------------------------------------------------*/
+/* Decharger un cristal sur une tuile OUT_OF_BOUNDS */
+/*--------------------------------------------------*/
+
+//deplacer le robot a cote du cristal
+R00GAA
+//charger le cristal
+R00C
+//Tourner le robot vers une tuile out of bound
+R00G
+//Decharger le cristal sur une tuile out of bound
+R00E
+//Tourne et depose le cristal sur une tuile libre in bounds
+R00GGE
