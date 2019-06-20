@@ -3,6 +3,7 @@ package ttb;
 import ttb.metier.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -65,7 +66,9 @@ public class ControleurCui
 			}while(i < 2);
 			ihm.afficherPlateau();
 			metier.changerJoueur();
-		}while(true);
+		}while(!metier.estPartieFinie());
+
+		ihm.finPartie(metier.getGagnant());
 	}
 
 	/**
@@ -171,8 +174,8 @@ public class ControleurCui
 				this.metier = SetGrille.initGrille(nbJoueurs);
 				debug(nbJoueurs, cpt- 2);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			System.out.println("Le fichier scenario" + nbJoueurs + ".data n'existe pas.");
 		}
 	}
 

@@ -109,6 +109,12 @@ public class IhmCui
 		System.out.println();
 	}
 
+	public void finPartie(Joueur j)
+	{
+		System.out.println("\n-------------- Fin de la partie --------------");
+		System.out.println("Le joueur " + j.getCouleur() + " a gagné avec " + j.getPoints());
+	}
+
 	public char getCarte()
 	{
 		System.out.println("Choisissez une carte de la réserve : ");
