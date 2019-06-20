@@ -34,6 +34,23 @@ public enum Tuile
 		return tuile.name().contains("CRISTAL");
 	}
 
+	/**
+	 * Retourne le cristal en fonction des caractères utilisés pour déterminer
+	 * sa couleur.
+	 * @param type le caractère correspondant au cristal.
+	 * @return la Tuile correspondant à un cristal.
+	 */
+	public static Tuile getCristal(char type)
+	{
+		switch (type)
+		{
+			case 'B' : return Tuile.CRISTAL_BLEU;
+			case 'V' : return Tuile.CRISTAL_VERT;
+			case 'R' : return Tuile.CRISTAL_VIOLET;
+		}
+		return Tuile.VIDE;
+	}
+
 	public String toString()
 	{
 		if (nom != null)
