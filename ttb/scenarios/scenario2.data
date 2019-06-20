@@ -1,37 +1,53 @@
-/*-------------------------------------------------------*/
-/* Tests chargement/dechargement/pousser robots/cristaux */
-/*-------------------------------------------------------*/
-//deplacer le robot a cote du cristal
-R00GA
-//charger le cristal
-R00C
-//Tourner le robot vers une tuile out of bounds
-R00G
-//Decharger le cristal sur une tuile out of bounds
-R00E
-//Tourne et depose le cristal sur une tuile libre in bounds
-R00GGE
-//CHARGER LE CRISTAL
-R00C
-//Tourner a gauche pour aller vers un autre critstal
-R00GG
-//Avancer vers le cristal
-R00AA
-//Decharger le cristal sur un autre cristal
-R00E
-//decharger le cristal a cote
-R00GE
-//Recharger le cristal
-R00C
-//deplacer et tourner devant un autre robot
-R00AGAD
-//test de reprendre le cristal
-R00E
-//Decharger le cristal a cote alors que le robot est vide
-R00GE
-//Pousser robot contre mur
-R00DAA
-//mettre un robot derriere un autre
-R11DDAGAGGA
-//pousser un robot contre une base
-R11AA
+/*------------------------------------*/
+/* Test gestion des actions du joueur */
+/*------------------------------------*/
+//Le joueur 1 donne au petit robot l'action avancer
+J0A0A0
+//Le joueur 1 donne au petit robot l'action tourner au gauche
+J0A0G1
+//Le joueur 1 donne au petit robot l'action avancer
+J0A0A2
+//Le joueur 1 donne au grand robot l'action avancer 2x
+J0A1S0
+//Le joueur 1 essaye de donner au grand robot l'action avancer (y arrive pas car reserve en a plus)
+J0A1A1
+//Le joueur 1 permute l'action 1 et 2 du grand robot
+J0P101
+//Le joueur 1 execute les ordres de ses robots
+J0F
+//Le joueur 2 donne au petit robot l'action avancer
+J1A0A0
+//Le joueur 2 donne au petit robot l'action tourner a droite
+J1A0D1
+//Le joueur 2 donne au petit robot l'action avancer
+J1A0A2
+//Le joueur 2 execute les ordres de ses robots
+J1F
+//Le joueur 1 donne au grand robot l'action tourner a droite et remplace son action précédente
+J0A1D0
+//Le joueur 1 execute les ordres de ses robots
+J0F
+//Le grand robot rouge ramasse un cristal
+R01C
+//Le joueur 1 donne au grand robot l'action tourner a gauche et remplace son action précédente
+J0A1G0
+//Le joueur 1 donne au grand robot l'action deposer son cristal
+J0A1E1
+//Le joueur 1 execute les ordres de ses robots
+J0F
+//Le joueur 2 donne l'action avancer a son grand robot
+J1A1A0
+//Le joueur 2 donne l'action tourner a gauche a son grand robot
+J1A1G1
+//Le joueur 2 donne l'action avancer 2x a son grand robot
+J1A1S1
+//Le joueur 2 donne l'action avancer 2x a son grand robot
+J1A1S1
+//Le joueur 2 donne l'action avancer 2x a son grand robot
+J1A1S1
+//Le joueur 2 execute les ordres de ses robots
+J1F
+//Le joueur 2 reset son petit robot
+J1R0
+//Le joueur 1 enleve la premiere carte de son grand robot
+J0E00

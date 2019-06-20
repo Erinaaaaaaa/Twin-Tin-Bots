@@ -1,0 +1,37 @@
+/*-------------------------------------------------------*/
+/* Tests chargement/dechargement/pousser robots/cristaux */
+/*-------------------------------------------------------*/
+//deplacer le robot a cote du cristal
+R00GA
+//charger le cristal
+R00C
+//Tourner le robot vers une tuile out of bounds
+R00G
+//Decharger le cristal sur une tuile out of bounds
+R00E
+//Tourne et depose le cristal sur une tuile libre in bounds
+R00GGE
+//CHARGER LE CRISTAL
+R00C
+//Tourner a gauche pour aller vers un autre critstal
+R00GG
+//Avancer vers le cristal
+R00AA
+//Decharger le cristal sur un autre cristal
+R00E
+//decharger le cristal a cote
+R00GE
+//Recharger le cristal
+R00C
+//deplacer et tourner devant un autre robot
+R00AGAD
+//test de reprendre le cristal
+R00E
+//Decharger le cristal a cote alors que le robot est vide
+R00GE
+//Pousser robot contre mur
+R00DAA
+//mettre un robot derriere un autre
+R11DDAGAGGA
+//pousser un robot contre une base
+R11AA
