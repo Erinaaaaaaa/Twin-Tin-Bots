@@ -9,7 +9,7 @@ public class Joueur
 	private final static char[] BASE_RESERVE = 
 		{'A', 'A', 'S', 'G', 'G', 'G', 'D', 'D', 'D', 'C', 'C', 'E', 'E'};
 
-	private static int nbJoueurs = 0;
+	static int nbJoueurs = 0;
 
 	private int     id;
 	private Robot[] tabRobot;
