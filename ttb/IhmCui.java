@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import iut.algo.CouleurConsole;
-import sun.net.www.content.text.plain;
 import iut.algo.Console;
 import ttb.metier.*;
 
