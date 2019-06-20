@@ -25,6 +25,13 @@ public class Plateau
 	private int       pointVictoire;
 	private int       pionDecompte;
 
+	/**
+	 * Construit un plateau.
+	 * Initialise la grille, les joueurs et la file d'attente de cristaux.
+	 * @param grille la grille du jeu.
+	 * @param tabJoueur le tableau contenant tous les joueurs.
+	 * @param fileAttent la file d'attente de cristaux.
+	 */
 	public Plateau(Tuile[][] grille, Joueur[] tabJoueur, String fileAttent)
 	{
 		this.plateau    = grille;
@@ -34,10 +41,17 @@ public class Plateau
 		pionDecompte    = 3;
 	}
 
+	/** Retourne le joueur devant jouer. */
 	public Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
 
+	/** Change le joueur courant, après la fin du tour. */
 	public void changerJoueur() {joueurActuel = (joueurActuel + 1) % tabJoueurs.length;}
 
+	/**
+	 * Retourne le robot, s'il existe, à la position donnée.
+	 * @param pos la position du robot.
+	 * @return le robot ayant cette position.
+	 */
 	public Robot getRobotAPosition(int[] pos)
 	{
 		if(plateau[pos[0]][pos[1]] != Tuile.ROBOT)
@@ -101,6 +115,12 @@ public class Plateau
 		return pos;
 	}
 
+	/**
+	 * Fait avancer un robot.
+	 * @param r le Robot à faire avancer.
+	 * @param canPush true si le robot peut pousser, false sinon.
+	 * @return true si le robot a avancé, false sinon.
+	 */
 	public boolean avancer(Robot r, boolean canPush)
 	{
 		int[] pos      = nextPos(r.getPos(), r.getDir());
@@ -152,7 +172,10 @@ public class Plateau
 		return false;
 	}
 
-	// TODO: prendre le cristal du robot en face
+	/**
+	 * Charge un cristal sur un robot.
+	 * @param r le robot pour lequel charger le cristal.
+	 */
 	public void chargerCristal(Robot r)
 	{
 		int[] next = nextPos(r.getPos(), r.getDir());
@@ -178,6 +201,10 @@ public class Plateau
 		}
 	}
 
+	/**
+	 * Dépose le cristal du robot en face de lui.
+	 * @param r le robot pour lequel déposer le cristal.
+	 */
 	public void deposerCristal(Robot r)
 	{
 		Tuile cristal = r.deposerCristal();
@@ -208,6 +235,9 @@ public class Plateau
 		r.chargerCristal(cristal);
 	}
 
+	/**
+	 * Prend un cristal de la file d'attente.
+	 */
 	public void listeAttente()
 	{
 		if(fileAttent.equals(""))
@@ -237,6 +267,7 @@ public class Plateau
 		}
 	}
 
+	/** Permet d'obtenir le Joueur grâce à la position de sa base. */
 	public Joueur getJoueurParBase(int[] pos)
 	{
 		for(Joueur j : tabJoueurs)
