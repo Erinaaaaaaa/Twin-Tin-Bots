@@ -222,7 +222,10 @@ public class Plateau
 		{
 			int[] nextCase = nextPos(new int[]{plateau.length / 2, plateau[0].length / 2}, i);
 			if(plateau[nextCase[0]][nextCase[1]] == Tuile.VIDE)
+			{
 				plateau[nextCase[0]][nextCase[1]] = cristal;
+				return;
+			}
 		}
 	}
 
