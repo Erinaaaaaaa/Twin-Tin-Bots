@@ -9,5 +9,5 @@
 ./ttb/metier/Tuile.java
 ./ttb/metier/SetGrille.java
 
-./ttb/gui/fx/IhmGui.java
-./ttb/gui/fx/ControleurFx.java
+./ttb/gui/fx/Ihm.java
+./ttb/gui/fx/ControleurIhm.java

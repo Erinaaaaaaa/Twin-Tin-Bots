@@ -42,9 +42,9 @@ public class IhmCui
 		System.out.println("Option invalide");
 	}
 
-	public void afficherString(char[] cara)
+	public void afficherString(String s)
 	{
-		System.out.println(new String(cara));
+		System.out.println(s);
 	}
 
 	public void controlesScenario()

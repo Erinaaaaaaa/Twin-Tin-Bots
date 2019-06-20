@@ -25,18 +25,19 @@ public class ControleurCui
 {
 	private Plateau metier;
 	private IhmCui  ihm;
+	private int cptTours;
 
 	public ControleurCui(int nbJoueurs)
 	{
 		metier = SetGrille.initGrille(nbJoueurs);
 		ihm    = new IhmCui(this);
+		cptTours = 0;
 	}
 
-	private void actionJoueur(Joueur j, char c)
+	private void actionJoueur(Joueur j, char c, int idRobot)
 	{
 		if(c == 'N')
 			return;
-		int idRobot = ihm.getRobot(j);
 		switch(c)
 		{
 			case 'P' :
@@ -63,10 +64,20 @@ public class ControleurCui
 			String action;
 			this.afficherJoueur();
 			ihm.afficherPlateau();
-			do
-				action = ihm.getAction();
-			while (!action.matches("[APERN]")); // actions possibles
-			actionJoueur(joueur, action.charAt(0));
+			int idRobot = ihm.getRobot(joueur);
+			if(cptTours < metier.getNbJoueurs())
+			{
+				ihm.afficherString("Il s'agit du premier tour, choisissez une carte pour à ajouter à vos robots");
+				for(int i = 0; i < 2; i++)
+					actionJoueur(joueur, 'A', idRobot);
+			}
+			else
+			{
+				do
+					action = ihm.getAction();
+				while (!action.matches("[APERN]")); // actions possibles
+				actionJoueur(joueur, action.charAt(0), idRobot);
+			}
 			int i = 0;
 			do
 			{
@@ -76,6 +87,7 @@ public class ControleurCui
 				i++;
 			}while(i < 2);
 			ihm.afficherPlateau();
+			cptTours++;
 			metier.changerJoueur();
 		}while(!metier.estPartieFinie());
 
@@ -169,7 +181,7 @@ public class ControleurCui
 					}
 				}
 				else if(cpt >= ligne)
-					ihm.afficherString(splittedLine);
+					ihm.afficherString(new String(splittedLine));
 
 				while(!choix.matches("[psq]") && cpt >= ligne && (splittedLine[0] == 'R' || splittedLine[0] == 'J'))
 				{
