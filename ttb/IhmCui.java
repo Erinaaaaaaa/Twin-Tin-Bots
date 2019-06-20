@@ -91,10 +91,15 @@ public class IhmCui
 	public void finPartie(List<Joueur> gagnants)
 	{
 		System.out.println("\n-------------- Fin de la partie --------------");
-		if (gagnants != null)
+		if (gagnants != null && !gagnants.isEmpty())
+		{
 			for (Joueur j : gagnants)
 				System.out.println("Le joueur " + j.getCouleur() +
-				                   " a gagné avec " + j.getPoints() + " points.");
+								   " a gagné avec " + j.getPoints() + " points.");
+		}
+		else
+			System.out.println("Tous les joueurs ont gagné.");
+
 	}
 
 	public char getCarte()
