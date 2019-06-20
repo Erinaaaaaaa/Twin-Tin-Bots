@@ -67,15 +67,15 @@ public class ControleurCui
 			String action;
 			this.afficherJoueur();
 			ihm.afficherPlateau();
-			int idRobot = ihm.getRobot(joueur);
 			if(cptTours < metier.getNbJoueurs())
 			{
 				ihm.afficherString("Il s'agit du premier tour, choisissez une carte pour à ajouter à vos robots");
 				for(int i = 0; i < 2; i++)
-					actionJoueur(joueur, 'A', idRobot);
+					actionJoueur(joueur, 'A', i);
 			}
 			else
 			{
+				int idRobot = ihm.getRobot(joueur);
 				do
 					action = ihm.getAction();
 				while (!action.matches("[APERN]")); // actions possibles
