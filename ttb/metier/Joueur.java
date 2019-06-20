@@ -65,7 +65,7 @@ public class Joueur
 			char ordre = ordres[idRobot][ind];
 			ordres[idRobot][ind] = reserve.remove(i);
 			if(ordre != '\0')
-				reserve.add(c);
+				reserve.add(ordre);
 		}
 	}
 
@@ -91,9 +91,6 @@ public class Joueur
 	 */
 	public void permuterOrdre(int idRobot, int ind1, int ind2)
 	{
-		if(ordres[idRobot][ind1] == '\0' || ordres[idRobot][ind2] == '\0')
-			return;
-
 		char c;
 		c = ordres[idRobot][ind1];
 		ordres[idRobot][ind1] = ordres[idRobot][ind2];
@@ -163,6 +160,8 @@ public class Joueur
 	}
 
 	public void addCristal(Tuile t) {cristaux.add(t);}
+
+	public ArrayList<Tuile> getCristaux() { return this.cristaux; }
 
 	public int[] getBase() {return this.posBase;}
 

@@ -2,6 +2,7 @@ package ttb.metier;
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -157,24 +158,24 @@ public class Plateau
 
 		if(Tuile.isCristal(t))
 		{
-			if(r.chargerCrystal(t))
+			if(r.chargerCristal(t))
 				plateau[next[0]][next[1]] = Tuile.VIDE;
 		}
 		else
 		{
 			Robot tmp = getRobotAPosition(next);
-			Tuile cristal = tmp.deposerCrystal();
+			Tuile cristal = tmp.deposerCristal();
 			if(cristal == null)
 				return;
 
-			if(!r.chargerCrystal(cristal))
-				tmp.chargerCrystal(cristal);
+			if(!r.chargerCristal(cristal))
+				tmp.chargerCristal(cristal);
 		}
 	}
 
 	public void deposerCristal(Robot r)
 	{
-		Tuile cristal = r.deposerCrystal();
+		Tuile cristal = r.deposerCristal();
 		if(cristal == null)
 			return;
 
@@ -183,7 +184,7 @@ public class Plateau
 		boolean bOk = false;
 
 		if(t == Tuile.ROBOT)
-			bOk = getRobotAPosition(next).chargerCrystal(cristal);
+			bOk = getRobotAPosition(next).chargerCristal(cristal);
 
 		if(t == Tuile.BASE || (t == Tuile.ROBOT && bOk) || (t == Tuile.VIDE))
 		{
@@ -199,7 +200,7 @@ public class Plateau
 			return;
 		}
 
-		r.chargerCrystal(cristal);
+		r.chargerCristal(cristal);
 	}
 
 	public void listeAttente()
@@ -293,16 +294,20 @@ public class Plateau
 	public List<Joueur> getGagnant()
 	{
 		List<Joueur> gagnants = new ArrayList<Joueur>();
+		Joueur gagnant = null;
 		if (pionDecompte != 0) // Cas de victoire par nombre de points
 		{
 			for (Joueur j : tabJoueurs)
 				if (j.getPoints() >= pointVictoire)
-					gagnants.add(j);
+					gagnant = j;
+
+			gagnants.add(gagnant);
 		}
 		else // si il n'y a plus de pions décompte, on calcule comme ceci
 		{
 			int[] totalPoints = new int[Joueur.nbJoueurs];
-			int ptsMax, indGagne;
+			int ptsMax;
+			boolean egalite = false;
 			for (int i = 0; i < totalPoints.length; i++)
 			{
 				totalPoints[i] = tabJoueurs[i].getPoints();
@@ -311,18 +316,63 @@ public class Plateau
 						totalPoints[i] += Integer.parseInt(r.getCristal().toString())-1;
 			}
 
-			indGagne = 0;
-			ptsMax = totalPoints[indGagne];
-			for (int i = 1; i < totalPoints.length; i++)
+			ptsMax = totalPoints[0];
+			gagnant = tabJoueurs[0];
+			for (int i = 1; i < tabJoueurs.length; i++)
+			{
 				if (ptsMax < totalPoints[i])
-					indGagne = i;
+				{
+					ptsMax = totalPoints[i];
+					gagnant = tabJoueurs[i];
+				}
+				else if (ptsMax == totalPoints[i])
+					egalite = true;
+			}
 
-			gagnants.add(tabJoueurs[indGagne]);
-			// TODO: gestion de victoire quand ptsMax égal pour 2 joueurs ou plus
-			// plus gérer en fonction du nb de cristaux d'une certaine couleur.
+			if (egalite)
+			{
+				// Le gagnant est celui qui a le plus de cristaux bleus.
+				gagnant = getMaxPtsJoueur(Tuile.CRISTAL_BLEU);
+				if (gagnant == null) // si encore égalité : le plus de cristaux verts
+					gagnant = getMaxPtsJoueur(Tuile.CRISTAL_VERT);
+				
+				if (gagnant == null)
+				{
+					for (int i = 0; i < tabJoueurs.length; i++)
+						totalPoints[i] = tabJoueurs[i].getPoints();
+
+					for (int max : totalPoints)
+						ptsMax = Math.max(ptsMax, max);
+
+					for (int i = 0; i < tabJoueurs.length; i++)
+						if (totalPoints[i] == ptsMax)
+							gagnants.add(tabJoueurs[i]);
+				}
+				else
+					gagnants.add(gagnant);
+			}
+			else
+				gagnants.add(gagnant);
 		}
-
 		return gagnants;
+	}
+
+	private Joueur getMaxPtsJoueur(Tuile t)
+	{
+		Joueur retour = null;
+		int max = 0, nbCristaux = 0;
+		for (Joueur j : tabJoueurs)
+		{
+			nbCristaux = Collections.frequency(j.getCristaux(), t);
+			if (max < nbCristaux)
+			{
+				max = nbCristaux;
+				retour = j;
+			}
+			else if (max == nbCristaux)
+				return null;
+		}
+		return retour;
 	}
 
 	public void enleverPionDecompte() { pionDecompte--; }
