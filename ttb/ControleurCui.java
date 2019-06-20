@@ -137,7 +137,6 @@ public class ControleurCui
 							break;
 						case 'R':
 							idRobot = Character.getNumericValue(splittedLine[3]);
-							int ind = Character.getNumericValue(splittedLine[4]);
 							j.resetOrdres(idRobot);
 							break;
 						case 'F' :
@@ -155,7 +154,7 @@ public class ControleurCui
 
 			if(choix.equals("p"))
 			{
-				this.plateau = SetGrille.initPlateau(nbJoueurs);
+				this.metier = SetGrille.initGrille(nbJoueurs);
 				debug(nbJoueurs, cpt- 2);
 			}
 		} catch (Exception e) {
