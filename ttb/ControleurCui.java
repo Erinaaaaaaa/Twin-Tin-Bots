@@ -62,8 +62,6 @@ public class ControleurCui
 				char[] ordres = joueur.getOrdres(i);
 				executerOrdres(ordres, r);
 				i++;
-				if(metier.aPlusDeCristaux())
-					metier.listeAttente();
 			}while(i < 2);
 			ihm.afficherPlateau();
 			metier.changerJoueur();
@@ -71,6 +69,8 @@ public class ControleurCui
 	}
 
 	/**
+	 * @param nbJoueurs nombres de joueurs
+	 * @param ligne ligne a laquelle commencer/reprendre le test
 	 * Méthode pour utiliser le mode debug. Les instructions à exécuter seront lues dans le fichier "scenario.data". <br />
 	 * La premiere lettre doit être soit J pour joueur ou R pour robot.<br />
 	 * <br />
