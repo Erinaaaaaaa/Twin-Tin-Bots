@@ -68,7 +68,7 @@ public abstract class SetGrille
 
 					case 'C' :
 						coor = SetGrille.getCooordonees(temp[i]);
-						grille[coor[0]][coor[1]] = SetGrille.getTypeCristal(temp[i]);
+						grille[coor[0]][coor[1]] = Tuile.getCristal(temp[i].charAt(1));
 						break;
 
 					case 'A' : fileAttent = SetGrille.getFileAttente(temp[i]);
@@ -139,22 +139,6 @@ public abstract class SetGrille
 			coor[1]++;
 
 		return coor;
-	}
-
-	/**
-	 * Permet d'obtenir le type de cristal.
-	 * @param info
-	 * @return la Tuile correspondant à ce cristal.
-	 */
-	private static Tuile getTypeCristal(String info)
-	{
-		switch(info.charAt(1))
-		{
-			case 'V' : return Tuile.CRISTAL_VERT;
-			case 'B' : return Tuile.CRISTAL_BLEU;
-			case 'R' : return Tuile.CRISTAL_VIOLET;
-		}
-		return Tuile.VIDE;
 	}
 
 	/**
