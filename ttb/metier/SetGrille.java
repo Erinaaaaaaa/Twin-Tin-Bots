@@ -17,7 +17,7 @@ public abstract class SetGrille
 	 */
 	public static Plateau initGrille(int nbJoueur)
 	{
-		Joueur.nbJoueurs = 0;
+		SetGrille.nbJoueur = 0;
 
 		Tuile[][] grille;
 		Joueur[]  tabJoueur = new Joueur[nbJoueur];
@@ -52,7 +52,7 @@ public abstract class SetGrille
 			{
 				switch (temp[i].charAt(0))
 				{
-					case 'R' : 
+					case 'R' :
 						coor = SetGrille.getCooordonees(temp[i]);
 						grille[coor[0]][coor[1]] = Tuile.ROBOT;
 						tabJoueur[Integer.parseInt("" +temp[i].charAt(1))].

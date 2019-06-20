@@ -148,11 +148,24 @@ public class Plateau
 		int[] next = nextPos(r.getPos(), r.getDir());
 		Tuile t    = plateau[next[0]][next[1]];
 
-		if(!Tuile.isCristal(t))
+		if(!Tuile.isCristal(t) && t != Tuile.ROBOT)
 			return;
 
-		if(r.chargerCrystal(t))
-			plateau[next[0]][next[1]] = Tuile.VIDE;
+		if(Tuile.isCristal(t))
+		{
+			if(r.chargerCrystal(t))
+				plateau[next[0]][next[1]] = Tuile.VIDE;
+		}
+		else
+		{
+			Robot tmp = getRobotAPosition(next);
+			Tuile cristal = tmp.deposerCrystal();
+			if(cristal == null)
+				return;
+
+			if(!r.chargerCrystal(cristal))
+				tmp.chargerCrystal(cristal);
+		}
 	}
 
 	public void deposerCristal(Robot r)

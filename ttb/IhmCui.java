@@ -15,9 +15,9 @@ public class IhmCui
 		this.ctrl = ctrl;
 	}
 
-	public void afficher()
+	public void afficher(Joueur j)
 	{
-		System.out.println(ctrl.getInfosJoueur());
+		System.out.println((getInfosJoueur(j)));
 		this.afficherPlateau();
 		System.out.println("\n Quel action effectuer ?");
 		System.out.println("\t[A]jouter/Remplacer une carte");
@@ -25,6 +25,31 @@ public class IhmCui
 		System.out.println("\t[E]nlever une carte");
 		System.out.println("\t[R]einitialiser les ordres");
 		System.out.println("\t[N]e rien faire");
+	}
+
+	public String    getInfosJoueur(Joueur j)
+	{
+		String retour = "Joueur " + (j.getId() + 1) + " : \n";
+		retour += "\tOrdres : ";
+		for(int i = 0; i < 2; i++)
+		{
+			for(char c : j.getOrdres(i))
+			{
+				retour += "[";
+				if(c == '\0')
+				retour += " ";
+				else
+				retour += c;
+
+				retour += "] ";
+			}
+		}
+
+		retour += "\n\tReserve : ";
+		for(Character c : j.getReserve())
+			retour += c + ",";
+
+		return retour.substring(0, retour.length() - 1) + "\n";
 	}
 
 	public void erreur()
@@ -70,6 +95,7 @@ public class IhmCui
 			System.out.print("\n");
 
 		}
+		System.out.println();
 	}
 
 	public char getCarte()

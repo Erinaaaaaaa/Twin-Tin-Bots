@@ -50,7 +50,7 @@ public class ControleurCui
 		{
 			Joueur joueur = metier.getJoueurCourant();
 			String action;
-			ihm.afficher();
+			ihm.afficher(joueur);
 			do
 				action = ihm.getAction();
 			while (!action.matches("[APERN]")); // actions possibles
@@ -98,16 +98,18 @@ public class ControleurCui
 			for(int i = 0; i < nbJoueurs; i++)
 				sc.nextLine();
 
-			Scanner line = new Scanner(sc.nextLine());
-			line.useDelimiter("|");
+			Scanner line = new Scanner(new String(sc.nextLine()));
+			line.useDelimiter("\\|");
+			System.out.println("2");
 			while (line.hasNext()) {
 				char[] splittedLine = line.next().toCharArray();
 				if (splittedLine[0] == 'R') {
 					int playerID = Character.getNumericValue(splittedLine[1]);
 					int robotID  = Character.getNumericValue(splittedLine[2]);
 
-					executerOrdres(Arrays.copyOfRange(splittedLine, 3, splittedLine.length-1),
+					executerOrdres(Arrays.copyOfRange(splittedLine, 3, splittedLine.length),
 					               metier.getJoueur(playerID).getRobot(robotID));
+					ihm.afficherPlateau();
 				}
 				else if (splittedLine[0] == 'J') {
 					Joueur j = metier.getJoueur(Character.getNumericValue(splittedLine[1]));
@@ -139,6 +141,7 @@ public class ControleurCui
 							for(int i = 0; i < j.getRobots().length; i++)
 								executerOrdres(j.getOrdres(i), j.getRobot(i));
 					}
+					ihm.afficher(j);
 				}
 			}
 		} catch (Exception e) {
@@ -180,44 +183,20 @@ public class ControleurCui
 		System.out.println("Combien de joueurs ? [2-6]");
 		Scanner sc = new Scanner(System.in);
 		String nbJoueurs;
+		int nbJ;
 		do
 			nbJoueurs = sc.next();
 		while (!nbJoueurs.matches("[2-6]"));
+		nbJ = Integer.parseInt(nbJoueurs);
 		if(args.length > 0 && args[0].equals("SCENARIO"))
-			new ControleurCui(sc.nextInt()).debug(sc.nextInt());
+			new ControleurCui(nbJ).debug(nbJ);
 		else
-			new ControleurCui(Integer.parseInt(nbJoueurs)).jouer();
+			new ControleurCui(nbJ).jouer();
 		sc.close();
 	}
 
 	public Tuile[][] getPlateau()          { return metier.getTuiles(); }
 	public String    getAffichagePlateau() { return metier.toString();  }
-	public String    getInfosJoueur()
-	{
-		Joueur j = metier.getJoueurCourant();
-		String retour = "Joueur " + (j.getId() + 1) + " : \n";
-		retour += "\tOrdres : ";
-		for(int i = 0; i < 2; i++)
-		{
-			for(char c : j.getOrdres(i))
-			{
-				retour += "[";
-				if(c == '\0')
-				retour += " ";
-				else
-				retour += c;
-
-				retour += "] ";
-			}
-		}
-
-		retour += "\n\tReserve : ";
-		for(Character c : j.getReserve())
-			retour += c + ",";
-
-		return retour.substring(0, retour.length() - 1) + "\n";
-	}
-
 
 	public int getNbLigne(){return metier.getNbLigne();}
 	public int getNbColonne(){return metier.getNbColonne();}
