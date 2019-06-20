@@ -1,20 +1,26 @@
-R00AA
-R00G
-R00A
-R00AAAA
-R00A
-R01G
-R01A
-R01DD
-R01A
-R10AAAA
-R10G
-R10AAA
-R11AAA
-R11A
-R11A
-R11GG
-R11C
-R11DDD
-R11A
-R11E
+ /*--------------------------------------------------*/ 
+ /* Scenario de test le pousser                      */ 
+ /*--------------------------------------------------*/ 
+ 
+    //Le 1er robot jaune avance 2 fois 
+R00AA 
+    //Le 1er robot jaune tourne a gauche 
+R00G 
+    //Le 1er robot jaune avance 1 fois
+R00A 
+    //Le 1er robot jaune avance 4 fois
+R00AAAA 
+    //Le 1er robot jaune avance 1 fois
+R00A 
+    //Le 1er robot jaune tourne a gauche 
+R01G 
+    //Le 1er robot jaune avance 1 fois 
+R01A 
+    //Le 1er robot jaune tourne a droite 2 fais 
+R01DD 
+    //Le 1er robot jaune avance 1 fois 
+R01A 
+    //Le 1er robot jaune avance 1 fois 
+R10AAAA 
+R10G 
+R10AAA 
