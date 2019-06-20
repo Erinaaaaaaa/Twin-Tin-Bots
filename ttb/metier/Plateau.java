@@ -305,6 +305,8 @@ public class Plateau
 			for (Joueur j : tabJoueurs)
 				if (j.getPoints() >= pointVictoire)
 					gagnant = j;
+
+			gagnants.add(gagnant);
 		}
 		else // si il n'y a plus de pions décompte, on calcule comme ceci
 		{
@@ -320,6 +322,7 @@ public class Plateau
 			}
 
 			ptsMax = totalPoints[0];
+			gagnant = tabJoueurs[0];
 			for (int i = 1; i < tabJoueurs.length; i++)
 			{
 				if (ptsMax < totalPoints[i])
@@ -350,6 +353,8 @@ public class Plateau
 						if (totalPoints[i] == ptsMax)
 							gagnants.add(tabJoueurs[i]);
 				}
+				else
+					gagnants.add(gagnant);
 			}
 			else
 				gagnants.add(gagnant);
