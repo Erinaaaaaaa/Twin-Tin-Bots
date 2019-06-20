@@ -13,7 +13,7 @@ public class Robot
 	private int    dir;
 	private int    id;
 	private Joueur monJoueur;
-	private Tuile crystal;
+	private Tuile cristal;
 
 	public Robot(int ligne, int colonne, int dir)
 	{
@@ -29,28 +29,28 @@ public class Robot
 
 	public boolean hasCristal()
 	{
-		return crystal != null;
+		return cristal != null;
 	}
 
-	public boolean chargerCrystal(Tuile c)
+	public boolean chargerCristal(Tuile c)
 	{
-		if(crystal != null)
+		if(cristal != null)
 		{
 			return false;
 		}
 
-		crystal = c;
+		cristal = c;
 		return true;
 	}
 
-	public Tuile deposerCrystal()
+	public Tuile deposerCristal()
 	{
-		Tuile c = crystal;
-		crystal = null;
+		Tuile c = cristal;
+		cristal = null;
 		return c;
 	}
 
-	public Tuile getCristal() { return crystal; }
+	public Tuile getCristal() { return cristal; }
 
 	public void setJoueur(Joueur j) {monJoueur = j;}
 
