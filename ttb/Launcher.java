@@ -1,5 +1,7 @@
 package ttb;
 
+import ttb.gui.fx.LauncherIhm;
+
 import java.util.Scanner;
 
 /**
@@ -39,7 +41,7 @@ public class Launcher
 					new ControleurCui(nbJoueurs);
 				break;
 			case 2:
-				ttb.gui.fx.Launcher.main(null);
+				LauncherIhm.main(null);
 				break;
 			default:
 				System.exit(0);

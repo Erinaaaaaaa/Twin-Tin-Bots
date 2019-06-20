@@ -21,6 +21,18 @@ public class Dialog
 		return result.map(Integer::parseInt).orElse(-1);
 	}
 
+	public static int lireNumScenario()
+	{
+		TextInputDialog dialog = new TextInputDialog("2");
+		dialog.setTitle("Choix du scénario");
+		dialog.setHeaderText("Choix du numéro de scénario");
+		dialog.setContentText("Entrez le numéro du scénario voulu:");
+		dialog.initStyle(StageStyle.UTILITY);
+
+		Optional<String> result = dialog.showAndWait();
+		return result.map(Integer::parseInt).orElse(-1);
+	}
+
 	public static boolean demander(String message)
 	{
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

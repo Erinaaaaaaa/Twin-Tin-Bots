@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -16,15 +17,17 @@ import ttb.metier.*;
 
 import java.io.File;
 
-import static ttb.gui.fx.util.Dialog.lireNbJoueur;
+import ttb.gui.fx.util.Dialog;
 
 public class Ihm
 {
     private int robot = 0;
     private ControleurIhm ctrl;
 
+    @FXML private ToolBar tbButtons;
     @FXML private Accordion accMains;
     @FXML private Button btnInit;
+    @FXML private Button btnFinirTour;
     @FXML private ImageView imgPlateau;
     @FXML private Pane panePlateau;
     @FXML private VBox vboxDroite;
@@ -79,8 +82,6 @@ public class Ihm
         ctrl.changerJoueur();
         afficherPlateau();
     }
-
-
 
     @FXML
     void changerRobot(ActionEvent event)
@@ -293,9 +294,41 @@ public class Ihm
         this.afficherPlateau();
     }
 
+    private Button btnPrec = null;
+    private Button btnSuiv = null;
+
     private void creerPartie()
     {
-        this.ctrl = new ControleurIhm(lireNbJoueur(), this);
+        if (this.btnPrec != null) this.tbButtons.getItems().remove(this.btnPrec);
+        if (this.btnSuiv != null) this.tbButtons.getItems().remove(this.btnSuiv);
+
+        int scenario;
+
+        if (Dialog.demander("Voulez-vous charger un scénario?") &&
+                (scenario = Dialog.lireNumScenario()) != -1)
+        {
+            // Scénario mode
+            this.ctrl = new ControleurIhm(Dialog.lireNbJoueur(), this, scenario);
+            btnPrec = new Button("Précédent");
+            btnPrec.setOnAction(event -> {
+                ctrl.scenarioPrecedent();
+                this.afficherPlateau();
+            });
+            btnSuiv = new Button("Suivant");
+            btnSuiv.setOnAction(event -> {
+                ctrl.scenarioSuivant();
+                this.afficherPlateau();
+            });
+            this.tbButtons.getItems().add(this.btnPrec);
+            this.tbButtons.getItems().add(this.btnSuiv);
+            this.btnFinirTour.setDisable(true);
+        }
+        else
+        {
+            // TODO: bloquer les clics en mode scénario (ControleurIhm peut-être?)
+            this.ctrl = new ControleurIhm(Dialog.lireNbJoueur(), this);
+            this.btnFinirTour.setDisable(false);
+        }
 
         this.accMains.getPanes().clear();
 
