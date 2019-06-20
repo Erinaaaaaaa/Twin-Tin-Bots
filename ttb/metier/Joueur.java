@@ -91,9 +91,6 @@ public class Joueur
 	 */
 	public void permuterOrdre(int idRobot, int ind1, int ind2)
 	{
-		if(ordres[idRobot][ind1] == '\0' || ordres[idRobot][ind2] == '\0')
-			return;
-
 		char c;
 		c = ordres[idRobot][ind1];
 		ordres[idRobot][ind1] = ordres[idRobot][ind2];
