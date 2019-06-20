@@ -62,6 +62,8 @@ public class ControleurCui
 				char[] ordres = joueur.getOrdres(i);
 				executerOrdres(ordres, r);
 				i++;
+				if(metier.aPlusDeCristaux())
+					metier.listeAttente();
 			}while(i < 2);
 			ihm.afficherPlateau();
 			metier.changerJoueur();

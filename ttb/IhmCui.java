@@ -55,9 +55,7 @@ public class IhmCui
 
 	public void afficherString(char[] cara)
 	{
-		String s = "";
-		for(int i = 0; i < cara.length; i++)
-			s += cara[i];
+		String s = new String(cara);
 
 		System.out.println(s);
 	}
