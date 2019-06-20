@@ -32,14 +32,14 @@ public class Robot
 		return cristal != null;
 	}
 
-	public boolean chargerCristal(Tuile c)
+	public boolean chargerCristal(Tuile t)
 	{
 		if(cristal != null)
 		{
 			return false;
 		}
 
-		cristal = c;
+		cristal = t;
 		return true;
 	}
 
