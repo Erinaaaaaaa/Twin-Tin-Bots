@@ -1,9 +1,12 @@
+ /*----------------*/
+ /* Tests victoire */
+ /*----------------*/
 	// Le robot rouge prend un cristal bleu
 R01SDC
 	// Le robot rouge part vers sa base
 R01DDD
 R01SAA
-	// Le robot rouge dépose son cristal dans la base rouge
+	// Le robot rouge dÃ©pose son cristal dans la base rouge
 R01DE
 	// Prise de cristaux
 R21DAC
@@ -12,11 +15,11 @@ R01CDD
 R01ADD
 R21DDD
 R21ADD
-	// Dépôt des cristaux dans la base
+	// DÃ©pÃ´t des cristaux dans la base
 R01E
 R21E
 R01E
-	// Le robot jaune va déposer dans la base rouge un cristal bleu
+	// Le robot jaune va dÃ©poser dans la base rouge un cristal bleu
 R10AAG
 R10CGG
 R10AG
