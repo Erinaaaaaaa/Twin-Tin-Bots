@@ -1,9 +1,6 @@
 package ttb.metier;
 
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Classe Plateau
@@ -324,6 +321,9 @@ public class Plateau
 				else if (ptsMax == totalPoints[i])
 					egalite = true;
 			}
+
+			if (egalite)
+				return gagnant; // à continuer
 
 			// TODO: gestion de victoire quand ptsMax égal pour 2 joueurs ou plus
 			// plus gérer en fonction du nb de cristaux d'une certaine couleur.
