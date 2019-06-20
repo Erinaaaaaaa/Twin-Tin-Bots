@@ -3,6 +3,7 @@ package ttb;
 import ttb.metier.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -50,7 +51,8 @@ public class ControleurCui
 		{
 			Joueur joueur = metier.getJoueurCourant();
 			String action;
-			ihm.afficher(joueur);
+			this.afficherJoueur();
+			ihm.afficherPlateau();
 			do
 				action = ihm.getAction();
 			while (!action.matches("[APERN]")); // actions possibles
@@ -65,7 +67,9 @@ public class ControleurCui
 			}while(i < 2);
 			ihm.afficherPlateau();
 			metier.changerJoueur();
-		}while(true);
+		}while(!metier.estPartieFinie());
+
+		ihm.finPartie(metier.getGagnant());
 	}
 
 	/**
@@ -149,14 +153,18 @@ public class ControleurCui
 								executerOrdres(j.getOrdres(i), j.getRobot(i));
 					}
 					if(cpt >= ligne)
-						ihm.afficher(j);
+					{
+						this.afficherJoueur();
+						ihm.afficherPlateau();
+					}
 				}
 				else if(cpt >= ligne)
 					ihm.afficherString(splittedLine);
 
 				while(!choix.matches("[psq]") && cpt >= ligne && (splittedLine[0] == 'R' || splittedLine[0] == 'J'))
 				{
-					choix = rep.next();
+					ihm.controlesScenario();
+					choix = rep.next().toLowerCase();
 				}
 				if(cpt < ligne || (splittedLine[0] != 'R' && splittedLine[0] != 'J'))
 					choix = "s";
@@ -170,8 +178,19 @@ public class ControleurCui
 				this.metier = SetGrille.initGrille(nbJoueurs);
 				debug(nbJoueurs, cpt- 2);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			System.out.println("Le fichier scenario" + nbJoueurs + ".data n'existe pas.");
+		}
+	}
+	
+	public void afficherJoueur()
+	{
+		Joueur joueurCourant = metier.getJoueurCourant();
+		for(int i = 0; i < metier.getNbJoueurs(); i++)
+		{
+			if(metier.getJoueur(i) == joueurCourant)
+				ihm.afficher(metier.getJoueur(i).toString(), this.converCouleur(joueurCourant.getCouleur()));
+			else ihm.afficher(metier.getJoueur(i).toString(),null);
 		}
 	}
 
@@ -231,6 +250,10 @@ public class ControleurCui
 	public CouleurConsole getCouleur(int lig, int col)
 	{
 		String couleur = metier.getCouleur(lig,col);
+		return this.converCouleur(couleur);
+	}
+	public CouleurConsole converCouleur(String couleur)
+	{
 		switch(couleur)
 		{
 			case "Vert"  :return CouleurConsole.VERT;
@@ -242,5 +265,6 @@ public class ControleurCui
 			case "Cyan"  :return CouleurConsole.CYAN;
 		}
 		return CouleurConsole.NOIR;
+
 	}
 }
