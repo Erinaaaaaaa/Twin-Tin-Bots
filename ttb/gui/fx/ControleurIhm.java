@@ -9,10 +9,11 @@ public class ControleurIhm
 
 	private Plateau metier;
 	private Ihm     ihm;
-	private boolean actionEffectuee;
+	private int     coupsDuTour;
 
 	public ControleurIhm(int nbJoueur, Ihm ihm)
 	{
+		this.coupsDuTour = 0;
 		this.metier = SetGrille.initGrille(nbJoueur);
 		this.ihm = ihm;
 	}
@@ -36,7 +37,7 @@ public class ControleurIhm
 		);
 		this.setSource(null);
 		this.metier.changerJoueur();
-		this.actionEffectuee = false;
+		this.coupsDuTour = 0;
 	}
 	public Robot getRobotAPosition(int[] coords) { return this.metier.getRobotAPosition(coords); }
 	public Joueur getJoueurParBase(int[] coords) { return this.metier.getJoueurParBase(coords); }
@@ -56,17 +57,17 @@ public class ControleurIhm
 
 	public void supprimerOrdre(int robot, int indice)
 	{
-		if (!actionEffectuee)
+		if (!actionEffectuee())
 		{
 			this.metier.getJoueurCourant().enleverOrdre(robot, indice);
 			this.ihm.afficherPlateau();
-			this.actionEffectuee = true;
+			this.coupsDuTour++;
 		}
 	}
 
 	public void ajouterOrdre(int robot, int indice)
 	{
-		if (!actionEffectuee)
+		if (!actionEffectuee())
 		{
 			if (this.source.getRobot() > -1 && this.source.getRobot() == robot)
 			{
@@ -77,18 +78,26 @@ public class ControleurIhm
 			}
 			this.setSource(null);
 			this.ihm.afficherPlateau();
-			this.actionEffectuee = true;
+			this.coupsDuTour++;
 		}
 	}
 
 	public void resetRobot(int i)
 	{
-		if (!actionEffectuee)
+		if (!actionEffectuee())
 		{
 			this.metier.getJoueurCourant().resetOrdres(i);
 			this.ihm.afficherPlateau();
-			this.actionEffectuee = true;
+			this.coupsDuTour++;
 		}
+	}
+
+	private boolean actionEffectuee()
+	{
+		if (metier.getNbTours() < metier.getNbJoueurs())
+			return this.coupsDuTour >= 2;
+		else
+			return this.coupsDuTour >= 1;
 	}
 
 	public void executerOrdres(char[] ordres, Robot r)

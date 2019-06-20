@@ -1,13 +1,18 @@
-./ttb/Launcher.java
-
-./ttb/ControleurCui.java
-./ttb/IhmCui.java
-
 ./ttb/metier/Joueur.java
 ./ttb/metier/Plateau.java
 ./ttb/metier/Robot.java
 ./ttb/metier/Tuile.java
 ./ttb/metier/SetGrille.java
 
-./ttb/gui/fx/Ihm.java
+./ttb/Launcher.java
+./ttb/ControleurCui.java
+./ttb/IhmCui.java
+
+./ttb/gui/fx/Launcher.java
 ./ttb/gui/fx/ControleurIhm.java
+./ttb/gui/fx/Ihm.java
+./ttb/gui/fx/controls/EtatRobot.java
+./ttb/gui/fx/controls/ImageRobot.java
+./ttb/gui/fx/controls/MainJoueur.java
+./ttb/gui/fx/util/Action.java
+./ttb/gui/fx/util/Dialog.java

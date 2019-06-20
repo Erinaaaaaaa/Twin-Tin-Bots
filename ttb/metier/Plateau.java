@@ -24,6 +24,7 @@ public class Plateau
 	private String    fileAttent;
 	private int       pointVictoire;
 	private int       pionDecompte;
+	private int       nbTours;
 
 	/**
 	 * Construit un plateau.
@@ -39,13 +40,18 @@ public class Plateau
 		this.fileAttent = fileAttent;
 		pointVictoire   = 13 - tabJoueur.length;
 		pionDecompte    = 3;
+		nbTours         = 0;
 	}
 
 	/** Retourne le joueur devant jouer. */
 	public Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
 
 	/** Change le joueur courant, après la fin du tour. */
-	public void changerJoueur() {joueurActuel = (joueurActuel + 1) % tabJoueurs.length;}
+	public void changerJoueur()
+	{
+		joueurActuel = (joueurActuel + 1) % tabJoueurs.length;
+		nbTours++;
+	}
 
 	/**
 	 * Retourne le robot, s'il existe, à la position donnée.
@@ -284,8 +290,16 @@ public class Plateau
 	public int       getNbLigne(){    return this.plateau.length;}
 	public int       getNbColonne(){  return this.plateau[0].length;}
 
+	/** Retourne le symbole utilisé pour définir une Tuile du plateau. */
 	public String getSymbole(int lig, int col){return this.plateau[lig][col].toString();}
 
+	/**
+	 * Retourne la couleur de l'objet positionné dans le plateau,
+	 * utilisé pour l'affichage des couleurs en CUI.
+	 * @param lig
+	 * @param col
+	 * @return le nom de la couleur.
+	 */
 	public String getCouleur(int lig, int col)
 	{
 		switch(this.getSymbole(lig,col))
@@ -317,6 +331,12 @@ public class Plateau
 		return retour;
 	}
 
+	/**
+	 * Détermine la fin de la partie. La partie peut être finie de deux façons :
+	 * un des joueurs a suffisamment de points, ou 3 tours ont été effectués
+	 * alors qu'il n'y avait plus de cristaux dans la file d'attente.
+	 * @return true si la partie est finie, false sinon.
+	 */
 	public boolean estPartieFinie()
 	{
 		boolean fini = false;
@@ -327,6 +347,10 @@ public class Plateau
 		return (fini || pionDecompte == 0);
 	}
 
+	/**
+	 * Détermine le ou les gagnants de la partie.
+	 * @return une liste du ou des gagnants.
+	 */
 	public List<Joueur> getGagnant()
 	{
 		List<Joueur> gagnants = new ArrayList<Joueur>();
@@ -411,7 +435,15 @@ public class Plateau
 		return retour;
 	}
 
+	/** Enlève un pion décompte. */
 	public void enleverPionDecompte() { pionDecompte--; }
 
+	/** Retourne le joueur en fonction de son id. */
 	public Joueur getJoueur(int id) {return tabJoueurs[id];}
+
+	/** Retourne le nombre de tours effectués depuis le début de la partie. */
+	public int getNbTours()
+	{
+		return nbTours;
+	}
 }

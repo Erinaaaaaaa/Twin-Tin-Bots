@@ -56,6 +56,9 @@ public class ControleurCui
 		}
 	}
 
+	/**
+	 * Déroulement de la partie.
+	 */
 	public void jouer()
 	{
 		do
@@ -118,37 +121,44 @@ public class ControleurCui
 	 * Si action robot, on exécute que sur le robot.<br>
 	 * Si action joueur, on exécute sur ses 2 robots.<br>
 	 */
-	public void debug(int nbJoueurs, int ligne) {
+	public void debug(int nbJoueurs, int ligne, int numScenar) {
 		Scanner sc = null;
 		Scanner rep = null;
 		String choix = "s";
 		int cpt = 0;
 
-		try {
-			sc = new Scanner(new File("./ttb/scenarios/scenario" + nbJoueurs +".data"), "utf8");
+		try
+		{
+			sc = new Scanner(new File(
+				"./ttb/scenarios/scenario" + nbJoueurs + "-" + numScenar + ".data"), "utf8");
 			rep = new Scanner(System.in);
-			if(ligne == 0)
+			if(ligne == 0) // Affichage du plateau au début.
 				ihm.afficherPlateau();
-			while (sc.hasNext() && choix.equals("s")) {
+			while (sc.hasNext() && choix.equals("s"))
+			{
 				choix = "";
 				char[] splittedLine = sc.nextLine().toCharArray();
-				if (splittedLine[0] == 'R') {
+				if (splittedLine[0] == 'R')
+				{
 					if(cpt >= ligne)
 						ihm.afficherPlateau();
 					int playerID = Character.getNumericValue(splittedLine[1]);
 					int robotID  = Character.getNumericValue(splittedLine[2]);
 
+					// On exécute les ordres directs du robot.
 					executerOrdres(Arrays.copyOfRange(splittedLine, 3, splittedLine.length),
 					               metier.getJoueur(playerID).getRobot(robotID));
 					if(cpt >= ligne)
 						ihm.afficherPlateau();
 				}
-				else if (splittedLine[0] == 'J') {
+				else if (splittedLine[0] == 'J') // exécute les ordres selon la main du joueur.
+				{
 					if(cpt >= ligne)
 						ihm.afficherPlateau();
 					Joueur j = metier.getJoueur(Character.getNumericValue(splittedLine[1]));
 					int idRobot;
-					switch (splittedLine[2]) {
+					switch (splittedLine[2])
+					{
 						case 'A':
 							idRobot = Character.getNumericValue(splittedLine[3]);
 							char lettre = splittedLine[4];
@@ -180,11 +190,17 @@ public class ControleurCui
 						ihm.afficherPlateau();
 					}
 				}
-				else if(cpt >= ligne)
+				else if(cpt >= ligne) // Affiche les commentaires du fichier.
 					ihm.afficherString(new String(splittedLine));
 
-				while(!choix.matches("[psq]") && cpt >= ligne && (splittedLine[0] == 'R' || splittedLine[0] == 'J'))
+				while(!choix.matches("[psq]") && cpt >= ligne &&
+				     (splittedLine[0] == 'R' || splittedLine[0] == 'J'))
 				{
+					if (metier.estPartieFinie())
+					{
+						ihm.finPartie(metier.getGagnant());
+						return;
+					}
 					ihm.controlesScenario();
 					choix = rep.next().toLowerCase();
 				}
@@ -195,16 +211,21 @@ public class ControleurCui
 					cpt++;
 			}
 
+			// Remise à zéro du plateau puis exécution de toutes les actions sauf celle-ci.
 			if(choix.equals("p"))
 			{
 				this.metier = SetGrille.initGrille(nbJoueurs);
-				debug(nbJoueurs, cpt- 2);
+				debug(nbJoueurs, cpt-2, numScenar);
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("Le fichier scenario" + nbJoueurs + ".data n'existe pas.");
+			System.out.println("Le fichier scenario" + nbJoueurs +
+			                   "-" + numScenar + ".data n'existe pas.");
 		}
 	}
 	
+	/**
+	 * Transmet les informations permettant d'afficher le statut des joueurs.
+	 */
 	public void afficherJoueur()
 	{
 		Joueur joueurCourant = metier.getJoueurCourant();
@@ -212,10 +233,16 @@ public class ControleurCui
 		{
 			if(metier.getJoueur(i) == joueurCourant)
 				ihm.afficher(metier.getJoueur(i).toString(), this.converCouleur(joueurCourant.getCouleur()));
-			else ihm.afficher(metier.getJoueur(i).toString(),null);
+			else
+				ihm.afficher(metier.getJoueur(i).toString(),null);
 		}
 	}
 
+	/**
+	 * Exécute le programme du robot.
+	 * @param ordres les ordres à exécuter
+	 * @param r le robot pour lequel exécuter les ordres placés.
+	 */
 	public void executerOrdres(char[] ordres, Robot r)
 	{
 		for(int i = 0; i < ordres.length; i++)
@@ -256,7 +283,14 @@ public class ControleurCui
 		while (!nbJoueurs.matches("[2-6]"));
 		nbJ = Integer.parseInt(nbJoueurs);
 		if(args.length > 0 && args[0].equals("SCENARIO"))
-			new ControleurCui(nbJ).debug(nbJ, 0);
+		{
+			System.out.println("Numéro du scénario : ");
+			String scen;
+			do
+				scen = sc.next();
+			while (!scen.matches("[0-9]+"));
+			new ControleurCui(nbJ).debug(nbJ, 0, Integer.parseInt(scen));
+		}
 		else
 			new ControleurCui(nbJ).jouer();
 		sc.close();
