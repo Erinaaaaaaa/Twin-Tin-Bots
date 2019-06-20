@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Joueur
 {
 	public  final static String[] COULEURS = {"Rouge", "Jaune", "Vert", "Bleu", "Violet", "Rose"};
-	private final static char[] BASE_RESERVE = 
+	private final static char[] BASE_RESERVE =
 		{'A', 'A', 'S', 'G', 'G', 'G', 'D', 'D', 'D', 'C', 'C', 'E', 'E'};
 
 	static int nbJoueurs = 0;
