@@ -2,6 +2,7 @@ package ttb.metier;
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -290,19 +291,20 @@ public class Plateau
 		return (fini || pionDecompte == 0);
 	}
 
-	public List<Joueur> getGagnant()
+	public Joueur getGagnant()
 	{
-		List<Joueur> gagnants = new ArrayList<Joueur>();
+		Joueur gagnant = null;
 		if (pionDecompte != 0) // Cas de victoire par nombre de points
 		{
 			for (Joueur j : tabJoueurs)
 				if (j.getPoints() >= pointVictoire)
-					gagnants.add(j);
+					gagnant = j;
 		}
 		else // si il n'y a plus de pions décompte, on calcule comme ceci
 		{
 			int[] totalPoints = new int[Joueur.nbJoueurs];
-			int ptsMax, indGagne;
+			int ptsMax;
+			boolean egalite = false;
 			for (int i = 0; i < totalPoints.length; i++)
 			{
 				totalPoints[i] = tabJoueurs[i].getPoints();
@@ -311,18 +313,23 @@ public class Plateau
 						totalPoints[i] += Integer.parseInt(r.getCristal().toString())-1;
 			}
 
-			indGagne = 0;
-			ptsMax = totalPoints[indGagne];
-			for (int i = 1; i < totalPoints.length; i++)
+			ptsMax = totalPoints[0];
+			for (int i = 1; i < tabJoueurs.length; i++)
+			{
 				if (ptsMax < totalPoints[i])
-					indGagne = i;
+				{
+					ptsMax = totalPoints[i];
+					gagnant = tabJoueurs[i];
+				}
+				else if (ptsMax == totalPoints[i])
+					egalite = true;
+			}
 
-			gagnants.add(tabJoueurs[indGagne]);
 			// TODO: gestion de victoire quand ptsMax égal pour 2 joueurs ou plus
 			// plus gérer en fonction du nb de cristaux d'une certaine couleur.
 		}
 
-		return gagnants;
+		return gagnant;
 	}
 
 	public void enleverPionDecompte() { pionDecompte--; }
