@@ -22,12 +22,21 @@ public class IhmCui
 	private ControleurCui ctrl;
 	private Scanner       sc;
 
+	/**
+	 * Constructeur par défaut de l'affichage en CUI.
+	 * @param ctrl
+	 */
 	public IhmCui(ControleurCui ctrl)
 	{
 		this.ctrl = ctrl;
 		sc = new Scanner(System.in);
 	}
 
+	/**
+	 * Affiche une information avec la couleur demandée.
+	 * @param info l'information à afficher.
+	 * @param coul la couleur à utiliser.
+	 */
 	public void afficher(String info, CouleurConsole coul)
 	{
 		if(coul != null) Console.couleurFont (coul);
@@ -37,24 +46,26 @@ public class IhmCui
 		
 	}
 
-	public void erreur()
-	{
-		System.out.println("Option invalide");
-	}
-
 	public void afficherString(char[] cara)
 	{
 		System.out.println(new String(cara));
 	}
 
+	/**
+	 * Affiche les possibilités de contrôle du mode scénario.
+	 */
 	public void controlesScenario()
 	{
 		System.out.println("[S]uivant | [P]récédent | [Q]uitter");
 	}
 
+	/**
+	 * Affiche les actions possibles pendant le tour d'un joueur.
+	 * @return l'action effectuée par le joueur.
+	 */
 	public String getAction()
 	{
-		System.out.println("\nQuel action effectuer ?");
+		System.out.println("\nQuelle action effectuer ?");
 		System.out.println("\t[A]jouter/Remplacer une carte");
 		System.out.println("\t[P]ermuter une carte");
 		System.out.println("\t[E]nlever une carte");
@@ -64,6 +75,9 @@ public class IhmCui
 		return sc.next().toUpperCase();
 	}
 
+	/**
+	 * Affiche le plateau de jeu, avec couleurs.
+	 */
 	public void afficherPlateau()
 	{
 		String cara;
@@ -98,6 +112,10 @@ public class IhmCui
 		System.out.println();
 	}
 
+	/**
+	 * Affiche les gagnants de la partie, une fois finie.
+	 * @param gagnants la liste du ou des gagnants.
+	 */
 	public void finPartie(List<Joueur> gagnants)
 	{
 		System.out.println("\n-------------- Fin de la partie --------------");
@@ -112,12 +130,20 @@ public class IhmCui
 
 	}
 
+	/**
+	 * Demande à un joueur de choisir une des cartes dans sa réserve.
+	 * @return le caractère correspondant à la carte.
+	 */
 	public char getCarte()
 	{
 		System.out.println("Choisissez une carte de la réserve : ");
 		return sc.next().toUpperCase().charAt(0);
 	}
 
+	/**
+	 * Demande un indice du tableau d'ordres.
+	 * @return l'indice choisi.
+	 */
 	public int getInd(char[] ordres)
 	{
 		String ind;
@@ -130,6 +156,11 @@ public class IhmCui
 		return Integer.parseInt(ind) - 1;
 	}
 
+	/**
+	 * Affiche l'état des robots d'un joueur, et demande la modification.
+	 * @param j le joueur pour qui modifier un robot.
+	 * @return l'indice du robot à modifier.
+	 */
 	public int getRobot(Joueur j)
 	{
 		String s = "";
