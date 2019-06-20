@@ -24,6 +24,7 @@ public class Plateau
 	private String    fileAttent;
 	private int       pointVictoire;
 	private int       pionDecompte;
+	private int       nbTours;
 
 	/**
 	 * Construit un plateau.
@@ -39,13 +40,18 @@ public class Plateau
 		this.fileAttent = fileAttent;
 		pointVictoire   = 13 - tabJoueur.length;
 		pionDecompte    = 3;
+		nbTours         = 0;
 	}
 
 	/** Retourne le joueur devant jouer. */
 	public Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
 
 	/** Change le joueur courant, après la fin du tour. */
-	public void changerJoueur() {joueurActuel = (joueurActuel + 1) % tabJoueurs.length;}
+	public void changerJoueur()
+	{
+		joueurActuel = (joueurActuel + 1) % tabJoueurs.length;
+		nbTours++;
+	}
 
 	/**
 	 * Retourne le robot, s'il existe, à la position donnée.
@@ -414,4 +420,9 @@ public class Plateau
 	public void enleverPionDecompte() { pionDecompte--; }
 
 	public Joueur getJoueur(int id) {return tabJoueurs[id];}
+
+	public int getNbTours()
+	{
+		return nbTours;
+	}
 }
