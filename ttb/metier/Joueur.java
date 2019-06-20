@@ -65,7 +65,7 @@ public class Joueur
 			char ordre = ordres[idRobot][ind];
 			ordres[idRobot][ind] = reserve.remove(i);
 			if(ordre != '\0')
-				reserve.add(c);
+				reserve.add(ordre);
 		}
 	}
 
