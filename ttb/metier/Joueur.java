@@ -11,12 +11,13 @@ public class Joueur
 
 	static int nbJoueurs = 0;
 
-	private int     id;
-	private Robot[] tabRobot;
-	private int[] posBase;
+	private int      id;
+	private Robot[]  tabRobot;
+	private int[]    posBase;
 	private char[][] ordres;
+
 	private ArrayList<Character> reserve;
-	private ArrayList<Tuile> cristaux;
+	private ArrayList<Tuile>     cristaux;
 
 	/**
 	 * Constructeur par défaut.
@@ -174,5 +175,30 @@ public class Joueur
 	public char[] getOrdres(int id) {return Arrays.copyOf(ordres[id], ordres[id].length);}
 	public ArrayList<Character> getReserve() {return this.reserve;}
 	public String getCouleur(){return Joueur.COULEURS[this.id];}
+
+	public String toString()
+	{
+		String retour = "Joueur " + this.getCouleur() + " ( Score :" + this.getPoints() + ") : \n";
+		retour += "\tOrdres : ";
+		for(int i = 0; i < 2; i++)
+		{
+			for(char c : this.getOrdres(i))
+			{
+				retour += "[";
+				if(c == '\0')
+				retour += " ";
+				else
+				retour += c;
+
+				retour += "] ";
+			}
+		}
+
+		retour += "\n\tReserve : ";
+		for(Character c : this.getReserve())
+			retour += c + ",";
+
+		return retour.substring(0, retour.length() - 1) + "\n";
+	}
 
 }

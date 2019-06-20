@@ -51,7 +51,7 @@ public class ControleurCui
 		{
 			Joueur joueur = metier.getJoueurCourant();
 			String action;
-			ihm.afficher(joueur);
+			ihm.afficher(joueur.toString());
 			do
 				action = ihm.getAction();
 			while (!action.matches("[APERN]")); // actions possibles
@@ -152,7 +152,7 @@ public class ControleurCui
 								executerOrdres(j.getOrdres(i), j.getRobot(i));
 					}
 					if(cpt >= ligne)
-						ihm.afficher(j);
+						ihm.afficher(j.toString());
 				}
 				else if(cpt >= ligne)
 					ihm.afficherString(splittedLine);
