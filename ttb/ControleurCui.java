@@ -90,19 +90,22 @@ public class ControleurCui
 	 * Si action robot, on exécute que sur le robot.<br>
 	 * Si action joueur, on exécute sur ses 2 robots.<br>
 	 */
-	public void debug(int nbJoueurs) {
+	public void debug(int nbJoueurs, int ligne) {
 		Scanner sc = null;
+		Scanner rep = null;
+		String choix = "";
+		int cpt = 0;
 
 		try {
-			sc = new Scanner(new File("./ttb/scenario.data"), "utf8");
-			for(int i = 0; i < nbJoueurs; i++)
+			sc = new Scanner(new File("./ttb/scenario" + nbJoueurs +".data"), "utf8");
+			rep = new Scanner(System.in);
+			while(cpt < ligne)
+			{
 				sc.nextLine();
-
-			Scanner line = new Scanner(new String(sc.nextLine()));
-			line.useDelimiter("\\|");
-			System.out.println("2");
-			while (line.hasNext()) {
-				char[] splittedLine = line.next().toCharArray();
+				cpt++;
+			}
+			while (sc.hasNext() && !choix.equals("p")) {
+				char[] splittedLine = sc.nextLine().toCharArray();
 				if (splittedLine[0] == 'R') {
 					int playerID = Character.getNumericValue(splittedLine[1]);
 					int robotID  = Character.getNumericValue(splittedLine[2]);
@@ -142,7 +145,18 @@ public class ControleurCui
 								executerOrdres(j.getOrdres(i), j.getRobot(i));
 					}
 					ihm.afficher(j);
+					cpt++;
+					do
+					{
+						choix = rep.next();
+					}while(!choix.matches("{ps}"));
 				}
+			}
+
+			if(choix.equals("p"))
+			{
+				this.plateau = SetGrille.initPlateau(nbJoueurs);
+				debug(nbJoueurs, cpt- 2);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -189,7 +203,7 @@ public class ControleurCui
 		while (!nbJoueurs.matches("[2-6]"));
 		nbJ = Integer.parseInt(nbJoueurs);
 		if(args.length > 0 && args[0].equals("SCENARIO"))
-			new ControleurCui(nbJ).debug(nbJ);
+			new ControleurCui(nbJ).debug(nbJ, 0);
 		else
 			new ControleurCui(nbJ).jouer();
 		sc.close();
