@@ -161,6 +161,8 @@ public class Joueur
 
 	public void addCristal(Tuile t) {cristaux.add(t);}
 
+	public ArrayList<Tuile> getCristaux() { return this.cristaux; }
+
 	public int[] getBase() {return this.posBase;}
 
 	public void setBase(int[] pos)

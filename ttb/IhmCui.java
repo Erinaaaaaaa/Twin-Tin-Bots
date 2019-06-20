@@ -88,11 +88,13 @@ public class IhmCui
 		System.out.println();
 	}
 
-	public void finPartie(Joueur gagnant)
+	public void finPartie(List<Joueur> gagnants)
 	{
 		System.out.println("\n-------------- Fin de la partie --------------");
-		System.out.println("Le joueur " + gagnant.getCouleur() +
-		                   " a gagné avec " + gagnant.getPoints() + " points.");
+		if (gagnants != null)
+			for (Joueur j : gagnants)
+				System.out.println("Le joueur " + j.getCouleur() +
+				                   " a gagné avec " + j.getPoints() + " points.");
 	}
 
 	public char getCarte()
