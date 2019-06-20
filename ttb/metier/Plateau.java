@@ -293,13 +293,13 @@ public class Plateau
 	public List<Joueur> getGagnant()
 	{
 		List<Joueur> gagnants = new ArrayList<Joueur>();
-		if (pionDecompte != 0)
+		if (pionDecompte != 0) // Cas de victoire par nombre de points
 		{
 			for (Joueur j : tabJoueurs)
 				if (j.getPoints() >= pointVictoire)
 					gagnants.add(j);
 		}
-		else
+		else // si il n'y a plus de pions décompte, on calcule comme ceci
 		{
 			int[] totalPoints = new int[Joueur.nbJoueurs];
 			int ptsMax, indGagne;
