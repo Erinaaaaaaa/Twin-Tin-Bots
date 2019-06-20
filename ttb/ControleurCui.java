@@ -101,12 +101,14 @@ public class ControleurCui
 		try {
 			sc = new Scanner(new File("./ttb/scenarios/scenario" + nbJoueurs +".data"), "utf8");
 			rep = new Scanner(System.in);
+			if(ligne == 0)
+				ihm.afficherPlateau();
 			while (sc.hasNext() && choix.equals("s")) {
 				choix = "";
-				if(cpt >= ligne)
-					ihm.afficherPlateau();
 				char[] splittedLine = sc.nextLine().toCharArray();
 				if (splittedLine[0] == 'R') {
+					if(cpt >= ligne)
+						ihm.afficherPlateau();
 					int playerID = Character.getNumericValue(splittedLine[1]);
 					int robotID  = Character.getNumericValue(splittedLine[2]);
 
@@ -116,6 +118,8 @@ public class ControleurCui
 						ihm.afficherPlateau();
 				}
 				else if (splittedLine[0] == 'J') {
+					if(cpt >= ligne)
+						ihm.afficherPlateau();
 					Joueur j = metier.getJoueur(Character.getNumericValue(splittedLine[1]));
 					int idRobot;
 					switch (splittedLine[2]) {
@@ -150,7 +154,7 @@ public class ControleurCui
 				else if(cpt >= ligne)
 					ihm.afficherString(splittedLine);
 
-				while(!choix.matches("[psq]") && cpt >= ligne && (splittedLine[0] == 'R' || splittedLine[0] == 'J')
+				while(!choix.matches("[psq]") && cpt >= ligne && (splittedLine[0] == 'R' || splittedLine[0] == 'J'))
 				{
 					choix = rep.next();
 				}
