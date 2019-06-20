@@ -1,6 +1,8 @@
 package ttb.metier;
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe Plateau
@@ -222,7 +224,10 @@ public class Plateau
 		{
 			int[] nextCase = nextPos(new int[]{plateau.length / 2, plateau[0].length / 2}, i);
 			if(plateau[nextCase[0]][nextCase[1]] == Tuile.VIDE)
+			{
 				plateau[nextCase[0]][nextCase[1]] = cristal;
+				return;
+			}
 		}
 	}
 
@@ -285,16 +290,16 @@ public class Plateau
 		return (fini || pionDecompte == 0);
 	}
 
-	public Joueur getGagnant()
+	public List<Joueur> getGagnant()
 	{
-		Joueur gagnant = null;
-		if (pionDecompte != 0)
+		List<Joueur> gagnants = new ArrayList<Joueur>();
+		if (pionDecompte != 0) // Cas de victoire par nombre de points
 		{
 			for (Joueur j : tabJoueurs)
 				if (j.getPoints() >= pointVictoire)
-					gagnant = j;
+					gagnants.add(j);
 		}
-		else
+		else // si il n'y a plus de pions décompte, on calcule comme ceci
 		{
 			int[] totalPoints = new int[Joueur.nbJoueurs];
 			int ptsMax, indGagne;
@@ -312,12 +317,12 @@ public class Plateau
 				if (ptsMax < totalPoints[i])
 					indGagne = i;
 
-			gagnant = tabJoueurs[indGagne];
+			gagnants.add(tabJoueurs[indGagne]);
 			// TODO: gestion de victoire quand ptsMax égal pour 2 joueurs ou plus
 			// plus gérer en fonction du nb de cristaux d'une certaine couleur.
 		}
 
-		return gagnant;
+		return gagnants;
 	}
 
 	public void enleverPionDecompte() { pionDecompte--; }

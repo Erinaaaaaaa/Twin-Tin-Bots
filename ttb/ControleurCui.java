@@ -3,6 +3,7 @@ package ttb;
 import ttb.metier.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class ControleurCui
 		{
 			Joueur joueur = metier.getJoueurCourant();
 			String action;
-			ihm.afficher(joueur);
+			ihm.afficher(joueur.toString());
 			do
 				action = ihm.getAction();
 			while (!action.matches("[APERN]")); // actions possibles
@@ -65,7 +66,9 @@ public class ControleurCui
 			}while(i < 2);
 			ihm.afficherPlateau();
 			metier.changerJoueur();
-		}while(true);
+		}while(!metier.estPartieFinie());
+
+		ihm.finPartie(metier.getGagnant());
 	}
 
 	/**
@@ -149,14 +152,15 @@ public class ControleurCui
 								executerOrdres(j.getOrdres(i), j.getRobot(i));
 					}
 					if(cpt >= ligne)
-						ihm.afficher(j);
+						ihm.afficher(j.toString());
 				}
 				else if(cpt >= ligne)
 					ihm.afficherString(splittedLine);
 
 				while(!choix.matches("[psq]") && cpt >= ligne && (splittedLine[0] == 'R' || splittedLine[0] == 'J'))
 				{
-					choix = rep.next();
+					ihm.controlesScenario();
+					choix = rep.next().toLowerCase();
 				}
 				if(cpt < ligne || (splittedLine[0] != 'R' && splittedLine[0] != 'J'))
 					choix = "s";
@@ -170,8 +174,8 @@ public class ControleurCui
 				this.metier = SetGrille.initGrille(nbJoueurs);
 				debug(nbJoueurs, cpt- 2);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			System.out.println("Le fichier scenario" + nbJoueurs + ".data n'existe pas.");
 		}
 	}
 

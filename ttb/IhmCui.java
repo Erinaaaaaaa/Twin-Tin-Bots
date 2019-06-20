@@ -1,10 +1,11 @@
 package ttb;
 
+import java.util.List;
 import java.util.Scanner;
+
 import iut.algo.CouleurConsole;
 import iut.algo.Console;
 import ttb.metier.*;
-
 
 public class IhmCui
 {
@@ -17,35 +18,10 @@ public class IhmCui
 		sc = new Scanner(System.in);
 	}
 
-	public void afficher(Joueur j)
+	public void afficher(String info)
 	{
-		System.out.println((getInfosJoueur(j)));
+		System.out.println(info);
 		this.afficherPlateau();
-	}
-
-	public String    getInfosJoueur(Joueur j)
-	{
-		String retour = "Joueur " + (j.getId() + 1) + " : \n";
-		retour += "\tOrdres : ";
-		for(int i = 0; i < 2; i++)
-		{
-			for(char c : j.getOrdres(i))
-			{
-				retour += "[";
-				if(c == '\0')
-				retour += " ";
-				else
-				retour += c;
-
-				retour += "] ";
-			}
-		}
-
-		retour += "\n\tReserve : ";
-		for(Character c : j.getReserve())
-			retour += c + ",";
-
-		return retour.substring(0, retour.length() - 1) + "\n";
 	}
 
 	public void erreur()
@@ -55,9 +31,12 @@ public class IhmCui
 
 	public void afficherString(char[] cara)
 	{
-		String s = new String(cara);
+		System.out.println(new String(cara));
+	}
 
-		System.out.println(s);
+	public void controlesScenario()
+	{
+		System.out.println("[S]uivant | [P]récédent | [Q]uitter");
 	}
 
 	public String getAction()
@@ -104,6 +83,15 @@ public class IhmCui
 
 		}
 		System.out.println();
+	}
+
+	public void finPartie(List<Joueur> gagnants)
+	{
+		System.out.println("\n-------------- Fin de la partie --------------");
+		if (gagnants != null)
+			for (Joueur j : gagnants)
+				System.out.println("Le joueur " + j.getCouleur() +
+				                   " a gagné avec " + j.getPoints() + " points.");
 	}
 
 	public char getCarte()
