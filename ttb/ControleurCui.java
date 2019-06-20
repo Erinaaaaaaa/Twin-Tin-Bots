@@ -97,7 +97,7 @@ public class ControleurCui
 		int cpt = 0;
 
 		try {
-			sc = new Scanner(new File("./ttb/scenario" + nbJoueurs +".data"), "utf8");
+			sc = new Scanner(new File("./ttb/scenarios/scenario" + nbJoueurs +".data"), "utf8");
 			rep = new Scanner(System.in);
 			while(cpt < ligne)
 			{
@@ -149,7 +149,7 @@ public class ControleurCui
 					do
 					{
 						choix = rep.next();
-					}while(!choix.matches("{ps}"));
+					}while(!choix.matches("[ps]"));
 				}
 			}
 
