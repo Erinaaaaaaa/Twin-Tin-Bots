@@ -145,7 +145,7 @@ public class ControleurCui
 					if(cpt >= ligne)
 						ihm.afficher(j);
 				}
-				else
+				else if(cpt >= ligne)
 					ihm.afficherString(splittedLine);
 
 				while(!choix.matches("[psq]") && cpt >= ligne && (splittedLine[0] == 'R' || splittedLine[0] == 'J')
