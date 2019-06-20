@@ -19,6 +19,12 @@ public abstract class SetGrille
 	{
 		Joueur.nbJoueurs = 0;
 
+		if(nbJoueur < 2)
+			nbJoueur = 2;
+
+		if(nbJoueur > 6)
+			nbJoueur = 6;
+
 		Tuile[][] grille;
 		Joueur[]  tabJoueur = new Joueur[nbJoueur];
 		Scanner   sc;

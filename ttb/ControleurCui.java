@@ -62,8 +62,6 @@ public class ControleurCui
 				char[] ordres = joueur.getOrdres(i);
 				executerOrdres(ordres, r);
 				i++;
-				if(metier.aPlusDeCristaux())
-					metier.listeAttente();
 			}while(i < 2);
 			ihm.afficherPlateau();
 			metier.changerJoueur();
@@ -71,7 +69,9 @@ public class ControleurCui
 	}
 
 	/**
-	 * Méthode pour utiliser le mode debug. Les instructions à exécuter seront lues dans le fichier "scenario2.data". <br />
+	 * @param nbJoueurs nombres de joueurs
+	 * @param ligne ligne a laquelle commencer/reprendre le test
+	 * Méthode pour utiliser le mode debug. Les instructions à exécuter seront lues dans le fichier "scenario.data". <br />
 	 * La premiere lettre doit être soit J pour joueur ou R pour robot.<br />
 	 * <br />
 	 * <ul><b>Si c'est un robot:</b>
@@ -160,7 +160,9 @@ public class ControleurCui
 				}
 				if(cpt < ligne || (splittedLine[0] != 'R' && splittedLine[0] != 'J'))
 					choix = "s";
-				cpt++;
+
+				if(splittedLine[0] == 'R' || splittedLine[0] == 'J')
+					cpt++;
 			}
 
 			if(choix.equals("p"))
