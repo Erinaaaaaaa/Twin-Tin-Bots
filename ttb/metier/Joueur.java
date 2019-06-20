@@ -1,31 +1,36 @@
 package ttb.metier;
 
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Joueur
 {
 	public  final static String[] COULEURS = {"Rouge", "Jaune", "Vert", "Bleu", "Violet", "Rose"};
+	private final static char[] BASE_RESERVE = 
+		{'A', 'A', 'S', 'G', 'G', 'G', 'D', 'D', 'D', 'C', 'C', 'E', 'E'};
 
 	private static int nbJoueurs = 0;
 
 	private int     id;
 	private Robot[] tabRobot;
 	private int[] posBase;
-	private int points;
 	private char[][] ordres;
 	private ArrayList<Character> reserve;
+	private ArrayList<Tuile> cristaux;
 
+	/**
+	 * Constructeur par défaut.
+	 * Initialise le numéro du joueur, sa main et les ordres de ses robots.
+	 */
 	public Joueur()
 	{
 		id = Joueur.nbJoueurs++;
 		this.tabRobot = new Robot[] {null, null};
-		this.points = 0;
 		ordres = new char[2][3];
 		Arrays.fill(ordres[0], '\0');
 		Arrays.fill(ordres[1], '\0');
 		reserve = new ArrayList<Character>();
+		cristaux = new ArrayList<Tuile>();
 		initReserve();
 	}
 
@@ -40,21 +45,16 @@ public class Joueur
 	 */
 	private void initReserve()
 	{
-		reserve.add('A');
-		reserve.add('A');
-		reserve.add('S');
-		reserve.add('G');
-		reserve.add('G');
-		reserve.add('G');
-		reserve.add('D');
-		reserve.add('D');
-		reserve.add('D');
-		reserve.add('C');
-		reserve.add('C');
-		reserve.add('E');
-		reserve.add('E');
+		for (char ordre : Joueur.BASE_RESERVE)
+			reserve.add(ordre);
 	}
 
+	/**
+	 * Ajoute un ordre à un robot.
+	 * @param idRobot le robot à modifier.
+	 * @param ind l'indice de l'ordre à changer.
+	 * @param c l'ordre à ajouter.
+	 */
 	public void ajouterOrdre(int idRobot, int ind, char c)
 	{
 		int i = 0;
@@ -68,6 +68,11 @@ public class Joueur
 		}
 	}
 
+	/**
+	 * Enlève l'ordre d'un robot.
+	 * @param idRobot le robot à modifier.
+	 * @param ind l'indice de l'ordre à enlever.
+	 */
 	public void enleverOrdre(int idRobot, int ind)
 	{
 		if(ordres[idRobot][ind] != '\0')
@@ -77,6 +82,12 @@ public class Joueur
 		}
 	}
 
+	/**
+	 * Permute deux ordres pour le programme d'un même robot.
+	 * @param idRobot le robot à modifier.
+	 * @param ind1 l'indice du premier ordre à permuter.
+	 * @param ind2 l'indice du deuxième ordre à permuter.
+	 */
 	public void permuterOrdre(int idRobot, int ind1, int ind2)
 	{
 		if(ordres[idRobot][ind1] == '\0' || ordres[idRobot][ind2] == '\0')
@@ -88,6 +99,10 @@ public class Joueur
 		ordres[idRobot][ind2] = c;
 	}
 
+	/**
+	 * Supprime tous les ordres d'un robot.
+	 * @param id l'id du robot pour lequel supprimer les ordres.
+	 */
 	public void resetOrdres(int id)
 	{
 		for(int i = 0; i < ordres[id].length; i++)
@@ -104,6 +119,12 @@ public class Joueur
 
 	public Robot getRobot(int id) {return tabRobot[id];}
 
+	/**
+	 * Ajoute un robot à ce joueur.
+	 * Un joueur peut posséder deux robots ;
+	 * s'il en possède déjà un, il est ajouté après.
+	 * @param r le Robot à ajouter.
+	 */
 	public void ajouterRobot(Robot r)
 	{
 		if(tabRobot[0] == null)
@@ -122,7 +143,14 @@ public class Joueur
 
 	public int getId() {return id;}
 
-	public int getPoints() {return this.points;}
+	public int getPoints()
+	{
+		int points = 0;
+		for (Tuile cristal : cristaux)
+			points += Integer.parseInt(cristal.toString());
+
+		return points;
+	}
 
 	public Robot getRobotParPos(int[] pos)
 	{
@@ -133,7 +161,7 @@ public class Joueur
 		return null;
 	}
 
-	public void addPoint(Tuile t) {points += Integer.parseInt(t.toString());}
+	public void addCristal(Tuile t) {cristaux.add(t);}
 
 	public int[] getBase() {return this.posBase;}
 
