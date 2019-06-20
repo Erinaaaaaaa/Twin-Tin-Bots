@@ -9,10 +9,12 @@ import ttb.metier.*;
 public class IhmCui
 {
 	private ControleurCui ctrl;
+	private Scanner       sc;
 
 	public IhmCui(ControleurCui ctrl)
 	{
 		this.ctrl = ctrl;
+		sc = new Scanner(System.in);
 	}
 
 	public void afficher(Joueur j)
@@ -60,7 +62,6 @@ public class IhmCui
 	public String getAction()
 	{
 		System.out.print("Action : ");
-		Scanner sc = new Scanner(System.in);
 		return sc.next().toUpperCase();
 	}
 
@@ -101,13 +102,11 @@ public class IhmCui
 	public char getCarte()
 	{
 		System.out.println("Choisissez une carte de la réserve : ");
-		Scanner sc = new Scanner(System.in);
 		return sc.next().toUpperCase().charAt(0);
 	}
 
 	public int getInd(char[] ordres)
 	{
-		Scanner sc = new Scanner(System.in);
 		String ind;
 		do
 		{
@@ -138,7 +137,6 @@ public class IhmCui
 
 		System.out.println(s);
 
-		Scanner sc = new Scanner(System.in);
 		String ind;
 		do
 		{
