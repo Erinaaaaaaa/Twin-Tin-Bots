@@ -160,7 +160,9 @@ public class ControleurCui
 				}
 				if(cpt < ligne || (splittedLine[0] != 'R' && splittedLine[0] != 'J'))
 					choix = "s";
-				cpt++;
+
+				if(splittedLine[0] == 'R' || splittedLine[0] == 'J')
+					cpt++;
 			}
 
 			if(choix.equals("p"))
