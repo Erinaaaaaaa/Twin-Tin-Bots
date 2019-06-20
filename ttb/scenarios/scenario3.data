@@ -2,47 +2,47 @@
  /* Scenario de test de pousser                      */ 
  /*--------------------------------------------------*/ 
  
-    //Le petit robot jaune avance 2 fois 
+    //Le petit robot rouge avance 2 fois 
 R00AA 
-    //Le petit robot jaune tourne a gauche 
+    //Le petit robot rouge tourne a gauche 
 R00G 
-    //Le petit robot jaune avance 1 fois
+    //Le petit robot rouge avance 1 fois
 R00A 
-    //Le petit robot jaune avance 4 fois
+    //Le petit robot rouge avance 4 fois
 R00AAAA 
-    //Le petit robot jaune avance 1 fois
+    //Le petit robot rouge avance 1 fois
 R00A 
-    //Le petit robot jaune tourne a gauche 
+    //Le petit robot rouge tourne a gauche 
 R01G 
-    //Le grand robot jaune avance 1 fois 
-R01A 
-    //Le grand robot jaune tourne a droite 2 fais 
-R01DD 
-    //Le grand robot jaune avance 4 fois 
-R01A 
-    //Le petit robot rouge avance 4 fois 
-R10AAAA 
-    //Le petit robot rouge tourne a gauche
-R10G 
-    //Le petit robot rouge avance 3 fois 
-R10AAA 
-    //Le grand robot rouge avance 3 fois 
-R11AAA 
     //Le grand robot rouge avance 1 fois 
+R01A 
+    //Le grand robot rouge tourne a droite 2 fais 
+R01DD 
+    //Le grand robot rouge avance 4 fois 
+R01A 
+    //Le petit robot jaune avance 4 fois 
+R10AAAA 
+    //Le petit robot jaune tourne a gauche
+R10G 
+    //Le petit robot jaune avance 3 fois 
+R10AAA 
+    //Le grand robot jaune avance 3 fois 
+R11AAA 
+    //Le grand robot jaune avance 1 fois 
 R11A 
-    //Le grand robot rouge avance 3 fois 
+    //Le grand robot jaune avance 3 fois 
 R11A 
-    //Le grand robot rouge tourne 2 fois a gauche
+    //Le grand robot jaune tourne 2 fois a gauche
 R11GG 
-    //Le grand robot rouge ramasse 
+    //Le grand robot jaune ramasse 
 R11C 
-    //Le grand robot rouge tourne 3 fois a droite
+    //Le grand robot jaune tourne 3 fois a droite
 R11DDD 
-    //Le grand robot rouge avance 1 fois
+    //Le grand robot jaune avance 1 fois
 R11A
-    //Le petit robot rouge tourne a gauche
+    //Le petit robot jaune tourne a gauche
 R11E
-    //Le petit robot rouge depose
+    //Le petit robot jaune depose
 R20AA
     //Le petit robot vert tourne a gauche
 R20G
