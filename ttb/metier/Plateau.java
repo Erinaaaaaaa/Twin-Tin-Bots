@@ -205,21 +205,31 @@ public class Plateau
 		return true;
 	}
 
-	/* public void listeAttente()
+	public void listeAttente()
 	{
 		if(fileAttent.equals(""))
 			return;
 
 		Tuile cristal = Tuile.getCristal(fileAttent.charAt(0));
 
-		if(fileAttent.length > 1)
+		if(fileAttent.length() > 1)
 			fileAttent = fileAttent.substring(1);
 		else
 			fileAttent = "";
 
 		if(plateau[plateau.length / 2][plateau[0].length / 2] == Tuile.VIDE)
+		{
 			plateau[plateau.length / 2][plateau[0].length / 2] = cristal;
-	} */
+			return;
+		}
+
+		for(int i = 0; i < 6; i++)
+		{
+			int[] nextCase = nextPos(new int[]{plateau.length / 2, plateau[0].length / 2}, i);
+			if(plateau[nextCase[0]][nextCase[1]] == Tuile.VIDE)
+				plateau[nextCase[0]][nextCase[1]] = cristal;
+		}
+	}
 
 	public Joueur getJoueurParBase(int[] pos)
 	{
