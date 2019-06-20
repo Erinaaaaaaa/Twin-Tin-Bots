@@ -109,7 +109,7 @@ public class ControleurCui
 	 * Si action robot, on exécute que sur le robot.<br>
 	 * Si action joueur, on exécute sur ses 2 robots.<br>
 	 */
-	public void debug(int nbJoueurs, int ligne) {
+	public void debug(int nbJoueurs, int ligne, int numScenar) {
 		Scanner sc = null;
 		Scanner rep = null;
 		String choix = "s";
@@ -117,7 +117,8 @@ public class ControleurCui
 
 		try
 		{
-			sc = new Scanner(new File("./ttb/scenarios/scenario" + nbJoueurs +".data"), "utf8");
+			sc = new Scanner(new File(
+				"./ttb/scenarios/scenario" + nbJoueurs + "-" + numScenar + ".data"), "utf8");
 			rep = new Scanner(System.in);
 			if(ligne == 0) // Affichage du plateau au début.
 				ihm.afficherPlateau();
@@ -183,6 +184,11 @@ public class ControleurCui
 				while(!choix.matches("[psq]") && cpt >= ligne &&
 				     (splittedLine[0] == 'R' || splittedLine[0] == 'J'))
 				{
+					if (metier.estPartieFinie())
+					{
+						ihm.finPartie(metier.getGagnant());
+						return;
+					}
 					ihm.controlesScenario();
 					choix = rep.next().toLowerCase();
 				}
@@ -197,10 +203,11 @@ public class ControleurCui
 			if(choix.equals("p"))
 			{
 				this.metier = SetGrille.initGrille(nbJoueurs);
-				debug(nbJoueurs, cpt- 2);
+				debug(nbJoueurs, cpt-2, numScenar);
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("Le fichier scenario" + nbJoueurs + ".data n'existe pas.");
+			System.out.println("Le fichier scenario" + nbJoueurs +
+			                   "-" + numScenar + ".data n'existe pas.");
 		}
 	}
 	
@@ -264,7 +271,14 @@ public class ControleurCui
 		while (!nbJoueurs.matches("[2-6]"));
 		nbJ = Integer.parseInt(nbJoueurs);
 		if(args.length > 0 && args[0].equals("SCENARIO"))
-			new ControleurCui(nbJ).debug(nbJ, 0);
+		{
+			System.out.println("Numéro du scénario : ");
+			String scen;
+			do
+				scen = sc.next();
+			while (!scen.matches("[0-9]+"));
+			new ControleurCui(nbJ).debug(nbJ, 0, Integer.parseInt(scen));
+		}
 		else
 			new ControleurCui(nbJ).jouer();
 		sc.close();
