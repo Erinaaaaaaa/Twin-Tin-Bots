@@ -53,6 +53,15 @@ public class IhmCui
 		System.out.println("Option invalide");
 	}
 
+	public void afficherString(char[] cara)
+	{
+		String s = "";
+		for(int i = 0; i < cara.length; i++)
+			s += cara[i];
+
+		System.out.println(s);
+	}
+
 	public String getAction()
 	{
 		System.out.println("\nQuel action effectuer ?");
