@@ -8,7 +8,7 @@ public class Joueur
 {
 	public  final static String[] COULEURS = {"Rouge", "Jaune", "Vert", "Bleu", "Violet", "Rose"};
 
-	private static int nbJoueurs = 0;
+	static int nbJoueurs = 0;
 
 	private int     id;
 	private Robot[] tabRobot;
