@@ -18,10 +18,13 @@ public class IhmCui
 		sc = new Scanner(System.in);
 	}
 
-	public void afficher(String info)
+	public void afficher(String info, CouleurConsole coul)
 	{
+		if(coul != null) Console.couleurFont (coul);
+
 		System.out.println(info);
-		this.afficherPlateau();
+		Console.normal();
+		
 	}
 
 	public void erreur()

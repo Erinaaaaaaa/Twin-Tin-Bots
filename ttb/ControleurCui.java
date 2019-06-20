@@ -51,7 +51,8 @@ public class ControleurCui
 		{
 			Joueur joueur = metier.getJoueurCourant();
 			String action;
-			ihm.afficher(joueur.toString());
+			this.afficherJoueur();
+			ihm.afficherPlateau();
 			do
 				action = ihm.getAction();
 			while (!action.matches("[APERN]")); // actions possibles
@@ -152,7 +153,10 @@ public class ControleurCui
 								executerOrdres(j.getOrdres(i), j.getRobot(i));
 					}
 					if(cpt >= ligne)
-						ihm.afficher(j.toString());
+					{
+						this.afficherJoueur();
+						ihm.afficherPlateau();
+					}
 				}
 				else if(cpt >= ligne)
 					ihm.afficherString(splittedLine);
@@ -176,6 +180,17 @@ public class ControleurCui
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Le fichier scenario" + nbJoueurs + ".data n'existe pas.");
+		}
+	}
+	
+	public void afficherJoueur()
+	{
+		Joueur joueurCourant = metier.getJoueurCourant();
+		for(int i = 0; i < metier.getNbJoueurs(); i++)
+		{
+			if(metier.getJoueur(i) == joueurCourant)
+				ihm.afficher(metier.getJoueur(i).toString(), this.converCouleur(joueurCourant.getCouleur()));
+			else ihm.afficher(metier.getJoueur(i).toString(),null);
 		}
 	}
 
@@ -235,6 +250,10 @@ public class ControleurCui
 	public CouleurConsole getCouleur(int lig, int col)
 	{
 		String couleur = metier.getCouleur(lig,col);
+		return this.converCouleur(couleur);
+	}
+	public CouleurConsole converCouleur(String couleur)
+	{
 		switch(couleur)
 		{
 			case "Vert"  :return CouleurConsole.VERT;
@@ -246,5 +265,6 @@ public class ControleurCui
 			case "Cyan"  :return CouleurConsole.CYAN;
 		}
 		return CouleurConsole.NOIR;
+
 	}
 }
