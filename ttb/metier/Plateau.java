@@ -15,6 +15,7 @@ public class Plateau
 	private int       joueurActuel;
 	private String    fileAttent;
 	private int       pointVictoire;
+	private int       pionDecompte;
 
 	public Plateau(Tuile[][] grille, Joueur[] tabJoueur, String fileAttent)
 	{
@@ -22,6 +23,7 @@ public class Plateau
 		this.tabJoueurs = tabJoueur;
 		this.fileAttent = fileAttent;
 		pointVictoire   = 13 - tabJoueur.length;
+		pionDecompte    = 3;
 	}
 
 	public Joueur getJoueurCourant() {return tabJoueurs[joueurActuel];}
@@ -282,12 +284,50 @@ public class Plateau
 
 	public boolean estPartieFinie()
 	{
+		boolean fini = false;
 		for(Joueur j : tabJoueurs)
-			if(j.getPoints() == pointVictoire)
-				return true;
+			if(j.getPoints() >= pointVictoire)
+				fini = true;
 
-		return false;
+		return (fini || pionDecompte == 0);
 	}
+
+	public Joueur getGagnant()
+	{
+		Joueur gagnant = null;
+		if (pionDecompte != 0)
+		{
+			for (Joueur j : tabJoueurs)
+				if (j.getPoints() >= pointVictoire)
+					gagnant = j;
+		}
+		else
+		{
+			int[] totalPoints = new int[Joueur.nbJoueurs];
+			int ptsMax, indGagne;
+			for (int i = 0; i < totalPoints.length; i++)
+			{
+				totalPoints[i] = tabJoueurs[i].getPoints();
+				for (Robot r : tabJoueurs[i].getRobots())
+					if (r.hasCristal())
+						totalPoints[i] += Integer.parseInt(r.getCristal().toString())-1;
+			}
+
+			indGagne = 0;
+			ptsMax = totalPoints[indGagne];
+			for (int i = 1; i < totalPoints.length; i++)
+				if (ptsMax < totalPoints[i])
+					indGagne = i;
+
+			gagnant = tabJoueurs[indGagne];
+			// TODO: gestion de victoire quand ptsMax égal pour 2 joueurs ou plus
+			// plus gérer en fonction du nb de cristaux d'une certaine couleur.
+		}
+
+		return gagnant;
+	}
+
+	public void enleverPionDecompte() { pionDecompte--; }
 
 	public Joueur getJoueur(int id) {return tabJoueurs[id];}
 }
