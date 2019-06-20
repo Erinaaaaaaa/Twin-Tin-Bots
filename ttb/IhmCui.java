@@ -23,7 +23,7 @@ public class IhmCui
 		this.afficherPlateau();
 	}
 
-	public String    getInfosJoueur(Joueur j)
+	public String getInfosJoueur(Joueur j)
 	{
 		String retour = "Joueur " + (j.getId() + 1) + " : \n";
 		retour += "\tOrdres : ";
@@ -55,9 +55,12 @@ public class IhmCui
 
 	public void afficherString(char[] cara)
 	{
-		String s = new String(cara);
+		System.out.println(new String(cara));
+	}
 
-		System.out.println(s);
+	public void controlesScenario()
+	{
+		System.out.println("[S]uivant | [P]récédent | [Q]uitter");
 	}
 
 	public String getAction()

@@ -156,7 +156,8 @@ public class ControleurCui
 
 				while(!choix.matches("[psq]") && cpt >= ligne && (splittedLine[0] == 'R' || splittedLine[0] == 'J'))
 				{
-					choix = rep.next();
+					ihm.controlesScenario();
+					choix = rep.next().toLowerCase();
 				}
 				if(cpt < ligne || (splittedLine[0] != 'R' && splittedLine[0] != 'J'))
 					choix = "s";
