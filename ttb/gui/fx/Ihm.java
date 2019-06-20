@@ -18,7 +18,6 @@ import java.io.File;
 
 import static ttb.gui.fx.util.Dialog.lireNbJoueur;
 
-// TODO: Implémenter un panneau de commande en bas de la frame pour les ordres
 public class Ihm
 {
     private int robot = 0;

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * Classe launcher, permettant de lancer soit l'IHM CUI ou l'IHM GUI JavaFX
+ *
  * @author Jérémy Auzou
  * @author Matys Achart
  * @author Kemo DESCHAMPS
@@ -26,6 +27,7 @@ public class Launcher
 		switch (choix)
 		{
 			case 1:
+
 				String debug = new Scanner(System.in).nextLine();
 				int nbJoueurs = choisir("Nombre de joueurs");
 				if (debug.equals("yes"))
