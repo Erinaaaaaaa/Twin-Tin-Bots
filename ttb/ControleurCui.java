@@ -99,13 +99,9 @@ public class ControleurCui
 		try {
 			sc = new Scanner(new File("./ttb/scenarios/scenario" + nbJoueurs +".data"), "utf8");
 			rep = new Scanner(System.in);
-			while(cpt < ligne)
-			{
-				sc.nextLine();
-				cpt++;
-			}
-			while (sc.hasNext() && !choix.equals("p")) {
-				ihm.afficherPlateau();
+			while (sc.hasNext() && !choix.equals("p") && !choix.equals("q")) {
+				if(cpt >= ligne)
+					ihm.afficherPlateau();
 				char[] splittedLine = sc.nextLine().toCharArray();
 				if (splittedLine[0] == 'R') {
 					int playerID = Character.getNumericValue(splittedLine[1]);
@@ -113,7 +109,8 @@ public class ControleurCui
 
 					executerOrdres(Arrays.copyOfRange(splittedLine, 3, splittedLine.length),
 					               metier.getJoueur(playerID).getRobot(robotID));
-					ihm.afficherPlateau();
+					if(cpt >= ligne)
+						ihm.afficherPlateau();
 				}
 				else if (splittedLine[0] == 'J') {
 					Joueur j = metier.getJoueur(Character.getNumericValue(splittedLine[1]));
@@ -144,13 +141,14 @@ public class ControleurCui
 							for(int i = 0; i < j.getRobots().length; i++)
 								executerOrdres(j.getOrdres(i), j.getRobot(i));
 					}
-					ihm.afficher(j);
+					if(cpt >= ligne)
+						ihm.afficher(j);
 				}
 				cpt++;
-				do
+				while(!choix.matches("[psq]" && cpt >= ligne)
 				{
 					choix = rep.next();
-				}while(!choix.matches("[ps]"));
+				}
 			}
 
 			if(choix.equals("p"))
