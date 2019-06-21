@@ -443,4 +443,10 @@ public class Plateau
 	{
 		return nbTours;
 	}
+
+	public void setJoueurCourant(int id)
+	{
+		if (id >= 0 && id < tabJoueurs.length)
+			this.joueurActuel = id;
+	}
 }
