@@ -1,0 +1,2 @@
+R0 = rouge | R1 = jaune | R2 = vert | R3 = bleu | R4 = violet | R5 = rose
+R02 4:5|R01 7:1|R10 8:6|R14 1:6|B0 4:7|B1 4:1|CB 4:6|AT CV
