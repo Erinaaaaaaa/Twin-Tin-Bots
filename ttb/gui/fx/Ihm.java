@@ -12,7 +12,6 @@ import ttb.gui.fx.controls.EtatRobot;
 import ttb.gui.fx.controls.ImageRobot;
 import ttb.gui.fx.controls.MainJoueur;
 
-
 import java.io.File;
 
 import ttb.gui.fx.util.Dialog;
@@ -47,6 +46,7 @@ public class Ihm
 
     private MainJoueur mainJoueur;
 
+
     @FXML
     void initPlateau(ActionEvent event)
     {
@@ -59,8 +59,14 @@ public class Ihm
     {
         ctrl.changerJoueur();
         afficherPlateau();
+        gestionFinPartie();
     }
 
+    /**
+     * Obtient le chemin de l'image représentant la tuile indiquée
+     * @param nomTuile nom de la tuile
+     * @return chemin de l'image
+     */
     private String getFichierPlateau(String nomTuile)
     {
         switch(nomTuile)
@@ -82,6 +88,11 @@ public class Ihm
         }
     }
 
+    /**
+     * Obtient le chemin de l'image représentant la tuile indiquée
+     * @param nomCristal nom du cristal
+     * @return chemin de l'image
+     */
     private String getFichierFileAttente(char nomCristal)
     {
         switch (nomCristal)
@@ -98,6 +109,15 @@ public class Ihm
         }
     }
 
+    /**
+     * Crée le composant ImageView nécessaire pour afficher le contenu de
+     * la tuile aux coordonnées ( i ; j )
+     *
+     * @param tuile Tuile aux coordonées i;j
+     * @param i Coordonnée i
+     * @param j Coordonée j
+     * @return ImageView avec l'image correspondante, redimensionnée et pivotée au besoin
+     */
     private ImageView chargerImage(Tuile tuile, int i, int j)
     {
         Robot  r      = this.ctrl.getRobotAPosition(new int[]{i, j});
@@ -105,6 +125,7 @@ public class Ihm
         double angle = 0.0;
         String fic;
 
+        // Il y a un robot
         if (r != null)
         {
             angle = (-210 + r.getDir() * 60);
@@ -124,10 +145,12 @@ public class Ihm
             }
 
         }
-        else if (joueur != null) // c'est une base
+        // Il y a une base
+        else if (joueur != null)
         {
             fic = "bases/base" + joueur.getId();
         }
+        // Il y a autre chose
         else
         {
             fic = getFichierPlateau(tuile.toString());
@@ -144,6 +167,9 @@ public class Ihm
         return iv;
     }
 
+    /**
+     * Met à jour le plateau sur l'IHM GUI.
+     */
     void afficherPlateau()
     {
         this.panePlateau.getChildren().clear();
@@ -163,6 +189,7 @@ public class Ihm
                     {
                         Robot r = this.ctrl.getRobotAPosition(new int[]{i, j});
 
+                        // Placement de l'image
                         int x = ((i) % 2 == 0 ? 23 : 0) + (j) * 46 - 5;
                         if (r != null)
                         {
@@ -186,7 +213,8 @@ public class Ihm
                             this.panePlateau.getChildren().add(iv);
                         }
                     }
-            } else
+            }
+            else
             {
                 File file = new File("./ttb/gui/images/plateau2-4.png");
                 Image image = new Image(file.toURI().toString());
@@ -197,6 +225,7 @@ public class Ihm
                     {
                         Robot r = this.ctrl.getRobotAPosition(new int[]{i, j});
 
+                        // Placement de l'image
                         int x = ((i + 1) % 2 == 0 ? -23 : 0) + (j + 1) * 46 - 5;
                         if (r != null)
                         {
@@ -225,7 +254,7 @@ public class Ihm
             }
         }
 
-        // FILE ATTENTE (X0 = 64, Y0 = 450)
+        // FILE ATTENTE (X0 = 64, Y = 450)
         {
             String file = this.ctrl.getFileAttente();
 
@@ -243,27 +272,19 @@ public class Ihm
             }
         }
 
+        // Mettre à jour l'état des robots des joueurs
         for (TitledPane p : this.accMains.getPanes())
             if (p instanceof EtatRobot)
                 ((EtatRobot) p).updateStatus();
 
-        // Forcer l'ouverture d'un panneau de l'accordéon
+        // Forcer l'ouverture d'un panneau de l'accordéon en fonction du joueur courant
         this.accMains.setExpandedPane(this.accMains.getPanes().get(this.ctrl.getJoueurCourant().getId()));
 
+        // Mettre à jour la main du joueur
         this.vboxDroite.getChildren().remove(this.mainJoueur);
         this.vboxDroite.getChildren().add(this.mainJoueur = new MainJoueur(this.ctrl.getJoueurCourant(), this.ctrl));
 
-        if (ctrl.partieTerminee())
-        {
-            this.hboxGame.setDisable    (true);
-            this.btnFinirTour.setDisable(true);
-            Dialog.afficherNoms(ctrl.getGagnants());
-        }
-        else
-        {
-            this.hboxGame.setDisable    (false);
-            this.btnFinirTour.setDisable(false);
-        }
+        this.gestionFinPartie();
     }
 
     @FXML
@@ -275,6 +296,7 @@ public class Ihm
     @FXML
     void initialize()
     {
+        // Créer une partie
         creerPartie();
 
         this.afficherPlateau();
@@ -284,6 +306,9 @@ public class Ihm
     private Button btnSuiv = null;
     private Label  lblComm = null;
 
+    /**
+     * Prépare une partie
+     */
     private void creerPartie()
     {
         if (this.btnPrec != null) this.tbButtons.getItems().remove(this.btnPrec);
@@ -320,6 +345,7 @@ public class Ihm
 
                 this.updateCommentaire();
                 this.afficherPlateau();
+                this.gestionFinPartie();
             });
 
             btnSuiv = new Button("Suivant");
@@ -327,6 +353,7 @@ public class Ihm
                 ctrl.scenarioSuivant();
                 this.updateCommentaire();
                 this.afficherPlateau();
+                this.gestionFinPartie();
             });
 
             lblComm = new Label("// Commentaires mode debug");
@@ -365,4 +392,19 @@ public class Ihm
             this.lblComm.setText(ctrl.getDernierCommentaire());
     }
 
+    private void gestionFinPartie()
+    {
+        System.out.println("Ihm.gestionFinPartie");
+        if (ctrl.partieTerminee())
+        {
+            this.hboxGame.setDisable    (true);
+            this.btnFinirTour.setDisable(true);
+            Dialog.afficherNoms(ctrl.getGagnants());
+        }
+        else
+        {
+            this.hboxGame.setDisable    (false);
+            this.btnFinirTour.setDisable(false);
+        }
+    }
 }

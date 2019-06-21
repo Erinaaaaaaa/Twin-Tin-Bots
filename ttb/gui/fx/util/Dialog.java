@@ -1,6 +1,7 @@
 package ttb.gui.fx.util;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.StageStyle;
@@ -53,9 +54,10 @@ public class Dialog
 		alert.setContentText("Êtes-vous sûr?");
 		alert.initStyle(StageStyle.UTILITY);
 
-		Optional<ButtonType> result = alert.showAndWait();
+		alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
 
-		return result.isPresent() && result.get() == ButtonType.OK;
+		Optional<ButtonType> result = alert.showAndWait();
+		return result.isPresent() && result.get() == ButtonType.YES;
 	}
 
 	public static void afficherNoms(List<Joueur> gagnants)
