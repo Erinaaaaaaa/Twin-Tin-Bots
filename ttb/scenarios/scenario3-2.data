@@ -3,11 +3,14 @@
 	Le robot rouge prend le cristal bleu
 R00SGC
 	Le robot vert prend un autre cristal
-R21SAG
-R21CDD
+R21SAGCDD
 	On replace le cristal du robot rouge
 R00E
-	On le reprend
+	Le robot vert depose son cristal sur le robot rouge
+R21E
+	Il le reprend
+R21C
+	Le robot rouge reprend son cristal
 R00C
 	On dépose le cristal du robot vert sur le robot rouge
 R21E
