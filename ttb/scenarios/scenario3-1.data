@@ -54,11 +54,17 @@ R10C
 R11CS
     //Le grand robot jaune tourne 1 fois a droite
 R11D 
+    //Le petit robot jaune tourne 2 fois a droite et avance
+R10DDA
     //Le grand robot jaune avance 1 fois
 R11A
-    //Le petit robot jaune tourne a gauche
+    //Le petit robot jaune avance 1 fois
+R10A
+    //Le grand robot jaune avance 1 fois
+R11A
+    //Le grand robot jaune depose
 R11E
-    //Le petit robot jaune depose
+    //Le petit robot vert avance 2 fois
 R20AA
     //Le petit robot vert tourne a gauche
 R20G
