@@ -27,11 +27,12 @@ R00C
 R00AGAD
 //test de reprendre le cristal
 R00E
+R00C
 //Decharger le cristal a cote alors que le robot est vide
 R00GE
 //Pousser robot contre mur
 R00DAA
 //mettre un robot derriere un autre
-R11DDAGAGGA
+R11A
 //pousser un robot contre une base
-R11AA
+R00DAA
