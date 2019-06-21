@@ -10,6 +10,16 @@ import ttb.metier.Tuile;
 
 import java.io.IOException;
 
+/**
+ * Classe ImageRobot
+ * @author Jérémy Auzou
+ * @author Matys Achart
+ * @author Kemo DESCHAMPS
+ * @author Guillaume COUFOURIER
+ * @author Sébastien PRUNIER
+ * @version 2019-06-21
+ */
+
 public class ImageRobot extends Pane
 {
 	@FXML private ImageView imgRobot;

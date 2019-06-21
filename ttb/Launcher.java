@@ -5,8 +5,8 @@ import ttb.gui.fx.LauncherIhm;
 import java.util.Scanner;
 
 /**
- * Classe launcher, permettant de lancer soit l'IHM CUI ou l'IHM GUI JavaFX
- *
+ * Classe launcher
+ * Permet de lancer soit l'IHM CUI ou l'IHM GUI JavaFX
  * @author Jérémy Auzou
  * @author Matys Achart
  * @author Kemo DESCHAMPS

@@ -14,6 +14,16 @@ import ttb.metier.Joueur;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Classe MainJoueur
+ * @author Jérémy Auzou
+ * @author Matys Achart
+ * @author Kemo DESCHAMPS
+ * @author Guillaume COUFOURIER
+ * @author Sébastien PRUNIER
+ * @version 2019-06-21
+ */
+
 public class MainJoueur extends FlowPane
 {
 	private Joueur j;

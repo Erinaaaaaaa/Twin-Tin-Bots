@@ -9,6 +9,16 @@ import ttb.metier.Joueur;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Classe Dialog
+ * @author Jérémy Auzou
+ * @author Matys Achart
+ * @author Kemo DESCHAMPS
+ * @author Guillaume COUFOURIER
+ * @author Sébastien PRUNIER
+ * @version 2019-06-21
+ */
+
 public class Dialog
 {
 	public static int lireNbJoueur()

@@ -6,6 +6,13 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "CodeLens (Launch) - LauncherIhm",
+			"request": "launch",
+			"mainClass": "ttb.gui.fx.LauncherIhm",
+			"projectName": "projet-tut-s2_3ca38c15"
+		},
+		{
+			"type": "java",
 			"name": "CodeLens (Launch) - ControleurCui",
 			"request": "launch",
 			"mainClass": "ttb.ControleurCui",

@@ -6,6 +6,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Classe LauncherIhm.
+ * Lance la version GUI
+ * @author Jérémy Auzou
+ * @author Matys Achart
+ * @author Kemo DESCHAMPS
+ * @author Guillaume COUFOURIER
+ * @author Sébastien PRUNIER
+ * @version 2019-06-21
+ */
+
 public class LauncherIhm extends Application
 {
 

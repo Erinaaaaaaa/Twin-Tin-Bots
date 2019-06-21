@@ -18,6 +18,16 @@ import java.io.IOException;
 
 import static ttb.gui.fx.util.Dialog.demander;
 
+/**
+ * Classe EtatRobot
+ * @author Jérémy Auzou
+ * @author Matys Achart
+ * @author Kemo DESCHAMPS
+ * @author Guillaume COUFOURIER
+ * @author Sébastien PRUNIER
+ * @version 2019-06-21
+ */
+
 public class EtatRobot extends TitledPane
 {
 	private Joueur j;
