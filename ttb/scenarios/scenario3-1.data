@@ -35,9 +35,25 @@ R11A
     //Le grand robot jaune tourne 2 fois a gauche
 R11GG 
     //Le grand robot jaune ramasse 
-R11C 
-    //Le grand robot jaune tourne 3 fois a droite
-R11DDD 
+R11C
+    //Le grand robot jaune tourne 1 fois a gauche
+R11G
+    //Le grand robot jaune avance 2 fois et tourne 3 fois a gauche
+R11SGGG
+    //Le petit robot jaune tourne 1 fois a gauche et avance
+R10GA
+    //Le grand robot jaune depose et avance
+R11EA
+    //Le petit robot jaune charge, avance, tourne 3 fois a droite et depose
+R10CADDDE
+    //Le grand avance
+R11A
+    //Le petit robot charge
+R10C
+    //Le grand robot jaune charge et avance 2 fois
+R11CS
+    //Le grand robot jaune tourne 1 fois a droite
+R11D 
     //Le grand robot jaune avance 1 fois
 R11A
     //Le petit robot jaune tourne a gauche
@@ -52,6 +68,8 @@ R20AAA
 R20C
     //Le petit robot vert avance 1 fois
 R20A
+    //Le petit robot depose
+R20E
     //Le petit robot vert tourne a gauche
 R20G
     //Le petit robot vert depose

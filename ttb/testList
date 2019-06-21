@@ -1,18 +1,27 @@
 Faits :
-- ajouter, enlever, permuter carte, reset carte;
-- avancer, tourner
-- avancer sur une base
-- charger un cristal
-- decharger un cristal sur une base
-- decharger un cristal sur out of bounds
-- decharger cristal sur robot et essayer de le reprendre
-- decharger un robot vide precedemment charge
-- decharger cristal sur cristal
-- pousser un robot contre un mur
-- pousser robot contre base
-- decharger cristal sur robot qui en a deja un
+- ajouter, enlever, permuter carte, reset carte; (2-1)
+- avancer, tourner (Tous)
+- avancer sur une base (3-1)
+- charger un cristal (3-2)
+- decharger un cristal sur une base (3-1)
+- decharger un cristal sur out of bounds 
+- decharger cristal sur robot et essayer de le reprendre (3-2)
+- decharger un robot vide precedemment charge  (2-2)
+- decharger cristal sur cristal (3-1)
+- pousser un robot contre un mur (3-1)
+- pousser robot contre base (3-1)
+- decharger cristal sur robot qui en a deja un (3-1)
+- montrer qu'aucun cristaux n'apparaissent si les places au milieu sont prises 
+- Teste victoire (4-1)
+<<<<<<< Updated upstream
+- pousser un robot jusqu'a un objet (3-1)
+- pousser robot/cristal contre base/mur (3-1)
+
+A faire :
+=======
+- pousser robot/cristal contre base/mur
 
 A faire :
 - pousser un robot jusqu'a un objet
-- pousser robot/cristal contre base/mur
-- montrer qu'aucun cristaux n'apparaissent si les places au milieu sont prises
+>>>>>>> Stashed changes
+
