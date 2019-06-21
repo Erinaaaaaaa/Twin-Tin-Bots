@@ -8,7 +8,7 @@
 ./ttb/ControleurCui.java
 ./ttb/IhmCui.java
 
-./ttb/gui/fx/Launcher.java
+./ttb/gui/fx/LauncherIhm.java
 ./ttb/gui/fx/ControleurIhm.java
 ./ttb/gui/fx/Ihm.java
 ./ttb/gui/fx/controls/EtatRobot.java
