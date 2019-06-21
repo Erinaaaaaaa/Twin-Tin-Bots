@@ -52,6 +52,8 @@ R20AAA
 R20C
     //Le petit robot vert avance 1 fois
 R20A
+    //Le petit robot depose
+R20E
     //Le petit robot vert tourne a gauche
 R20G
     //Le petit robot vert depose
