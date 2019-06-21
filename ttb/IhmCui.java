@@ -43,7 +43,6 @@ public class IhmCui
 
 		System.out.println(info);
 		Console.normal();
-		
 	}
 
 	public void erreur()
