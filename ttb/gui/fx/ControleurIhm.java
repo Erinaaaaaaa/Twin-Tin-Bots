@@ -6,6 +6,7 @@ import ttb.metier.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class ControleurIhm
@@ -16,12 +17,15 @@ public class ControleurIhm
 	private Ihm     ihm;
 	private int     coupsDuTour;
 	private boolean modeScenario;
+	private boolean robot1;
+	private boolean robot2;
 
 	public ControleurIhm(int nbJoueurs, Ihm ihm)
 	{
 		this.coupsDuTour = 0;
 		this.metier = SetGrille.initGrille(nbJoueurs);
 		this.ihm = ihm;
+		this.robot1 = this.robot2 = false;
 	}
 
 	public ControleurIhm(int nbJoueurs, Ihm ihm, int numScenario)
@@ -36,12 +40,20 @@ public class ControleurIhm
 	public int getNbJoueurs() {	return this.metier.getNbJoueurs(); }
 	public Joueur getJoueur(int i) { return this.metier.getJoueur(i); }
 	public Joueur getJoueurCourant() { return this.metier.getJoueurCourant(); }
-	public void avancer(Robot robot, boolean b) { if (this.modeScenario) return; this.metier.avancer(robot, b); }
-	public void chargerCristal(Robot robot) { if (this.modeScenario) return; this.metier.chargerCristal(robot); }
-	public void deposerCristal(Robot robot) { if (this.modeScenario) return; this.metier.deposerCristal(robot); }
 	public void changerJoueur()
 	{
 		if (this.modeScenario) return;
+
+		if (premierTour())
+		{
+			// TODO PREMIER TOUR
+			if (robot1 && robot2)
+			{
+				robot1 = robot2 = false;
+			}
+			else return;
+		}
+
 		executerOrdres(
 				this.metier.getJoueurCourant().getOrdres(0),
 				this.metier.getJoueurCourant().getRobot(0)
@@ -54,6 +66,22 @@ public class ControleurIhm
 		this.metier.changerJoueur();
 		this.coupsDuTour = 0;
 	}
+
+	public boolean partieTerminee()
+	{
+		return metier.estPartieFinie();
+	}
+
+	public List<Joueur> getGagnants()
+	{
+		return metier.getGagnant();
+	}
+
+	private boolean premierTour()
+	{
+		return metier.getNbTours() < metier.getNbJoueurs();
+	}
+
 	public Robot getRobotAPosition(int[] coords) { return this.metier.getRobotAPosition(coords); }
 	public Joueur getJoueurParBase(int[] coords) { return this.metier.getJoueurParBase(coords); }
 	public Tuile[][] getTuiles() { return this.metier.getTuiles(); }
@@ -74,6 +102,7 @@ public class ControleurIhm
 	public void supprimerOrdre(int robot, int indice)
 	{
 		if (this.modeScenario) return;
+		if (premierTour())     return;
 		if (peutJouer())
 		{
 			this.metier.getJoueurCourant().enleverOrdre(robot, indice);
@@ -87,16 +116,58 @@ public class ControleurIhm
 		if (this.modeScenario) return;
 		if (peutJouer())
 		{
-			if (this.source.getRobot() > -1 && this.source.getRobot() == robot)
+			if (premierTour())
 			{
-				this.metier.getJoueurCourant().permuterOrdre(robot, this.source.getIndice(), indice);
-			} else
-			{
-				this.metier.getJoueurCourant().ajouterOrdre(robot, indice, source.getAction());
+				System.out.println("premier tour");
+				if (robot == 0)
+				{
+					System.out.println("robot 1");
+					if (robot1)
+					{
+						System.out.println("deja ajouté");
+						return;
+					}
+					else
+					{
+						this.robot1 = true;
+						System.out.println("ajout");
+						this.metier.getJoueurCourant().ajouterOrdre(robot, indice, source.getAction());
+						this.setSource(null);
+						this.ihm.afficherPlateau();
+						this.coupsDuTour++;
+					}
+				}
+				else if (robot == 1)
+				{
+					System.out.println("robot 2");
+					if (robot2)
+					{
+						System.out.println("deja ajouté");
+						return;
+					}
+					else
+					{
+						this.robot2 = true;
+						this.metier.getJoueurCourant().ajouterOrdre(robot, indice, source.getAction());
+						this.setSource(null);
+						this.ihm.afficherPlateau();
+						this.coupsDuTour++;
+					}
+				}
 			}
-			this.setSource(null);
-			this.ihm.afficherPlateau();
-			this.coupsDuTour++;
+			else
+			{
+				if (this.source.getRobot() > -1 && this.source.getRobot() == robot)
+				{
+					this.metier.getJoueurCourant().permuterOrdre(robot, this.source.getIndice(), indice);
+				} else
+				{
+					this.metier.getJoueurCourant().ajouterOrdre(robot, indice, source.getAction());
+				}
+				this.setSource(null);
+				this.ihm.afficherPlateau();
+				this.coupsDuTour++;
+			}
 		}
 	}
 
@@ -113,7 +184,7 @@ public class ControleurIhm
 
 	private boolean peutJouer()
 	{
-		if (metier.getNbTours() < metier.getNbJoueurs())
+		if (premierTour())
 			return this.coupsDuTour < 2;
 		else
 			return this.coupsDuTour < 1;
@@ -155,6 +226,11 @@ public class ControleurIhm
 	private int     ligne = 0;
 	String dernierCommentaire = "";
 
+	public boolean isModeScenario()
+	{
+		return this.modeScenario;
+	}
+
 	public void scenarioInit()
 	{
 		this.coupsDuTour = 0;
@@ -191,6 +267,7 @@ public class ControleurIhm
 			else if (splittedLine[0] == 'J') // exécute les ordres selon la main du joueur.
 			{
 				Joueur j = metier.getJoueur(Character.getNumericValue(splittedLine[1]));
+				metier.setJoueurCourant(Character.getNumericValue(splittedLine[1]));
 				int idRobot;
 				switch (splittedLine[2])
 				{

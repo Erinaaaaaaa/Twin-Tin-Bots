@@ -20,7 +20,7 @@
             <Button fx:id="btnFinirTour" mnemonicParsing="false" onAction="#changerJoueur" text="Terminer le tour" />
          </items>
       </ToolBar>
-      <HBox VBox.vgrow="ALWAYS">
+      <HBox VBox.vgrow="ALWAYS" fx:id="hboxGame">
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                <children>
