@@ -64,6 +64,10 @@ public class EtatRobot extends TitledPane
 		this.setText("Joueur " + (j.getId() + 1) );
 	}
 
+	/**
+	 * Met à jour le contenu de cet EtatRobot avec des informations à jour sur ce joueur.
+	 * Le texte du panneau est mis en GRAS si celui-ci représente le joueur courant.
+	 */
 	public void updateStatus()
 	{
 		this.setText("Joueur " + (j.getId() + 1) + " - " + j.getPoints() + " point" + (j.getPoints() > 1 ? "s" : ""));

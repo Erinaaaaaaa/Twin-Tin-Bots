@@ -12,6 +12,7 @@ import java.util.Scanner;
 /**
  * Classe ControleurIhm
  * Controleur de la version GUI
+ *
  * @author Jérémy Auzou
  * @author Matys Achart
  * @author Kemo DESCHAMPS
@@ -199,6 +200,16 @@ public class ControleurIhm
 			return this.coupsDuTour < 2;
 		else
 			return this.coupsDuTour < 1;
+	}
+
+	public boolean derniersTours()
+	{
+		return this.metier.getFileAttente().isEmpty();
+	}
+
+	public int toursRestants()
+	{
+		return this.metier.getDecompte();
 	}
 
 	public void executerOrdres(char[] ordres, Robot r)

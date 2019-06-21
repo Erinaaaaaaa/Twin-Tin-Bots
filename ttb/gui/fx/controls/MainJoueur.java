@@ -96,8 +96,6 @@ public class MainJoueur extends FlowPane
 
 	void imageClick(MouseEvent event)
 	{
-		System.out.println((int)((ImageView)event.getSource()).getUserData());
-
 		int indice = (int)((ImageView)event.getSource()).getUserData();
 
 		this.ctrl.setSource(new Action(indice, -1, this.ctrl.getJoueurCourant().getReserve().get(indice)));
