@@ -182,7 +182,7 @@ public class IhmCui
 		String s = "";
 		for(int i = 0; i < j.getRobots().length; i++)
 		{
-			s += "\nRobot " + (i+1) + " :\n\t";
+			s += "\n" + ((i == 1)?"Grand":"Petit") + " robot :\n\t";
 			for(char c : j.getOrdres(i))
 			{
 				s += ("[");
