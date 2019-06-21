@@ -21,7 +21,7 @@ import ttb.metier.Tuile;
 
 /**
  * Classe Ihm
- * Ihm de la version GUI
+ * Ihm de la version GUI en JavaFX
  * @author Jérémy Auzou
  * @author Matys Achart
  * @author Kemo DESCHAMPS
@@ -46,7 +46,9 @@ public class Ihm
 
     private MainJoueur mainJoueur;
 
-
+    /**
+     * Gestionnaire d'évnènement du bouton "Recommencer la partie"
+     */
     @FXML
     void initPlateau(ActionEvent event)
     {
@@ -54,6 +56,9 @@ public class Ihm
         afficherPlateau();
     }
 
+    /**
+     * Gestionnaire d'évènement du bouton "Terminer le tour"
+     */
     @FXML
     void changerJoueur(ActionEvent event)
     {
@@ -290,12 +295,18 @@ public class Ihm
         this.gestionFinPartie();
     }
 
+    /**
+     * Gestionnaire d'évènement du bouton "Annuler sélection"
+     */
     @FXML
     void annulerSelection(ActionEvent event)
     {
         this.ctrl.setSource(null);
     }
 
+    /**
+     * Méthode initialisant l'interface graphique
+     */
     @FXML
     void initialize()
     {
@@ -389,12 +400,18 @@ public class Ihm
                 ((EtatRobot) p).updateStatus();
     }
 
+    /**
+     * Met à jour le commentaire en mode scénario
+     */
     private void updateCommentaire()
     {
         if (this.lblComm != null)
             this.lblComm.setText(ctrl.getDernierCommentaire());
     }
 
+    /**
+     * Détermine la fin de partie et agit en conséquence
+     */
     private void gestionFinPartie()
     {
         if (ctrl.partieTerminee())

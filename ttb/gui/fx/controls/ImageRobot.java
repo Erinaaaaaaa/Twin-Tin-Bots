@@ -12,6 +12,9 @@ import java.io.IOException;
 
 /**
  * Classe ImageRobot
+ *
+ * Composant dessinant le robot et son cristal si il en porte un
+ *
  * @author Jérémy Auzou
  * @author Matys Achart
  * @author Kemo DESCHAMPS

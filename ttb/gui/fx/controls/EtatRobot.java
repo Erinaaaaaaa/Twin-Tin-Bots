@@ -70,6 +70,7 @@ public class EtatRobot extends TitledPane
 	 */
 	public void updateStatus()
 	{
+		// Mettre à jour le titre de cette TitledPane
 		this.setText("Joueur " + (j.getId() + 1) + " - " + j.getPoints() + " point" + (j.getPoints() > 1 ? "s" : ""));
 		this.setFont(Font.font(
 				this.getFont().getFamily(),
@@ -77,6 +78,7 @@ public class EtatRobot extends TitledPane
 				this.getFont().getSize()
 		));
 
+		// Définir l'image du des robots et des tuiles
 		this.imgR1.setImage(new Image(
 				getClass().getResourceAsStream("../../images/robots/petit" + this.j.getId() + ".png")
 		));
@@ -94,6 +96,11 @@ public class EtatRobot extends TitledPane
 		this.imgR2A3.setImage(getImageTuile(this.j.getOrdres(1)[2]));
 	}
 
+	/**
+	 * Obtenir une Image représentant une tuile d'action
+	 * @param action caractère représentant l'action
+	 * @return l'Image avec l'image de tuile
+	 */
 	private Image getImageTuile(char action)
 	{
 		String uri = MainJoueur.getImageFromTuile(action);
@@ -101,6 +108,9 @@ public class EtatRobot extends TitledPane
 		return new Image(getClass().getResourceAsStream(uri));
 	}
 
+	/**
+	 * Gestionnaire d'évènement pour un clic sur image
+	 */
 	@FXML
 	void imgClick(MouseEvent event)
 	{
@@ -142,6 +152,9 @@ public class EtatRobot extends TitledPane
 		}
 	}
 
+	/**
+	 * Gestionnaire d'évènemment du bouton du reset du robot 1
+	 */
 	@FXML
 	void robot1Reset(ActionEvent event)
 	{
@@ -149,6 +162,9 @@ public class EtatRobot extends TitledPane
 			this.ctrl.resetRobot(0);
 	}
 
+	/**
+	 * Gestionnaire d'évènemment du bouton du reset du robot 2
+	 */
 	@FXML
 	void robot2Reset(ActionEvent event)
 	{

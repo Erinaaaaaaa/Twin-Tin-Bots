@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 /**
  * Classe MainJoueur
+ *
+ * Affiche visuellement la réserve du joueur courant
+ *
  * @author Jérémy Auzou
  * @author Matys Achart
  * @author Kemo DESCHAMPS
@@ -51,6 +54,8 @@ public class MainJoueur extends FlowPane
 		for (int i = 0; i < reserve.size(); i++)
 		{
 			ImageView img = creerImage(reserve.get(i));
+
+			// Insère l'indice de l'action dans l'ImageView pour le passer au contrôleur
 			img.setUserData(i);
 
 			FlowPane.setMargin(img, new Insets(5));
@@ -59,6 +64,11 @@ public class MainJoueur extends FlowPane
 		}
 	}
 
+	/**
+	 * Crée une ImageView en fonction du de l'action passée en paramètre
+	 * @param c caractère représentant une action
+	 * @return ImageView avec l'image représentant l'action
+	 */
 	private ImageView creerImage(char c)
 	{
 		ImageView iv = new ImageView();
@@ -73,6 +83,11 @@ public class MainJoueur extends FlowPane
 		return iv;
 	}
 
+	/**
+	 * Retourne le chemin d'accès à l'image correspondant au caractère passé en paramètre
+	 * @param c caractère représentant une tuile d'action
+	 * @return chemin d'accès à l'image
+	 */
 	static String getImageFromTuile(char c)
 	{
 		switch (c)
@@ -94,6 +109,9 @@ public class MainJoueur extends FlowPane
 		}
 	}
 
+	/**
+	 * Gestionnaire d'évènement de clic sur une image
+	 */
 	void imageClick(MouseEvent event)
 	{
 		int indice = (int)((ImageView)event.getSource()).getUserData();

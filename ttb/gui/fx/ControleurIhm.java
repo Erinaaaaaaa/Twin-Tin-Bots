@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  * Classe ControleurIhm
- * Controleur de la version GUI
+ * Controleur de la version GUI JavaFX
  *
  * @author Jérémy Auzou
  * @author Matys Achart
@@ -55,16 +55,33 @@ public class ControleurIhm
 	}
 
 	// Méthodes pour jouer
+	/**
+	 * Obtient le nombre de joueurs
+	 */
 	public int getNbJoueurs() {	return this.metier.getNbJoueurs(); }
+
+	/**
+	 * Obtient un joueur en fonction de l'indice
+	 * @param i indice du joueur
+	 * @return Joueur à cet indice
+	 */
 	public Joueur getJoueur(int i) { return this.metier.getJoueur(i); }
+
+	/**
+	 * Obtient le joueur courant
+	 * @return le joueur courant
+	 */
 	public Joueur getJoueurCourant() { return this.metier.getJoueurCourant(); }
+
+	/**
+	 * Passe au joueur suivant
+	 */
 	public void changerJoueur()
 	{
 		if (this.modeScenario) return;
 
 		if (premierTour())
 		{
-			// TODO PREMIER TOUR
 			if (robot1 && robot2)
 			{
 				robot1 = robot2 = false;
@@ -85,26 +102,62 @@ public class ControleurIhm
 		this.coupsDuTour = 0;
 	}
 
+	/**
+	 * Obtient si la partie est terminée
+	 * @return vrai si la partie est terminée
+	 */
 	public boolean partieTerminee()
 	{
 		return metier.estPartieFinie();
 	}
 
+	/**
+	 * Retourne la liste de gagnants.
+	 * @return la liste de gagnants.
+	 */
 	public List<Joueur> getGagnants()
 	{
 		return metier.getGagnant();
 	}
 
+	/**
+	 * @return vrai si appelée lors du premier tour
+	 */
 	private boolean premierTour()
 	{
 		return metier.getNbTours() < metier.getNbJoueurs();
 	}
 
+	/**
+	 * Obtient le robot au coordonnées indiquées
+	 * @param coords coordonnées du robot
+	 * @return Robot si existant, null sinon
+	 */
 	public Robot getRobotAPosition(int[] coords) { return this.metier.getRobotAPosition(coords); }
+
+	/**
+	 * Obtient le joueur auquel appartient la base indiquée par les coordonnées fournies
+	 * @param coords coordonnées de la base
+	 * @return Joueur si les coordonnées pointent sur une base, null sinon
+	 */
 	public Joueur getJoueurParBase(int[] coords) { return this.metier.getJoueurParBase(coords); }
+
+	/**
+	 * Obtient le tableau des tuiles
+	 * @return le tableau des tuiles
+	 */
 	public Tuile[][] getTuiles() { return this.metier.getTuiles(); }
+
+	/**
+	 * Obtient la file d'attente de cristaux
+	 * @return un String représentant la file d'attente de cristaux
+	 */
 	public String getFileAttente() { return this.metier.getFileAttente(); }
 
+	/**
+	 * Définit la source de l'action pendant un tour
+	 * @param a source de l'action
+	 */
 	public void setSource(Action a)
 	{
 		if (this.modeScenario) return;
@@ -112,11 +165,20 @@ public class ControleurIhm
 		this.ihm.afficherPlateau();
 	}
 
+	/**
+	 * Obtient la source de l'action
+	 * @return la source de l'action
+	 */
 	public Action getSource()
 	{
 		return this.source;
 	}
 
+	/**
+	 * Supprime l'ordre d'un robot
+	 * @param robot indice du robot
+	 * @param indice indice de l'ordre
+	 */
 	public void supprimerOrdre(int robot, int indice)
 	{
 		if (this.modeScenario) return;
@@ -129,6 +191,11 @@ public class ControleurIhm
 		}
 	}
 
+	/**
+	 * Ajoute un ordre à un robot
+	 * @param robot indice du robot
+	 * @param indice indice de l'ordre
+	 */
 	public void ajouterOrdre(int robot, int indice)
 	{
 		if (this.modeScenario) return;
@@ -136,19 +203,11 @@ public class ControleurIhm
 		{
 			if (premierTour())
 			{
-				System.out.println("premier tour");
 				if (robot == 0)
 				{
-					System.out.println("robot 1");
-					if (robot1)
-					{
-						System.out.println("deja ajouté");
-						return;
-					}
-					else
+					if (!robot1)
 					{
 						this.robot1 = true;
-						System.out.println("ajout");
 						this.metier.getJoueurCourant().ajouterOrdre(robot, indice, source.getAction());
 						this.setSource(null);
 						this.ihm.afficherPlateau();
@@ -157,13 +216,7 @@ public class ControleurIhm
 				}
 				else if (robot == 1)
 				{
-					System.out.println("robot 2");
-					if (robot2)
-					{
-						System.out.println("deja ajouté");
-						return;
-					}
-					else
+					if (!robot2)
 					{
 						this.robot2 = true;
 						this.metier.getJoueurCourant().ajouterOrdre(robot, indice, source.getAction());
@@ -189,6 +242,10 @@ public class ControleurIhm
 		}
 	}
 
+	/**
+	 * Réinitalise les ordres d'un robot
+	 * @param i indice du robot
+	 */
 	public void resetRobot(int i)
 	{
 		if (this.modeScenario) return;
@@ -200,6 +257,10 @@ public class ControleurIhm
 		}
 	}
 
+	/**
+	 * Retourne vrai si le joueur peut jouer
+	 * @return vrai si le joueur peut jouer
+	 */
 	private boolean peutJouer()
 	{
 		if (premierTour())
@@ -208,16 +269,29 @@ public class ControleurIhm
 			return this.coupsDuTour < 1;
 	}
 
+	/**
+	 * Retourne vrai si tous les cristaux de la file d'attente ont été déposés
+	 * @return
+	 */
 	public boolean derniersTours()
 	{
 		return this.metier.getFileAttente().isEmpty();
 	}
 
+	/**
+	 * Obtient le nombre de tours restants
+	 * @return le nombre de tours restants
+	 */
 	public int toursRestants()
 	{
 		return this.metier.getDecompte();
 	}
 
+	/**
+	 * Exécute les ordres d'un robot
+	 * @param ordres Tableau d'ordres à exécuter
+	 * @param r Robot sur lequel exécuter les ordres
+	 */
 	public void executerOrdres(char[] ordres, Robot r)
 	{
 		for (char ordre : ordres)
@@ -254,11 +328,17 @@ public class ControleurIhm
 	private int     ligne = 0;
 	String dernierCommentaire = "";
 
+	/**
+	 * @return vrai si ce Controleur gère un scénario
+	 */
 	public boolean isModeScenario()
 	{
 		return this.modeScenario;
 	}
 
+	/**
+	 * Initialise un scénario.
+	 */
 	public void scenarioInit()
 	{
 		this.victoireAck = false;
@@ -275,6 +355,10 @@ public class ControleurIhm
 		}
 	}
 
+	/**
+	 * Passe a l'étape suivante d'un scénario
+	 * @return le commentaire le plus récent du fichier de scénario
+	 */
 	public String scenarioSuivant()
 	{
 		if (sc.hasNext())
@@ -329,8 +413,6 @@ public class ControleurIhm
 			}
 			else
 			{
-				// C'est un commentaire
-				// System.out.println(line);
 				ligne--;
 				dernierCommentaire = line + '\n' + scenarioSuivant();
 				return dernierCommentaire;
@@ -339,6 +421,10 @@ public class ControleurIhm
 		return "// Fin de fichier";
 	}
 
+	/**
+	 * Passe a l'étape précédente d'un scénario
+	 * @return le commentaire le plus récent d'un scénario
+	 */
 	public String scenarioPrecedent()
 	{
 		scenarioInit();
@@ -350,8 +436,14 @@ public class ControleurIhm
 		return retour;
 	}
 
+	/**
+	 * @return le dernier commentaire du scénario courant
+	 */
 	public String getDernierCommentaire() { return this.dernierCommentaire; }
 
+	/**
+	 * @return vrai si la victoire a été prise en compte
+	 */
 	public boolean getVictoireAck()
 	{
 		return victoireAck;

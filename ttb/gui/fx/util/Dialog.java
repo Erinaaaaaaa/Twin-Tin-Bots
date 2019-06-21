@@ -12,6 +12,9 @@ import java.util.Optional;
 
 /**
  * Classe Dialog
+ *
+ * Boite à outils pour afficher diverses popups
+ *
  * @author Jérémy Auzou
  * @author Matys Achart
  * @author Kemo DESCHAMPS
@@ -22,6 +25,10 @@ import java.util.Optional;
 
 public class Dialog
 {
+	/**
+	 * Demande le nombre de joueurs à l'utilisateur
+	 * @return nombre de joueurs. -1 si aucune réponse
+	 */
 	public static int lireNbJoueur()
 	{
 		TextInputDialog dialog = new TextInputDialog("2");
@@ -34,6 +41,10 @@ public class Dialog
 		return result.map(Integer::parseInt).orElse(-1);
 	}
 
+	/**
+	 * Demande le numéro du scénario à l'utilisateur
+	 * @return le numéro du scénarion. -1 si aucune réponse
+	 */
 	public static int lireNumScenario()
 	{
 		TextInputDialog dialog = new TextInputDialog("2");
@@ -46,6 +57,11 @@ public class Dialog
 		return result.map(Integer::parseInt).orElse(-1);
 	}
 
+	/**
+	 * Demande une question oui/non à l'utilisateur
+	 * @param message question
+	 * @return réponse
+	 */
 	public static boolean demander(String message)
 	{
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -60,6 +76,10 @@ public class Dialog
 		return result.isPresent() && result.get() == ButtonType.YES;
 	}
 
+	/**
+	 * Affiche les noms des joueurs gagnants
+	 * @param gagnants joueurs gagnants
+	 */
 	public static void afficherNoms(List<Joueur> gagnants)
 	{
 		StringBuilder s = new StringBuilder();
