@@ -25,7 +25,6 @@ public class ControleurCui
 {
 	private Plateau metier;
 	private IhmCui  ihm;
-	private int cptTours;
 
 	public ControleurCui(int nbJoueurs)
 	{
@@ -91,6 +90,7 @@ public class ControleurCui
 				executerOrdres(ordres, r);
 				i++;
 			}while(i < 2);
+
 			ihm.afficherPlateau();
 			metier.changerJoueur();
 		}while(!metier.estPartieFinie());
@@ -123,10 +123,10 @@ public class ControleurCui
 	 * Si action joueur, on exécute sur ses 2 robots.<br>
 	 */
 	public void debug(int nbJoueurs, int ligne, int numScenar) {
-		Scanner sc = null;
-		Scanner rep = null;
+		Scanner sc   = null;
+		Scanner rep  = null;
 		String choix = "s";
-		int cpt = 0;
+		int cpt      = 0;
 
 		try
 		{
@@ -230,6 +230,7 @@ public class ControleurCui
 	public void afficherJoueur()
 	{
 		Joueur joueurCourant = metier.getJoueurCourant();
+
 		for(int i = 0; i < metier.getNbJoueurs(); i++)
 		{
 			if(metier.getJoueur(i) == joueurCourant)
@@ -273,6 +274,35 @@ public class ControleurCui
 		}
 	}
 
+	public Tuile[][] getPlateau()          { return metier.getTuiles(); }
+	public String    getAffichagePlateau() { return metier.toString();  }
+
+	public int getNbLigne()  {return metier.getNbLigne();}
+	public int getNbColonne(){return metier.getNbColonne();}
+	
+	public String getSymbole(int lig, int col){return metier.getSymbole(lig,col);}
+
+	public CouleurConsole getCouleur(int lig, int col)
+	{
+		String couleur = metier.getCouleur(lig,col);
+		return this.converCouleur(couleur);
+	}
+	public CouleurConsole converCouleur(String couleur)
+	{
+		switch(couleur)
+		{
+			case "Vert"  : return CouleurConsole.VERT;
+			case "Rouge" : return CouleurConsole.ROUGE;
+			case "Jaune" : return CouleurConsole.JAUNE;
+			case "Bleu"  : return CouleurConsole.BLEU;
+			case "Violet": return CouleurConsole.MAUVE;
+			case "Rose"  : return CouleurConsole.CYAN;
+			case "Cyan"  : return CouleurConsole.CYAN;
+		}
+		return CouleurConsole.NOIR;
+
+	}
+
 	public static void main(String[] args)
 	{
 		System.out.println("Combien de joueurs ? [2-6]");
@@ -295,33 +325,5 @@ public class ControleurCui
 		else
 			new ControleurCui(nbJ).jouer();
 		sc.close();
-	}
-
-	public Tuile[][] getPlateau()          { return metier.getTuiles(); }
-	public String    getAffichagePlateau() { return metier.toString();  }
-
-	public int getNbLigne(){return metier.getNbLigne();}
-	public int getNbColonne(){return metier.getNbColonne();}
-	public String getSymbole(int lig, int col){return metier.getSymbole(lig,col);}
-
-	public CouleurConsole getCouleur(int lig, int col)
-	{
-		String couleur = metier.getCouleur(lig,col);
-		return this.converCouleur(couleur);
-	}
-	public CouleurConsole converCouleur(String couleur)
-	{
-		switch(couleur)
-		{
-			case "Vert"  : return CouleurConsole.VERT;
-			case "Rouge" : return CouleurConsole.ROUGE;
-			case "Jaune" : return CouleurConsole.JAUNE;
-			case "Bleu"  : return CouleurConsole.BLEU;
-			case "Violet": return CouleurConsole.MAUVE;
-			case "Rose"  : return CouleurConsole.CYAN;
-			case "Cyan"  : return CouleurConsole.CYAN;
-		}
-		return CouleurConsole.NOIR;
-
 	}
 }
