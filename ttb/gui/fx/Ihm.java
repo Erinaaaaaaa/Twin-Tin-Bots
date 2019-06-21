@@ -284,6 +284,9 @@ public class Ihm
         this.vboxDroite.getChildren().remove(this.mainJoueur);
         this.vboxDroite.getChildren().add(this.mainJoueur = new MainJoueur(this.ctrl.getJoueurCourant(), this.ctrl));
 
+        if (ctrl.derniersTours())
+            this.lblComm.setText(ctrl.toursRestants() + " tours");
+
         this.gestionFinPartie();
     }
 
@@ -364,6 +367,8 @@ public class Ihm
         else
         {
             this.ctrl = new ControleurIhm(Dialog.lireNbJoueur(), this);
+            this.lblComm = new Label("");
+            this.tbButtons.getItems().add(this.lblComm);
             this.btnFinirTour.setDisable(false);
         }
 
