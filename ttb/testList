@@ -10,8 +10,9 @@ Faits :
 - decharger cristal sur cristal
 - pousser un robot contre un mur
 - pousser robot contre base
+- decharger cristal sur robot qui en a deja un
 
 A faire :
 - pousser un robot jusqu'a un objet
 - pousser robot/cristal contre base/mur
-- decharger cristal sur robot qui en a deja un
+- montrer qu'aucun cristaux n'apparaissent si les places au milieu sont prises
