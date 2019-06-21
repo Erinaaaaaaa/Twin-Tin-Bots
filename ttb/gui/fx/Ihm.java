@@ -311,12 +311,12 @@ public class Ihm
             this.ctrl = new ControleurIhm(Dialog.lireNbJoueur(), this, scenario);
             btnPrec = new Button("Précédent");
             btnPrec.setOnAction(event -> {
-                ctrl.scenarioPrecedent();
+                System.out.println(ctrl.scenarioPrecedent());
                 this.afficherPlateau();
             });
             btnSuiv = new Button("Suivant");
             btnSuiv.setOnAction(event -> {
-                ctrl.scenarioSuivant();
+                System.out.println(ctrl.scenarioSuivant());
                 this.afficherPlateau();
             });
             this.tbButtons.getItems().add(this.btnPrec);

@@ -61,7 +61,6 @@ public class EtatRobot extends TitledPane
 		assert imgR2A3 != null : "fx:id=\"imgR2A3\" was not injected: check your FXML file 'EtatRobot.fxml'.";
 	}
 
-	// TODO: Aller lire les ordres dans le Joueur et adapter imgR#A#
 	public void updateStatus()
 	{
 		this.setText("Joueur " + (j.getId() + 1) + " - " + j.getPoints() + " point" + (j.getPoints() > 1 ? "s" : ""));

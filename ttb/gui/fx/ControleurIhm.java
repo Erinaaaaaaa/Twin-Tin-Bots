@@ -15,6 +15,7 @@ public class ControleurIhm
 	private Plateau metier;
 	private Ihm     ihm;
 	private int     coupsDuTour;
+	private boolean modeScenario;
 
 	public ControleurIhm(int nbJoueurs, Ihm ihm)
 	{
@@ -27,6 +28,7 @@ public class ControleurIhm
 	{
 		this(nbJoueurs, ihm);
 		this.numScenario = numScenario;
+		this.modeScenario = true;
 		scenarioInit();
 	}
 
@@ -34,12 +36,12 @@ public class ControleurIhm
 	public int getNbJoueurs() {	return this.metier.getNbJoueurs(); }
 	public Joueur getJoueur(int i) { return this.metier.getJoueur(i); }
 	public Joueur getJoueurCourant() { return this.metier.getJoueurCourant(); }
-	public void avancer(Robot robot, boolean b) { this.metier.avancer(robot, b); }
-	public void chargerCristal(Robot robot) { this.metier.chargerCristal(robot); }
-	public void deposerCristal(Robot robot) { this.metier.deposerCristal(robot); }
+	public void avancer(Robot robot, boolean b) { if (this.modeScenario) return; this.metier.avancer(robot, b); }
+	public void chargerCristal(Robot robot) { if (this.modeScenario) return; this.metier.chargerCristal(robot); }
+	public void deposerCristal(Robot robot) { if (this.modeScenario) return; this.metier.deposerCristal(robot); }
 	public void changerJoueur()
 	{
-
+		if (this.modeScenario) return;
 		executerOrdres(
 				this.metier.getJoueurCourant().getOrdres(0),
 				this.metier.getJoueurCourant().getRobot(0)
@@ -59,6 +61,7 @@ public class ControleurIhm
 
 	public void setSource(Action a)
 	{
+		if (this.modeScenario) return;
 		this.source = a;
 		this.ihm.afficherPlateau();
 	}
@@ -70,7 +73,8 @@ public class ControleurIhm
 
 	public void supprimerOrdre(int robot, int indice)
 	{
-		if (!actionEffectuee())
+		if (this.modeScenario) return;
+		if (peutJouer())
 		{
 			this.metier.getJoueurCourant().enleverOrdre(robot, indice);
 			this.ihm.afficherPlateau();
@@ -80,7 +84,8 @@ public class ControleurIhm
 
 	public void ajouterOrdre(int robot, int indice)
 	{
-		if (!actionEffectuee())
+		if (this.modeScenario) return;
+		if (peutJouer())
 		{
 			if (this.source.getRobot() > -1 && this.source.getRobot() == robot)
 			{
@@ -97,7 +102,8 @@ public class ControleurIhm
 
 	public void resetRobot(int i)
 	{
-		if (!actionEffectuee())
+		if (this.modeScenario) return;
+		if (peutJouer())
 		{
 			this.metier.getJoueurCourant().resetOrdres(i);
 			this.ihm.afficherPlateau();
@@ -105,13 +111,12 @@ public class ControleurIhm
 		}
 	}
 
-	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
-	private boolean actionEffectuee()
+	private boolean peutJouer()
 	{
 		if (metier.getNbTours() < metier.getNbJoueurs())
-			return this.coupsDuTour >= 2;
+			return this.coupsDuTour < 2;
 		else
-			return this.coupsDuTour >= 1;
+			return this.coupsDuTour < 1;
 	}
 
 	public void executerOrdres(char[] ordres, Robot r)
@@ -148,6 +153,7 @@ public class ControleurIhm
 	private Scanner sc;
 	private int     numScenario;
 	private int     ligne = 0;
+	String dernierCommentaire = "";
 
 	public void scenarioInit()
 	{
@@ -164,7 +170,7 @@ public class ControleurIhm
 		}
 	}
 
-	public void scenarioSuivant()
+	public String scenarioSuivant()
 	{
 		if (sc.hasNext())
 		{
@@ -173,12 +179,14 @@ public class ControleurIhm
 			char[] splittedLine = line.toCharArray();
 			if (splittedLine[0] == 'R')
 			{
+
 				int playerID = Character.getNumericValue(splittedLine[1]);
 				int robotID  = Character.getNumericValue(splittedLine[2]);
 
 				// On exécute les ordres directs du robot.
 				executerOrdres(Arrays.copyOfRange(splittedLine, 3, splittedLine.length),
 						metier.getJoueur(playerID).getRobot(robotID));
+				return "";
 			}
 			else if (splittedLine[0] == 'J') // exécute les ordres selon la main du joueur.
 			{
@@ -211,23 +219,30 @@ public class ControleurIhm
 						for(int i = 0; i < j.getRobots().length; i++)
 							executerOrdres(j.getOrdres(i), j.getRobot(i));
 				}
+				return "";
 			}
 			else
 			{
 				// C'est un commentaire
-				System.out.println(line);
+				// System.out.println(line);
 				ligne--;
-				scenarioSuivant();
+				dernierCommentaire = line + '\n' + scenarioSuivant();
+				return dernierCommentaire;
 			}
 		}
+		return "// Fin de fichier";
 	}
 
-	public void scenarioPrecedent()
+	public String scenarioPrecedent()
 	{
 		scenarioInit();
 		int lignes = ligne;
+		String retour = "";
 		ligne = 0;
 		for (int i = 0; i < lignes - 1; i++)
-			scenarioSuivant();
+			retour = scenarioSuivant();
+		return retour;
 	}
+
+	public String getDernierCommentaire() { return this.dernierCommentaire; }
 }
