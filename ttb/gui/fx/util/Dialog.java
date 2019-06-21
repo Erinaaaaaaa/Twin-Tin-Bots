@@ -4,7 +4,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.StageStyle;
+import ttb.metier.Joueur;
 
+import java.util.List;
 import java.util.Optional;
 
 public class Dialog
@@ -44,5 +46,22 @@ public class Dialog
 		Optional<ButtonType> result = alert.showAndWait();
 
 		return result.isPresent() && result.get() == ButtonType.OK;
+	}
+
+	public static void afficherNoms(List<Joueur> gagnants)
+	{
+		StringBuilder s = new StringBuilder();
+
+		for (Joueur j : gagnants)
+		{
+			s.append("Joueur ").append(j.getId() + 1).append("\n");
+		}
+
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Partie terminées");
+		alert.setHeaderText("Les gagnants:");
+		alert.setContentText(s.toString());
+
+		alert.showAndWait();
 	}
 }

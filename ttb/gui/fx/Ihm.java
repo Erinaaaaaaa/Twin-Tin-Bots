@@ -5,29 +5,34 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import ttb.gui.fx.controls.EtatRobot;
 import ttb.gui.fx.controls.ImageRobot;
 import ttb.gui.fx.controls.MainJoueur;
-import ttb.metier.*;
+
 
 import java.io.File;
 
 import ttb.gui.fx.util.Dialog;
+import ttb.metier.Joueur;
+import ttb.metier.Robot;
+import ttb.metier.Tuile;
 
 public class Ihm
 {
+
     private int robot = 0;
     private ControleurIhm ctrl;
 
-    @FXML private ToolBar tbButtons;
+    @FXML private HBox      hboxGame;
+    @FXML private ToolBar   tbButtons;
     @FXML private Accordion accMains;
-    @FXML private Button btnInit;
-    @FXML private Button btnFinirTour;
+    @FXML private Button    btnFinirTour;
     @FXML private ImageView imgPlateau;
-    @FXML private Pane panePlateau;
-    @FXML private VBox vboxDroite;
+    @FXML private Pane      panePlateau;
+    @FXML private VBox      vboxDroite;
 
     private MainJoueur mainJoueur;
 
@@ -39,52 +44,9 @@ public class Ihm
     }
 
     @FXML
-    void avancer(ActionEvent event)
-    {
-        this.ctrl.avancer(ctrl.getJoueurCourant().getRobot(robot), true);
-        afficherPlateau();
-    }
-
-    @FXML
-    void charger(ActionEvent event)
-    {
-        ctrl.chargerCristal(ctrl.getJoueurCourant().getRobot(robot));
-        afficherPlateau();
-    }
-
-    @FXML
-    void deposer(ActionEvent event)
-    {
-        ctrl.deposerCristal(ctrl.getJoueurCourant().getRobot(robot));
-        afficherPlateau();
-    }
-
-    @FXML
-    void tournerDroite(ActionEvent event)
-    {
-        ctrl.getJoueurCourant().getRobot(robot).turnAround(false);
-        afficherPlateau();
-    }
-
-    @FXML
-    void tournerGauche(ActionEvent event)
-    {
-        ctrl.getJoueurCourant().getRobot(robot).turnAround(true);
-        afficherPlateau();
-    }
-
-    // TODO: Mettre en évidence le joueur courant
-    @FXML
     void changerJoueur(ActionEvent event)
     {
         ctrl.changerJoueur();
-        afficherPlateau();
-    }
-
-    @FXML
-    void changerRobot(ActionEvent event)
-    {
-        robot = (robot + 1) % 2;
         afficherPlateau();
     }
 
@@ -279,6 +241,18 @@ public class Ihm
 
         this.vboxDroite.getChildren().remove(this.mainJoueur);
         this.vboxDroite.getChildren().add(this.mainJoueur = new MainJoueur(this.ctrl.getJoueurCourant(), this.ctrl));
+
+        if (ctrl.partieTerminee())
+        {
+            this.hboxGame.setDisable    (true);
+            this.btnFinirTour.setDisable(true);
+            Dialog.afficherNoms(ctrl.getGagnants());
+        }
+        else
+        {
+            this.hboxGame.setDisable    (false);
+            this.btnFinirTour.setDisable(false);
+        }
     }
 
     @FXML
@@ -315,7 +289,7 @@ public class Ihm
 
             btnPrec = new Button("Précédent");
             btnPrec.setOnAction(event -> {
-                System.out.println(ctrl.scenarioPrecedent());
+                ctrl.scenarioPrecedent();
 
                 this.accMains.getPanes().clear();
 
@@ -339,7 +313,7 @@ public class Ihm
 
             btnSuiv = new Button("Suivant");
             btnSuiv.setOnAction(event -> {
-                System.out.println(ctrl.scenarioSuivant());
+                ctrl.scenarioSuivant();
                 this.updateCommentaire();
                 this.afficherPlateau();
             });
