@@ -12,8 +12,8 @@ package ttb.metier;
  */
 public enum Tuile
 {
-	OUT_OF_BOUNDS(null),
-	VIDE("T"),
+	OUT_OF_BOUNDS(null), //Tuile indiquant les zones hors du plateau
+	VIDE("T"), //Tuile indiquant une case vide 
 	CRISTAL_BLEU("2"),
 	CRISTAL_VERT("3"),
 	CRISTAL_VIOLET("4"),
