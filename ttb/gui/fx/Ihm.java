@@ -310,12 +310,29 @@ public class Ihm
         if (Dialog.demander("Voulez-vous charger un scénario?") &&
                 (scenario = Dialog.lireNumScenario()) != -1)
         {
-            // Scénario mode
+            // Mode scénario
             this.ctrl = new ControleurIhm(Dialog.lireNbJoueur(), this, scenario);
 
             btnPrec = new Button("Précédent");
             btnPrec.setOnAction(event -> {
                 System.out.println(ctrl.scenarioPrecedent());
+
+                this.accMains.getPanes().clear();
+
+                for (int i = 0; i < this.ctrl.getNbJoueurs(); i++)
+                {
+                    this.accMains.getPanes().add(
+                            new EtatRobot(
+                                    this.ctrl.getJoueur(i),
+                                    this.ctrl
+                            )
+                    );
+                }
+
+                for (TitledPane p : this.accMains.getPanes())
+                    if (p instanceof EtatRobot)
+                        ((EtatRobot) p).updateStatus();
+
                 this.updateCommentaire();
                 this.afficherPlateau();
             });

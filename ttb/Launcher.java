@@ -38,7 +38,7 @@ public class Launcher
 					new ControleurCui(nbJoueurs).debug(nbJoueurs,0,numScenar);
 				}
 				else
-					new ControleurCui(nbJoueurs);
+					new ControleurCui(nbJoueurs).jouer();
 				break;
 			case 2:
 				LauncherIhm.main(null);

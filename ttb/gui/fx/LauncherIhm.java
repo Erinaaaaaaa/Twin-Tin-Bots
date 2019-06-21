@@ -19,6 +19,7 @@ public class LauncherIhm extends Application
     {
         try
         {
+            primaryStage.setTitle("Twin Tin Bots");
             primaryStage.setMinHeight(690);
             primaryStage.setMinWidth(900);
 
