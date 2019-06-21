@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Classe ControleurIhm
- * Controleur de la version GUI
- *
- * @author Jérémy Auzou
- * @author Matys Achart
+ * Classe ControleurIhm 
+ * Controleur de la version GUI *
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER

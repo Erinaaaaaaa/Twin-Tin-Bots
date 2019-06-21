@@ -1,15 +1,16 @@
 package ttb.metier;
 
 /**
- * Classe Tuile.
- * Contient tous les types de Tuile utiles à l'affichage du plateau.
- * @author Jérémy Auzou
- * @author Matys Achart
+ * Classe Tuile. Contient tous les types de Tuile utiles à l'affichage du
+ * plateau.
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER
  * @version 2019-06-21
  */
+
 public enum Tuile
 {
 	OUT_OF_BOUNDS(null), //Tuile indiquant les zones hors du plateau

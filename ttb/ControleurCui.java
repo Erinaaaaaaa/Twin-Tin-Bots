@@ -13,8 +13,8 @@ import iut.algo.Console;
 
 /**
  * Classe ControleurCui
- * @author Jérémy Auzou
- * @author Matys Achart
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER
@@ -127,13 +127,12 @@ public class ControleurCui
 	 * <li>Si action E : 1 indice.</li>
 	 * <li>Si action P : 2 indices suivent.</li>
 	 * <li>Si action R : rien.</li>
+	 * <li>Si action F : executer les ordres de ses robots</li>
 	 * </ul>
 	 * <br>
-	 * Si action robot, on exécute que sur le robot.<br>
-	 * Si action joueur, on exécute sur ses 2 robots.<br>
-	 * 
 	 * @param nbJoueurs nombres de joueurs
 	 * @param ligne     ligne a laquelle commencer/reprendre le test
+	 * @param numScenar numero du scenario
 	 */
 	public void debug(int nbJoueurs, int ligne, int numScenar) {
 		Scanner sc   = null;

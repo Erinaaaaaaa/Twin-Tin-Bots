@@ -7,13 +7,14 @@ import java.util.Scanner;
 /**
  * Classe launcher
  * Permet de lancer soit l'IHM CUI ou l'IHM GUI JavaFX
- * @author Jérémy Auzou
- * @author Matys Achart
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER
  * @version 2019-06-21
  */
+
 public class Launcher
 {
 	private static Scanner sc = new Scanner(System.in);

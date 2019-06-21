@@ -8,9 +8,8 @@ import javafx.stage.Stage;
 
 /**
  * Classe LauncherIhm.
- * Lance la version GUI
- * @author Jérémy Auzou
- * @author Matys Achart
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER

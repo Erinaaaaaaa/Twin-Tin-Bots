@@ -12,8 +12,8 @@ import java.util.Optional;
 
 /**
  * Classe Dialog
- * @author Jérémy Auzou
- * @author Matys Achart
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER

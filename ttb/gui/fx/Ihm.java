@@ -20,10 +20,10 @@ import ttb.metier.Robot;
 import ttb.metier.Tuile;
 
 /**
- * Classe Ihm
- * Ihm de la version GUI
- * @author Jérémy Auzou
- * @author Matys Achart
+ * Classe Ihm 
+ * Ihm de la version GUI 
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER

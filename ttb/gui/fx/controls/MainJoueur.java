@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 /**
  * Classe MainJoueur
- * @author Jérémy Auzou
- * @author Matys Achart
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER
