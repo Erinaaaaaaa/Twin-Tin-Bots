@@ -39,7 +39,7 @@ public class Plateau
 		this.tabJoueurs = tabJoueur;
 		this.fileAttent = fileAttent;
 		pointVictoire   = 13 - tabJoueur.length;
-		pionDecompte    = 3;
+		pionDecompte    = 4;
 		nbTours         = 0;
 	}
 
@@ -50,6 +50,8 @@ public class Plateau
 	public void changerJoueur()
 	{
 		joueurActuel = (joueurActuel + 1) % tabJoueurs.length;
+		if (fileAttent.equals("") && joueurActuel == 0)
+			pionDecompte--;
 		nbTours++;
 	}
 
@@ -432,8 +434,8 @@ public class Plateau
 		return retour;
 	}
 
-	/** Enlève un pion décompte. */
-	public void enleverPionDecompte() { pionDecompte--; }
+	/** Retourne le nombre de pions décompte. */
+	public int getDecompte() { return pionDecompte; }
 
 	/** Retourne le joueur en fonction de son id. */
 	public Joueur getJoueur(int id) {return tabJoueurs[id];}

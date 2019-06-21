@@ -93,6 +93,8 @@ public class ControleurCui
 
 			ihm.afficherPlateau();
 			metier.changerJoueur();
+			if (metier.getFileAttente().equals(""))
+				ihm.afficherString("Pion décompte : " + metier.getDecompte());
 		}while(!metier.estPartieFinie());
 
 		ihm.finPartie(metier.getGagnant());
