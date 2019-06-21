@@ -1,4 +1,2 @@
-mkdir out
-javac -encoding utf-8 @compile.list -d out
-cd out
+javac -encoding utf-8 @compile.list
 java ttb.Launcher
