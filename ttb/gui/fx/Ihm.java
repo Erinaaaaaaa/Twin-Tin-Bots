@@ -2,10 +2,7 @@ package ttb.gui.fx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Accordion;
-import javafx.scene.control.Button;
-import javafx.scene.control.TitledPane;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -76,6 +73,7 @@ public class Ihm
         afficherPlateau();
     }
 
+    // TODO: Mettre en évidence le joueur courant
     @FXML
     void changerJoueur(ActionEvent event)
     {
@@ -276,6 +274,9 @@ public class Ihm
             if (p instanceof EtatRobot)
                 ((EtatRobot) p).updateStatus();
 
+        // Forcer l'ouverture d'un panneau de l'accordéon
+        this.accMains.setExpandedPane(this.accMains.getPanes().get(this.ctrl.getJoueurCourant().getId()));
+
         this.vboxDroite.getChildren().remove(this.mainJoueur);
         this.vboxDroite.getChildren().add(this.mainJoueur = new MainJoueur(this.ctrl.getJoueurCourant(), this.ctrl));
     }
@@ -296,36 +297,62 @@ public class Ihm
 
     private Button btnPrec = null;
     private Button btnSuiv = null;
+    private Label  lblComm = null;
 
     private void creerPartie()
     {
         if (this.btnPrec != null) this.tbButtons.getItems().remove(this.btnPrec);
         if (this.btnSuiv != null) this.tbButtons.getItems().remove(this.btnSuiv);
+        if (this.lblComm != null) this.tbButtons.getItems().remove(this.lblComm);
 
         int scenario;
 
         if (Dialog.demander("Voulez-vous charger un scénario?") &&
                 (scenario = Dialog.lireNumScenario()) != -1)
         {
-            // Scénario mode
+            // Mode scénario
             this.ctrl = new ControleurIhm(Dialog.lireNbJoueur(), this, scenario);
+
             btnPrec = new Button("Précédent");
             btnPrec.setOnAction(event -> {
                 System.out.println(ctrl.scenarioPrecedent());
+
+                this.accMains.getPanes().clear();
+
+                for (int i = 0; i < this.ctrl.getNbJoueurs(); i++)
+                {
+                    this.accMains.getPanes().add(
+                            new EtatRobot(
+                                    this.ctrl.getJoueur(i),
+                                    this.ctrl
+                            )
+                    );
+                }
+
+                for (TitledPane p : this.accMains.getPanes())
+                    if (p instanceof EtatRobot)
+                        ((EtatRobot) p).updateStatus();
+
+                this.updateCommentaire();
                 this.afficherPlateau();
             });
+
             btnSuiv = new Button("Suivant");
             btnSuiv.setOnAction(event -> {
                 System.out.println(ctrl.scenarioSuivant());
+                this.updateCommentaire();
                 this.afficherPlateau();
             });
+
+            lblComm = new Label("// Commentaires mode debug");
+
             this.tbButtons.getItems().add(this.btnPrec);
             this.tbButtons.getItems().add(this.btnSuiv);
+            this.tbButtons.getItems().add(this.lblComm);
             this.btnFinirTour.setDisable(true);
         }
         else
         {
-            // TODO: bloquer les clics en mode scénario (ControleurIhm peut-être?)
             this.ctrl = new ControleurIhm(Dialog.lireNbJoueur(), this);
             this.btnFinirTour.setDisable(false);
         }
@@ -345,6 +372,12 @@ public class Ihm
         for (TitledPane p : this.accMains.getPanes())
             if (p instanceof EtatRobot)
                 ((EtatRobot) p).updateStatus();
+    }
+
+    private void updateCommentaire()
+    {
+        if (this.lblComm != null)
+            this.lblComm.setText(ctrl.getDernierCommentaire());
     }
 
 }
