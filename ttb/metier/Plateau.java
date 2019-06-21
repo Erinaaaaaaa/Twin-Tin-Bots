@@ -7,8 +7,10 @@ import java.util.List;
 
 /**
  * Classe Plateau
- * @author Jérémy Auzou
- * @author Matys Achart
+ * Le Plateau est une grille de tuiles hexagonales. Il gère le
+ * joueur actuel et la fin de la partie, ainsi que le placement
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER
@@ -77,9 +79,13 @@ public class Plateau
 		return r;
 	}
 
+	/**
+	 * Calcule la prochaine position dans le tableau par rapport à la position initialie et la direction
+	 */
 	private int[] nextPos(int[] initPos, int dir)
 	{
 		int[] pos = Arrays.copyOf(initPos, initPos.length);
+		//La direction est entre 0 et 5, 0 indique le nord ouest puis on tourne dans le horaire (sans le nord et sud)
 		switch(dir)
 		{
 			case 0 :
@@ -114,6 +120,7 @@ public class Plateau
 			break;
 		}
 
+		//Retourne la position initiale du robot si la nouvelle position est hors du plateau
 		if(pos[0] < 0 || pos[0]    >= plateau.length ||
 		   pos[1] < 0 || pos[1]    >= plateau.length ||
 		   plateau[pos[0]][pos[1]] == Tuile.OUT_OF_BOUNDS
@@ -166,6 +173,12 @@ public class Plateau
 		return retour;
 	}
 
+	/**
+	 * Permet de faire pousser un cristal
+	 * @param pos la position du cristal
+	 * @param dir la direction du robot le poussant
+	 * @return false si il y a un objet dans la direction du cristal
+	 */
 	private boolean avancer(int[] pos, int dir)
 	{
 		int[] next = nextPos(pos, dir);
@@ -272,7 +285,9 @@ public class Plateau
 		}
 	}
 
-	/** Permet d'obtenir le Joueur grâce à la position de sa base. */
+	/** 
+	 * Permet d'obtenir le Joueur grâce à la position de sa base. 
+	 */
 	public Joueur getJoueurParBase(int[] pos)
 	{
 		for(Joueur j : tabJoueurs)
@@ -289,7 +304,9 @@ public class Plateau
 	public int       getNbLigne(){    return this.plateau.length;}
 	public int       getNbColonne(){  return this.plateau[0].length;}
 
-	/** Retourne le symbole utilisé pour définir une Tuile du plateau. */
+	/** 
+	 * Retourne le symbole utilisé pour définir une Tuile du plateau.
+	*/
 	public String getSymbole(int lig, int col){return this.plateau[lig][col].toString();}
 
 	/**

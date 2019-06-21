@@ -1,9 +1,12 @@
 package ttb.metier;
 
 /**
- * Classe Robot
- * @author Jérémy Auzou
- * @author Matys Achart
+ * Classe Robot 
+ * Un Robot appartient à un joueur. Il peut charger et déposer des
+ * cristaux et se déplacer sur le plateau en fonction des ordres donnés par son
+ * joueur.
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER

@@ -15,8 +15,8 @@ import java.io.IOException;
  *
  * Composant dessinant le robot et son cristal si il en porte un
  *
- * @author Jérémy Auzou
- * @author Matys Achart
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER

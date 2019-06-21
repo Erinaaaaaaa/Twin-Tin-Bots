@@ -6,8 +6,8 @@ package ttb.gui.fx.util;
  * Classe de données permettant de faire la passerelle entre l'IHM et le contrôleur
  * dans l'attribution des actions
  *
- * @author Jérémy Auzou
- * @author Matys Achart
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER

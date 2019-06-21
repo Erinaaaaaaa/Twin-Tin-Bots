@@ -22,8 +22,8 @@ import ttb.metier.Tuile;
 /**
  * Classe Ihm
  * Ihm de la version GUI en JavaFX
- * @author Jérémy Auzou
- * @author Matys Achart
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER

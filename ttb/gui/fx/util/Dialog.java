@@ -15,8 +15,8 @@ import java.util.Optional;
  *
  * Boite à outils pour afficher diverses popups
  *
- * @author Jérémy Auzou
- * @author Matys Achart
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER

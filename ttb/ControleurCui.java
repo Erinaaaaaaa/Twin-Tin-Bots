@@ -13,8 +13,8 @@ import iut.algo.Console;
 
 /**
  * Classe ControleurCui
- * @author Jérémy Auzou
- * @author Matys Achart
+ * @author Jérémy AUZOU
+ * @author Matys ACHART
  * @author Kemo DESCHAMPS
  * @author Guillaume COUFOURIER
  * @author Sébastien PRUNIER
@@ -32,6 +32,12 @@ public class ControleurCui
 		ihm    = new IhmCui(this);
 	}
 
+	/**
+	 * Permet d'exécuter l'action du joueur actuel (Ajouter ordre, permuter, enlever,...)
+	 * @param j joueur actuel
+	 * @param c Action choisie
+	 * @param idRobot numero du robot subissant l'action
+	 */
 	private void actionJoueur(Joueur j, char c, int idRobot)
 	{
 		if(c == 'N')
@@ -101,28 +107,32 @@ public class ControleurCui
 	}
 
 	/**
-	 * @param nbJoueurs nombres de joueurs
-	 * @param ligne ligne a laquelle commencer/reprendre le test
-	 * Méthode pour utiliser le mode debug. Les instructions à exécuter seront lues dans le fichier "scenario.data". <br />
+	 * Méthode pour utiliser le mode debug. Les instructions à exécuter seront lues
+	 * dans le fichier "scenario.data". <br />
 	 * La premiere lettre doit être soit J pour joueur ou R pour robot.<br />
 	 * <br />
-	 * <ul><b>Si c'est un robot:</b>
-	 * 	 <li>La suivante indique l'indice du joueur.</li>
-	 * 	 <li>La suivante celui du robot.</li>
-	 * 	 <li>Ensuite, toutes les actions à effectuer.</li>
-	 * </ul><br>
+	 * <ul>
+	 * <b>Si c'est un robot:</b>
+	 * <li>La suivante indique l'indice du joueur.</li>
+	 * <li>La suivante celui du robot.</li>
+	 * <li>Ensuite, toutes les actions à effectuer.</li>
+	 * </ul>
+	 * <br>
 	 *
 	 * Si c'est un joueur, la lettre suivante est son indice.<br>
 	 * Ensuite l'action à effectuer.<br>
-	 * <ul><b>En fontion de l'action.</b>
-	 *   <li>Si action A : on a une lettre et un indice.</li>
-	 *   <li>Si action E : 1 indice.</li>
-	 *   <li>Si action P : 2 indices suivent.</li>
-	 *   <li>Si action R : rien.</li>
+	 * <ul>
+	 * <b>En fonction de l'action.</b>
+	 * <li>Si action A : on a une lettre et un indice.</li>
+	 * <li>Si action E : 1 indice.</li>
+	 * <li>Si action P : 2 indices suivent.</li>
+	 * <li>Si action R : rien.</li>
+	 * <li>Si action F : executer les ordres de ses robots</li>
 	 * </ul>
 	 * <br>
-	 * Si action robot, on exécute que sur le robot.<br>
-	 * Si action joueur, on exécute sur ses 2 robots.<br>
+	 * @param nbJoueurs nombres de joueurs
+	 * @param ligne     ligne a laquelle commencer/reprendre le test
+	 * @param numScenar numero du scenario
 	 */
 	public void debug(int nbJoueurs, int ligne, int numScenar) {
 		Scanner sc   = null;
@@ -244,6 +254,12 @@ public class ControleurCui
 
 	/**
 	 * Exécute le programme du robot.
+	 * A correspond à Avancer
+	 * D correspond à Tourner à droite
+	 * G correspond à Tourner à gauche
+	 * C correspond à Charger un cristal
+	 * E correspond à Décharger un cristal
+	 * S correspond à avancer 2 fois
 	 * @param ordres les ordres à exécuter
 	 * @param r le robot pour lequel exécuter les ordres placés.
 	 */
