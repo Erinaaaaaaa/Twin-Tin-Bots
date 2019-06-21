@@ -31,13 +31,14 @@ public class ControleurIhm
 	private boolean modeScenario;
 	private boolean robot1;
 	private boolean robot2;
+	private boolean victoireAck;
 
 	public ControleurIhm(int nbJoueurs, Ihm ihm)
 	{
 		this.coupsDuTour = 0;
 		this.metier = SetGrille.initGrille(nbJoueurs);
 		this.ihm = ihm;
-		this.robot1 = this.robot2 = false;
+		this.robot1 = this.robot2 = this.victoireAck = false;
 	}
 
 	public ControleurIhm(int nbJoueurs, Ihm ihm, int numScenario)
@@ -46,6 +47,11 @@ public class ControleurIhm
 		this.numScenario = numScenario;
 		this.modeScenario = true;
 		scenarioInit();
+	}
+
+	public void acknowlegeVictoire()
+	{
+		this.victoireAck = true;
 	}
 
 	// Méthodes pour jouer
@@ -255,6 +261,7 @@ public class ControleurIhm
 
 	public void scenarioInit()
 	{
+		this.victoireAck = false;
 		this.coupsDuTour = 0;
 		this.metier = SetGrille.initGrille(metier.getNbJoueurs());
 		try
@@ -344,4 +351,9 @@ public class ControleurIhm
 	}
 
 	public String getDernierCommentaire() { return this.dernierCommentaire; }
+
+	public boolean getVictoireAck()
+	{
+		return victoireAck;
+	}
 }

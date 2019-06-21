@@ -345,7 +345,6 @@ public class Ihm
 
                 this.updateCommentaire();
                 this.afficherPlateau();
-                this.gestionFinPartie();
             });
 
             btnSuiv = new Button("Suivant");
@@ -353,7 +352,6 @@ public class Ihm
                 ctrl.scenarioSuivant();
                 this.updateCommentaire();
                 this.afficherPlateau();
-                this.gestionFinPartie();
             });
 
             lblComm = new Label("// Commentaires mode debug");
@@ -394,12 +392,15 @@ public class Ihm
 
     private void gestionFinPartie()
     {
-        System.out.println("Ihm.gestionFinPartie");
         if (ctrl.partieTerminee())
         {
             this.hboxGame.setDisable    (true);
             this.btnFinirTour.setDisable(true);
-            Dialog.afficherNoms(ctrl.getGagnants());
+            if (!ctrl.getVictoireAck())
+            {
+                Dialog.afficherNoms(ctrl.getGagnants());
+                ctrl.acknowlegeVictoire();
+            }
         }
         else
         {
