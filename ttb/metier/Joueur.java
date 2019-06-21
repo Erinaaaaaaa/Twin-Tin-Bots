@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /**
  * Classe Joueur
+ * Un Joueur possède possède des robots à qui il donne des ordres.
+ * Il possède également une base qui contient des cristaux.
  * @author Jérémy Auzou
  * @author Matys Achart
  * @author Kemo DESCHAMPS

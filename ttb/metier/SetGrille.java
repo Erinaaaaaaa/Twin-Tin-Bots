@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 /**
  * Classe SetGrille
+ * Initialise le plateau en fonction du nombre de joueurs dans la partie,
+ * et au moyen du fichier niveau.data.
  * @author Jérémy Auzou
  * @author Matys Achart
  * @author Kemo DESCHAMPS

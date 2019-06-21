@@ -7,6 +7,9 @@ import java.util.List;
 
 /**
  * Classe Plateau
+ * Le Plateau est une grille de tuiles hexagonales.
+ * Il gère le joueur actuel et la fin de la partie, ainsi que le placement
+ * de nouveaux cristaux.
  * @author Jérémy Auzou
  * @author Matys Achart
  * @author Kemo DESCHAMPS
