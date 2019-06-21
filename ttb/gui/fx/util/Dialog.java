@@ -70,7 +70,7 @@ public class Dialog
 		}
 
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Partie terminées");
+		alert.setTitle("Partie terminée");
 		alert.setHeaderText("Les gagnants:");
 		alert.setContentText(s.toString());
 
