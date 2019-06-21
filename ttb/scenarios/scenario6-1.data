@@ -1,0 +1,21 @@
+	Réapparition des cristaux
+	On déplace les robots au centre du plateau.
+R11SAD
+R11AA
+R50AD
+R50CGG
+R50SAG
+R50E
+R20SDD
+R20DDD
+R20SA
+	On dépose un cristal dans une base
+	pour faire réapparaître un cristal
+R00AD
+R00C
+R00DDD
+R00E
+	Le cristal n'est pas apparu
+R11AAA
+R10CG
+R10E
