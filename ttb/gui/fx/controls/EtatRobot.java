@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import ttb.gui.fx.ControleurIhm;
 import ttb.gui.fx.util.Action;
 import ttb.metier.Joueur;
@@ -50,20 +52,16 @@ public class EtatRobot extends TitledPane
 		this.j = j;
 
 		this.setText("Joueur " + (j.getId() + 1) );
-
-		assert imgR1 != null : "fx:id=\"imgR1\" was not injected: check your FXML file 'EtatRobot.fxml'.";
-		assert imgR1A1 != null : "fx:id=\"imgR1A1\" was not injected: check your FXML file 'EtatRobot.fxml'.";
-		assert imgR1A2 != null : "fx:id=\"imgR1A2\" was not injected: check your FXML file 'EtatRobot.fxml'.";
-		assert imgR1A3 != null : "fx:id=\"imgR1A3\" was not injected: check your FXML file 'EtatRobot.fxml'.";
-		assert imgR2 != null : "fx:id=\"imgR2\" was not injected: check your FXML file 'EtatRobot.fxml'.";
-		assert imgR2A1 != null : "fx:id=\"imgR2A1\" was not injected: check your FXML file 'EtatRobot.fxml'.";
-		assert imgR2A2 != null : "fx:id=\"imgR2A2\" was not injected: check your FXML file 'EtatRobot.fxml'.";
-		assert imgR2A3 != null : "fx:id=\"imgR2A3\" was not injected: check your FXML file 'EtatRobot.fxml'.";
 	}
 
 	public void updateStatus()
 	{
 		this.setText("Joueur " + (j.getId() + 1) + " - " + j.getPoints() + " point" + (j.getPoints() > 1 ? "s" : ""));
+		this.setFont(Font.font(
+				this.getFont().getFamily(),
+				(ctrl.getJoueurCourant() == j) ? FontWeight.BOLD : FontWeight.NORMAL,
+				this.getFont().getSize()
+		));
 
 		this.imgR1.setImage(new Image(
 				getClass().getResourceAsStream("../../images/robots/petit" + this.j.getId() + ".png")
