@@ -284,6 +284,9 @@ public class Ihm
         this.vboxDroite.getChildren().remove(this.mainJoueur);
         this.vboxDroite.getChildren().add(this.mainJoueur = new MainJoueur(this.ctrl.getJoueurCourant(), this.ctrl));
 
+        if (ctrl.derniersTours())
+            this.lblComm.setText(ctrl.toursRestants() + " tours");
+
         this.gestionFinPartie();
     }
 
@@ -345,7 +348,6 @@ public class Ihm
 
                 this.updateCommentaire();
                 this.afficherPlateau();
-                this.gestionFinPartie();
             });
 
             btnSuiv = new Button("Suivant");
@@ -353,7 +355,6 @@ public class Ihm
                 ctrl.scenarioSuivant();
                 this.updateCommentaire();
                 this.afficherPlateau();
-                this.gestionFinPartie();
             });
 
             lblComm = new Label("// Commentaires mode debug");
@@ -366,6 +367,8 @@ public class Ihm
         else
         {
             this.ctrl = new ControleurIhm(Dialog.lireNbJoueur(), this);
+            this.lblComm = new Label("");
+            this.tbButtons.getItems().add(this.lblComm);
             this.btnFinirTour.setDisable(false);
         }
 
@@ -394,12 +397,15 @@ public class Ihm
 
     private void gestionFinPartie()
     {
-        System.out.println("Ihm.gestionFinPartie");
         if (ctrl.partieTerminee())
         {
             this.hboxGame.setDisable    (true);
             this.btnFinirTour.setDisable(true);
-            Dialog.afficherNoms(ctrl.getGagnants());
+            if (!ctrl.getVictoireAck())
+            {
+                Dialog.afficherNoms(ctrl.getGagnants());
+                ctrl.acknowlegeVictoire();
+            }
         }
         else
         {
