@@ -133,13 +133,11 @@ public class Plateau
 		int initDirR   = 0;
 		boolean retour = false;
 
-		if(pos == r.getPos())
-			return retour;
+		if(pos == r.getPos()) return retour;
 
 		Tuile t = plateau[pos[0]][pos[1]];
 
-		if(t == Tuile.OUT_OF_BOUNDS)
-			return false;
+		if(t == Tuile.OUT_OF_BOUNDS) return false;
 
 		Robot nextHex = null;
 
@@ -246,8 +244,7 @@ public class Plateau
 	 */
 	public void listeAttente()
 	{
-		if(fileAttent.equals(""))
-			return;
+		if(fileAttent.equals("")) return;
 
 		Tuile cristal = Tuile.getCristal(fileAttent.charAt(0));
 

@@ -36,12 +36,16 @@ public class Joueur
 	public Joueur()
 	{
 		id = Joueur.nbJoueurs++;
+
 		this.tabRobot = new Robot[] {null, null};
-		ordres = new char[2][3];
+		ordres        = new char[2][3];
+
 		Arrays.fill(ordres[0], '\0');
 		Arrays.fill(ordres[1], '\0');
-		reserve = new ArrayList<Character>();
+
+		reserve  = new ArrayList<Character>();
 		cristaux = new ArrayList<Tuile>();
+
 		initReserve();
 	}
 
@@ -124,7 +128,7 @@ public class Joueur
 	}
 
 	/** Retourne tous les robots du joueur. */
-	public Robot[] getRobots() {return this.tabRobot;}
+	public Robot[] getRobots()    {return this.tabRobot;}
 
 	/** Retourne le robot du joueur ayant l'id spécifié. */
 	public Robot getRobot(int id) {return tabRobot[id];}

@@ -13,12 +13,13 @@ package ttb.metier;
 public class Robot
 {
 	private static int nbRobots = 0;
+
 	private int[]  pos;
 	/** Direction du robot, commence à 0 et va jusqu'à 5, sens horaire */
 	private int    dir;
 	private int    id;
 	private Joueur monJoueur;
-	private Tuile cristal;
+	private Tuile  cristal;
 
 	/**
 	 * Construit un nouveau robot et initialise sa position et sa direction.
@@ -33,10 +34,10 @@ public class Robot
 		this.id  = Robot.nbRobots++ % 2;
 	}
 
-	public int      getDir()    { return dir; }
-	public int[]    getPos()    { return pos; }
-	public int      getId()     { return id ; }
-	public Joueur   getJoueur() { return this.monJoueur; }
+	public int      getDir()    {return dir; }
+	public int[]    getPos()    {return pos; }
+	public int      getId()     {return id ; }
+	public Joueur   getJoueur() {return this.monJoueur; }
 
 	/**
 	 * Retourne vrai si le robot possède un cristal sur lui.
